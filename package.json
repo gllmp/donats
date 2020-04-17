@@ -1,0 +1,52 @@
+{
+  "name": "donats",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "http://donats.net/",
+  "dependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "acorn": "7.1.1",
+    "axios": "^0.19.2",
+    "bootstrap": "^4.4.1",
+    "bootswatch": "^4.4.1",
+    "formik": "^2.1.4",
+    "get-youtube-title": "^1.0.0",
+    "history": "^4.10.1",
+    "node-sass": "^4.13.1",
+    "path": "^0.12.7",
+    "react": "^16.13.0",
+    "react-bootstrap": "^1.0.0-beta.16",
+    "react-dom": "^16.13.0",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "3.4.0",
+    "react-table": "^6.10.0",
+    "react-youtube": "^7.9.0",
+    "rxjs": "^6.5.4",
+    "serialize-javascript": "^2.1.2",
+    "styled-components": "^5.0.1",
+    "yup": "^0.28.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

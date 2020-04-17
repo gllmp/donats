@@ -1,0 +1,249 @@
+body {
+    background-color: #000;
+}
+
+.stripes {
+    position: fixed;
+    width: 10px;
+    height: 100vh;
+    background-image: linear-gradient(45deg, #000000 25%, #ffd900 25%, #ffd900 50%, #000000 50%, #000000 75%, #ffd900 75%, #ffd900 100%);
+    background-size: 56.57px 56.57px;
+    z-index: 2;
+}
+
+.stripes-right {
+    right: 0;
+}
+
+.login-container {
+    border: 1px solid #fff;
+    padding: 20px;
+    margin-top: 120px;
+}
+
+.admin-container {
+    position: relative;
+    background-color: #000;
+    border-bottom: 1px solid #fff;
+    z-index: 2;
+}
+  
+.adminLogo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 75vh;
+    top: 0px !important;
+}
+
+.nav-link {
+    color: #fff;
+    padding: 5px;
+    font-weight: bold;
+    border: 0px;
+}
+
+.nav-link:hover, .nav-link:focus {
+    color: #bbb !important;
+}
+
+.navbar-collapse {
+    margin-left: 25px;
+}
+
+.navbar-toggler:focus {
+    outline: none;
+}
+
+.jumbotron {
+    background-color: #000;
+    border-radius: 0;
+}
+
+.jumbotron h2 {
+    font-size: 2rem;
+}
+
+.form-control {
+    background-color: transparent;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 0;
+}
+
+.form-control:focus {
+    color: #fff !important;
+    background-color: transparent !important;
+    border-color: #fff;
+    outline: 0;
+}
+
+/* Input autofill background */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    box-shadow: 0 0 0 30px #000 inset !important;
+}
+
+/* Input autofill text color*/
+input:-webkit-autofill {
+    -webkit-text-fill-color: #fff !important;
+}
+
+option { 
+    background-color: #000;
+}
+
+.form-group h1 {
+    font-size: 2rem;
+}
+
+.form-insert {
+    margin-top: 0;
+    border: 1px solid #fff;
+    padding: 25px;
+    top: 20vh;
+}
+
+.form-insert h1 {
+    font-size: 2rem;
+}
+
+.btn {
+    border-radius: 0;
+}
+
+.btn-primary {
+    color: #fff !important;
+    background-color: #000 !important;
+    border-color: #fff !important;
+}
+
+.btn-primary:hover {
+    color: #000;
+    background-color: #fff;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show>.btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #000;
+    border-color: #fff;
+    box-shadow: none;
+}
+
+.btn-primary:focus, .btn-primary.focus {
+    color: #fff;
+    background-color: #000;
+    border-color: #fff;
+    box-shadow: none;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #f00;
+    border-color: #f00;
+}
+
+.btn-danger:hover {
+    color: #fff;
+    background-color: #000;
+    border-color: #f00;
+}
+
+.alert {
+    border-radius: 0;
+}
+
+.deleteLink {
+    color: #ff0000;
+}
+
+.deleteLink:hover {
+    color: rgb(255, 195, 195);
+    text-decoration: none;
+}
+
+.updateLink {
+    color: #ef9b0f;
+}
+
+.updateLink:hover {
+    color: #ebcf9f;
+    text-decoration: none;
+}
+
+/* Table Scrollbar */
+/* Width */
+::-webkit-scrollbar {
+    height: 15px;
+    width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #000; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #fff;
+}
+
+#drop-area {
+    border: 2px dashed #bbb;
+    border-radius: 5px;
+    padding: 25px;
+    text-align: center;
+}
+
+@media screen and (max-width: 680px) {
+    .jumbotron {
+        margin-top: 50px;
+    }
+}
+
+@media screen and (max-height: 680px) {
+    .login-container {
+        margin-top: 20px;
+    }
+
+    .navbar {
+        padding: 0;
+    }
+
+    .nav-link {
+        padding: 0px;
+        margin-bottom: 10px;
+    }
+
+    .form-insert {
+        top: 16vh;
+    }
+
+    .form-insert h1 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Mobile landscape mode */
+@media (orientation: landscape) and (max-device-width : 960px) {
+    .jumbotron {
+        margin-top: 0px;
+        padding: 0;
+    }
+
+    .login-container {
+        margin-top: 0px;
+    }
+
+    .update-form {
+        margin: 0 auto;
+        padding: 5px;
+        top: -55px;
+    }
+
+    #footer {
+        display: none;
+    }
+}
