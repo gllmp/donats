@@ -99,7 +99,7 @@ class VideoPlayer extends React.Component {
     }
 
     onEnd(event) {
-        this.onRandomVideo();
+        this.onUpdateVideo();
     }
 
     onPlayVideo() {
