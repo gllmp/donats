@@ -6,7 +6,7 @@ class Footer extends Component {
 
         return (
             <div id="footer">
-                <p>&copy;{year}, <a href="http://donats.net/" target="_blank" rel="noopener noreferrer">DONATS | KILL THE QUARANTINE</a></p>
+                <p><span id="copyright-symbol">&copy;</span>{year}, <a href="http://donats.net/" rel="noopener noreferrer">DONATS | KILL THE QUARANTINE</a></p>
             </div>
   )
     }
