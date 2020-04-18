@@ -186,7 +186,7 @@ code {
 }
 
 @media screen and (max-height: 600px) {
-  #footer {
+  /* #footer {
       display: none;
-  }
+  } */
 }
