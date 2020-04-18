@@ -1,5 +1,5 @@
 import React from 'react';
-import  nextButtonImage from '../assets/img/button-next-orange.png';
+import  nextButtonImage from '../assets/img/button-next.gif';
 
 class RandomButton extends React.Component {
     constructor(props) {
