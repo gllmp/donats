@@ -216,8 +216,6 @@
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (max-width: 1200px) {
 
-    top: 9vh;
-  }
 }
 
 /* Extra large devices (large laptops and desktops, 1366px and up) */
