@@ -62,55 +62,11 @@
 }
 
 #video-button-container {
-  display: none;
-  position: relative;
-  z-index: 2;
-}
-
-#category-container button {
-  border: 0;
-  padding: 0;
-  background-color: transparent;
-  cursor:'pointer'
-}
-
-#category-container button:active, #category-container button:focus {
-  outline: none;
-}
-
-.category-image {
-  cursor:'pointer';
-}
-
-.category-image:hover {
-  cursor: pointer;
-}
-
-#category-music {
-  width: 100%;
-  max-width: 178px;
-  height: auto;
-  opacity: 0;
-  background-image: url(./assets/img/button-music.jpg);
-}
-
-#category-rap {
-  width: 100%;
-  max-width: 178px;
-  height: auto;
   margin: 0 auto;
   position: fixed;
   left: 50%;
   transform: translate(-50%, 50%);
   bottom: 18vh;
-#category-skate {
-  width: 100%;
-  max-width: 178px;
-  height: auto;
-  opacity: 0;
-  background-image: url(./assets/img/button-skate.jpg);
-}
-
 }
 
 #video-button {
@@ -152,23 +108,6 @@
     top: 0;
   }
 
-  #category-container {
-    top: 60px;
-  }
-  
-  #category-music {
-    max-width: 158px;
-  }
-  
-  #category-rap {
-    max-width: 158px;
-    display: flex;
-  }
-  
-  #category-skate {
-    max-width: 158px;
-  }
-  
   #video-button-container {
     bottom: 30vh;
   }
@@ -182,10 +121,6 @@
 @media (orientation: landscape) and (max-device-width : 960px) {
   #deuspi-visual {
     top: -5vh;
-  }
-
-  #category-container {
-    display: none;
   }
 
   #video-button-container {
