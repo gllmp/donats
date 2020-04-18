@@ -10,8 +10,28 @@
   font-size: calc(10px + 2vmin);
 }
 
+#banner-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+}
+
+#banner-top h1 {
+  margin-left: 5vw;
+  font-size: 2em;
+}
+
+#banner-top h1 a {
+  color: #dadada;
+  text-decoration: none;
+}
+
 .app-container {
   max-width: 1000px;
+  position: relative;
+  top: -5vh;
 }
 
 #logo-container {
