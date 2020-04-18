@@ -76,6 +76,9 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/">
             <div className="App">
+              <div id="banner-top">
+                <h1><a href="/">DONATS</a></h1>
+              </div>
               <div className="app-container w-50">
                 <div className="row">
                   <div className="col-lg">
