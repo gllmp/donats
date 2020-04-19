@@ -11,27 +11,32 @@
 }
 
 #banner-top {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: auto;
-  height: auto;
+  padding: 0;
 }
 
-#banner-top h1 {
-  margin-left: 5vw;
-  font-size: 2em;
-}
-
-#banner-top h1 a {
+#link-title {
   color: #dadada;
-  text-decoration: none;
+  margin-left: 5vw;
+  margin-top: 2vh;
+  font-size: 3.5em;
+}
+
+#link-info {
+  margin-right: 5vw;
+  margin-top: 2vh;
+}
+
+#link-info img {
+  width: 4vw;
+  height: auto;
+  max-width: 35px;
+  min-width: 25px;
 }
 
 .app-container {
   max-width: 1000px;
   position: relative;
-  top: -5vh;
+  top: -10vh;
 }
 
 #logo-container {
