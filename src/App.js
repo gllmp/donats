@@ -9,6 +9,8 @@ import VideoPlayer from './components/VideoPlayer';
 import Footer from './components/Footer';
 import './App.css';
 import  infoIcon from './assets/img/info-icon.png';
+import Swiper from 'react-id-swiper';
+import 'swiper/css/swiper.css';
 
 
 let data = [];

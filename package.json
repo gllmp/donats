@@ -19,6 +19,7 @@
     "react": "^16.13.0",
     "react-bootstrap": "^1.0.0-beta.16",
     "react-dom": "^16.13.0",
+    "react-id-swiper": "^3.0.0",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.4.0",
     "react-table": "^6.10.0",
@@ -26,6 +27,7 @@
     "rxjs": "^6.5.4",
     "serialize-javascript": "^2.1.2",
     "styled-components": "^5.0.1",
+    "swiper": "^5.3.7",
     "yup": "^0.28.3"
   },
   "scripts": {
