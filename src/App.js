@@ -157,7 +157,8 @@ class App extends React.Component {
               <div className="app-container">
                 <div className="row">
                   <div className="col-lg">
-                    <VideoPlayer data={data} ref={this.videoPlayerRef} />
+                    <MutipleSlidesPerView />
+                    {/* <VideoPlayer data={data} ref={this.videoPlayerRef} /> */}
                     {/* <button onClick={() => this.videoPlayerRef.current.onUpdateVideo()}>RANDOM</button> */}
                     <Footer />
                   </div>
