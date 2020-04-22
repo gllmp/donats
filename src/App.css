@@ -28,6 +28,10 @@
   font-size: 3.5em;
 }
 
+#link-title:focus {
+  text-decoration: none;
+}
+
 #link-info {
   margin-right: 5vw;
   margin-top: 2vh;
