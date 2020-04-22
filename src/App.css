@@ -12,6 +12,7 @@
 
 .app-container {
   width: 80% !important;
+  max-width: 1400px;
 #banner-top {
   padding: 0;
 }
