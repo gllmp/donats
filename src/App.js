@@ -48,6 +48,75 @@ function parseItemsByCategory(_data, item) {
   })
 }
 
+const MutipleSlidesPerView = () => {
+  const params = {
+    slidesPerView: 3,
+    spaceBetween: 40,
+    centeredSlides: true,
+    loop: true,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev'
+    },
+    // pagination: {
+    //   el: '.swiper-pagination',
+    //   clickable: true,
+    //   dynamicBullets: true
+    // },
+    effect: 'coverflow',
+    coverflowEffect: {
+      rotate: 0,
+      stretch: 0,
+      depth: 100,
+      modifier: 1,
+      slideShadows: true
+    },
+    breakpoints: {
+      1024: {
+        slidesPerView: 3,
+        spaceBetween: 30
+      },
+      768: {
+        slidesPerView: 3,
+        spaceBetween: 30
+      },
+      640: {
+        slidesPerView: 2,
+        spaceBetween: 20
+      },
+      320: {
+        slidesPerView: 2,
+        spaceBetween: 10
+      }
+    }
+  }
+  return (
+    <Swiper {...params}>
+      {/* <div>Slide #1</div>
+      <div>Slide #2</div>
+      <div>Slide #3</div>
+      <div>Slide #4</div>
+      <div>Slide #5</div>
+      <div>Slide #6</div>
+      <div>Slide #7</div>
+      <div>Slide #8</div>
+      <div>Slide #9</div>
+      <div>Slide #10</div> */}
+
+      <div><img className="swiper-slide-image" src={deuspiCover} alt="deuspi cover" /></div>
+      <div><img className="swiper-slide-image" src={categoryCover} alt="category cover" /></div>
+      <div><img className="swiper-slide-image" src={categoryCover} alt="category cover" /></div>
+      <div><img className="swiper-slide-image" src={categoryCover} alt="category cover" /></div>
+      <div><img className="swiper-slide-image" src={categoryCover} alt="category cover" /></div>
+      <div><img className="swiper-slide-image" src={categoryCover} alt="category cover" /></div>
+      <div><img className="swiper-slide-image" src={categoryCover} alt="category cover" /></div>
+      <div><img className="swiper-slide-image" src={categoryCover} alt="category cover" /></div>
+      <div><img className="swiper-slide-image" src={categoryCover} alt="category cover" /></div>
+      <div><img className="swiper-slide-image" src={categoryCover} alt="category cover" /></div>
+    </Swiper>
+  )
+};
+
 class App extends React.Component {
   constructor(props) {
     super(props);
