@@ -84,7 +84,7 @@ class App extends React.Component {
               <a id="link-info" className="navbar-nav ml-auto" href="/"><img src={infoIcon} alt="info icon" /></a>
             </nav>
             <div className="App">
-              <div className="app-container w-50">
+              <div className="app-container">
                 <div className="row">
                   <div className="col-lg">
                     <VideoPlayer data={data} ref={this.videoPlayerRef} />

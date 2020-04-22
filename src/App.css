@@ -10,6 +10,8 @@
   font-size: calc(10px + 2vmin);
 }
 
+.app-container {
+  width: 80% !important;
 #banner-top {
   padding: 0;
 }
