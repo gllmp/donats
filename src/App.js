@@ -118,29 +118,19 @@ const MutipleSlidesPerView = () => {
       }
     }
   }
+
   return (
     <Swiper {...params}>
-      {/* <div>Slide #1</div>
-      <div>Slide #2</div>
-      <div>Slide #3</div>
-      <div>Slide #4</div>
-      <div>Slide #5</div>
-      <div>Slide #6</div>
-      <div>Slide #7</div>
-      <div>Slide #8</div>
-      <div>Slide #9</div>
-      <div>Slide #10</div> */}
-
-      <div><img className="swiper-slide-image" src={deuspiCover} alt="deuspi cover" /></div>
-      <div><img className="swiper-slide-image" src={categoryCover} alt="category cover" /></div>
-      <div><img className="swiper-slide-image" src={categoryCover} alt="category cover" /></div>
-      <div><img className="swiper-slide-image" src={categoryCover} alt="category cover" /></div>
-      <div><img className="swiper-slide-image" src={categoryCover} alt="category cover" /></div>
-      <div><img className="swiper-slide-image" src={categoryCover} alt="category cover" /></div>
-      <div><img className="swiper-slide-image" src={categoryCover} alt="category cover" /></div>
-      <div><img className="swiper-slide-image" src={categoryCover} alt="category cover" /></div>
-      <div><img className="swiper-slide-image" src={categoryCover} alt="category cover" /></div>
-      <div><img className="swiper-slide-image" src={categoryCover} alt="category cover" /></div>
+      <div><img className="swiper-slide-image" data-playlist="deuspi" src={deuspiCover} alt="deuspi cover" /></div>
+      <div><img className="swiper-slide-image" data-playlist="aaaaaaa" src={categoryCover} alt="category cover" /></div>
+      <div><img className="swiper-slide-image" data-playlist="bbbbbbb" src={categoryCover} alt="category cover" /></div>
+      <div><img className="swiper-slide-image" data-playlist="ccccccc" src={categoryCover} alt="category cover" /></div>
+      <div><img className="swiper-slide-image" data-playlist="ddddddd" src={categoryCover} alt="category cover" /></div>
+      <div><img className="swiper-slide-image" data-playlist="eeeeeee" src={categoryCover} alt="category cover" /></div>
+      <div><img className="swiper-slide-image" data-playlist="fffffff" src={categoryCover} alt="category cover" /></div>
+      <div><img className="swiper-slide-image" data-playlist="ggggggg" src={categoryCover} alt="category cover" /></div>
+      <div><img className="swiper-slide-image" data-playlist="hhhhhhh" src={categoryCover} alt="category cover" /></div>
+      <div><img className="swiper-slide-image" data-playlist="iiiiiii" src={categoryCover} alt="category cover" /></div>
     </Swiper>
   )
 };
