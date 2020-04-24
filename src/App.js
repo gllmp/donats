@@ -48,6 +48,36 @@ function parseItemsByCategory(_data, item) {
   })
 }
 
+function setSlidesTransform() {
+  let slides = document.getElementsByClassName("swiper-slide");
+  
+  [].forEach.call(slides, slide => {
+
+    slide.onmouseover = () => {
+      let translateZ = getComputedTranslateZ(slide);
+
+      slide.style.transform = "translate3d(0px, 0px, " + String(translateZ) +  "px) rotateX(0deg) rotateY(0deg) scale(1.1)";
+      slide.style.transitionDuration = "300ms";
+    }
+
+    slide.onmouseout = () => {
+      let translateZ = getComputedTranslateZ(slide);
+      
+      slide.style.transform = "translate3d(0px, 0px, " + String(translateZ) +  "px) rotateX(0deg) rotateY(0deg) scale(1)";
+    }
+  });
+}
+
+function getComputedTranslateZ(el) {
+    if(!window.getComputedStyle) return;
+    
+    let style = getComputedStyle(el);
+    let transform = style.transform || style.webkitTransform || style.mozTransform;
+    let mat = transform.match(/^matrix3d\((.+)\)$/);
+
+    return mat ? ~~(mat[1].split(', ')[14]) : 0;
+}
+
 function getSlideClickEvent() {
   let swiperWrapper = document.querySelector('.swiper-wrapper');
   swiperWrapper.addEventListener('click', function(event) {
@@ -77,6 +107,7 @@ const MutipleSlidesPerView = () => {
   const params = {
     slidesPerView: 3,
     spaceBetween: 40,
+    speed: 300,
     centeredSlides: true,
     prevenClicks: true,
     preventClicksPropagation: true,
@@ -98,6 +129,10 @@ const MutipleSlidesPerView = () => {
       depth: 100,
       modifier: 1,
       slideShadows: true
+    },
+    zoom: {
+      maxRatio: 1.1,
+      toggle: false
     },
     breakpoints: {
       1024: {
