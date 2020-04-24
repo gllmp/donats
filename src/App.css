@@ -82,6 +82,23 @@
   transform: translate(0, -50%);
   top: 50%;
   */
+  /* transition: transform 250ms !important; */
+}
+
+.swiper-button-next {
+  color: #fff !important;
+}
+
+.swiper-button-next:focus {
+  text-decoration: none !important;
+}
+
+.swiper-button-prev {
+  color: #fff !important;
+}
+
+.swiper-button-prev:focus {
+  text-decoration: none !important;
 }
 
 #logo-container {
