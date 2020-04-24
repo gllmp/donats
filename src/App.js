@@ -48,11 +48,39 @@ function parseItemsByCategory(_data, item) {
   })
 }
 
+function getSlideClickEvent() {
+  let swiperWrapper = document.querySelector('.swiper-wrapper');
+  swiperWrapper.addEventListener('click', function(event) {
+      if (event.target.tagName === 'IMG') {
+        let slideElement = event.target;
+        let playlist = slideElement.getAttribute("data-playlist");
+        console.log(playlist);
+      
+        new Promise((resolve, reject) => {
+          resolve();
+        }).then(() => {
+            
+        }).then(() => {
+            
+        }).then(() => {
+            
+        }).catch(() => {
+      
+        }).finally(() => {
+      
+        });      
+      }
+  });  
+}
+
 const MutipleSlidesPerView = () => {
   const params = {
     slidesPerView: 3,
     spaceBetween: 40,
     centeredSlides: true,
+    prevenClicks: true,
+    preventClicksPropagation: true,
+    slideToClickedSlide: true,
     loop: true,
     navigation: {
       nextEl: '.swiper-button-next',
@@ -131,6 +159,11 @@ class App extends React.Component {
 
   componentDidMount() {
     parseData(this.props.appData);
+
+    setSlidesTransform();
+
+    // fix click on duplicate slides
+    getSlideClickEvent();
 
     authenticationService.currentUser.subscribe(x => this.setState({
       currentUser: x,
