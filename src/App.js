@@ -215,7 +215,7 @@ class App extends React.Component {
               <div className="app-container">
                 <div className="row">
                   <div className="col-lg">
-                    <MutipleSlidesPerView />
+                    <div className="align-items-center justify-content-center">
                     {/* <VideoPlayer data={data} ref={this.videoPlayerRef} /> */}
                     {/* <button onClick={() => this.videoPlayerRef.current.onUpdateVideo()}>RANDOM</button> */}
                     <Footer />

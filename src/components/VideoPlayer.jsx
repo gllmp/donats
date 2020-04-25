@@ -176,7 +176,7 @@ class VideoPlayer extends React.Component {
         }
 
         return (
-            <div className="align-items-center justify-content-center">
+                <div id="player-container">
                 <div id="logo-container">
                     <img id="deuspi-visual" onClick={this.onUpdateVideo} src={deuspiImage} alt="deuspi visual"/>
                 </div>
