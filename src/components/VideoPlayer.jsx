@@ -177,16 +177,16 @@ class VideoPlayer extends React.Component {
 
         return (
                 <div id="player-container">
-                <div id="logo-container">
-                    <img id="deuspi-visual" onClick={this.onUpdateVideo} src={deuspiImage} alt="deuspi visual"/>
-                </div>
-                <div id="video-container" className="embed-responsive embed-responsive-16by9">
-                    <div id="video-player" className="">
-                        <YouTube videoId={this.state.videoId} className="random-video" ref={this.youtubePlayerRef} opts={opts} onReady={this.onReady} onEnd={this.onEnd}/>
+                    <div id="logo-container">
+                        <img id="deuspi-visual" onClick={this.onUpdateVideo} src={deuspiImage} alt="deuspi visual"/>
                     </div>
+                    <div id="video-container" className="embed-responsive embed-responsive-16by9">
+                        <div id="video-player" className="">
+                            <YouTube videoId={this.state.videoId} className="random-video" ref={this.youtubePlayerRef} opts={opts} onReady={this.onReady} onEnd={this.onEnd}/>
+                        </div>
+                    </div>
+                    <RandomButton onClick={this.onUpdateVideo} />
                 </div>
-                <RandomButton onClick={this.onUpdateVideo} />
-            </div>
         );
     }
 }
