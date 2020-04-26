@@ -72,7 +72,7 @@ class Slider extends React.Component {
           click: (event) => {
             if (event.target.tagName === 'IMG') {
               this.setState({
-              currentSlide: event.target
+                currentSlide: event.target
             });        
             
             let url = this.state.currentSlide.getAttribute("data-url");
