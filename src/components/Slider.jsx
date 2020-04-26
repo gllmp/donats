@@ -64,7 +64,7 @@ class Slider extends React.Component {
         },
         on: {
           init: () => {
-            console.log("INIT SWIPER")
+            console.log("INIT SWIPER");
           },
           // reachBeginning: () => {
           //   this.state.swiper.slideTo(this.state.swiper.slides.length-1);
@@ -73,12 +73,28 @@ class Slider extends React.Component {
             if (event.target.tagName === 'IMG') {
               this.setState({
                 currentSlide: event.target
-            });        
-            
-            let url = this.state.currentSlide.getAttribute("data-url");
-            if (url !== null) {
-              // go to special site
-              window.location.href = url;
+              });        
+              
+              let url = this.state.currentSlide.getAttribute("data-url");
+              if (url !== null) {
+                // go to special site
+                window.location.href = url;
+              } else {
+                new Promise((resolve, reject) => {
+                  resolve();
+                }).then(() => {
+                  // get playlist
+                  let playlist = this.state.currentSlide.getAttribute("data-playlist");
+                  console.log("PLAYLIST: ", playlist);
+                }).then(() => {
+                  // swap slider with video player
+                  this.props.swapHandler();
+                }).catch(() => {
+              
+                }).finally(() => {
+              
+                });        
+              }
             }
           },
           transitionEnd: () => {
@@ -88,16 +104,14 @@ class Slider extends React.Component {
               }).then(() => {
                 // get playlist
                 let playlist = this.state.currentSlide.getAttribute("data-playlist");
-                console.log(playlist);
+                console.log("PLAYLIST: ", playlist);
               }).then(() => {
                 // mount video player
                 let swiperElement = document.getElementsByClassName("swiper-container");
                 swiperElement[0].style.display = "none";
-                console.log(swiperElement[0].style.display);
 
                 let playerElement = document.getElementById("player-container");
                 playerElement.style.display = "block";
-                console.log(playerElement.style.display);
               }).then(() => {
                   
               }).catch(() => {
