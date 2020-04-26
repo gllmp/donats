@@ -55,6 +55,8 @@ class App extends React.Component {
     };
 
     this.videoPlayerRef = React.createRef();
+
+    this.handleSwap = this.handleSwap.bind(this);
   }
 
   componentDidMount() {
@@ -64,6 +66,33 @@ class App extends React.Component {
       currentUser: x,
       isAdmin: x && x.role === Role.Admin
     }));
+  }
+
+  handleSwap() {
+    const swiperElement = document.getElementsByClassName("swiper-container")[0];
+    const playerElement = document.getElementById("player-container");
+
+    const videoPlayer = document.getElementById("video-player");
+    const videoIframe = videoPlayer.children[0].children[0]; 
+
+    new Promise((resolve, reject) => {
+      resolve();
+    }).then(() => {
+      swiperElement.classList.add("fade-out");
+
+      swiperElement.addEventListener("animationend", () => {
+        swiperElement.style.display = "none";
+        playerElement.style.display = "block";  
+      });  
+    }).then(() => {
+      videoIframe.classList.add("fade-in");  
+    }).then(() => {
+      this.videoPlayerRef.current.onUpdateVideo();
+    }).catch(() => {
+
+    }).finally(() => {
+
+    });
   }
 
   logout() {
@@ -86,7 +115,7 @@ class App extends React.Component {
                 <div className="row">
                   <div className="col-lg">
                     <div className="align-items-center justify-content-center">
-                      <Slider />
+                      <Slider swapHandler={this.handleSwap} />
                       <VideoPlayer data={data} ref={this.videoPlayerRef} />
                       {/* <button onClick={() => this.videoPlayerRef.current.onUpdateVideo()}>RANDOM</button> */}
                       <Footer />
