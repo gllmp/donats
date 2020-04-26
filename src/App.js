@@ -107,7 +107,7 @@ class App extends React.Component {
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Switch>
           <Route exact path="/">
-            <BannerTop />
+            <BannerTop handleSwap={this.handleSwap} />
             <div className="App">
               <div className="app-container">
                 <div className="row">
