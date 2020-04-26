@@ -157,12 +157,13 @@ class Slider extends React.Component {
 
     setSlidesTransform() {
       let slides = document.getElementsByClassName("swiper-slide");
+      let scale = 1.05;
       
       [].forEach.call(slides, slide => {
           slide.onmouseover = () => {
           let translateZ = this.getComputedTranslateZ(slide);
   
-          slide.style.transform = "translate3d(0px, 0px, " + String(translateZ) +  "px) rotateX(0deg) rotateY(0deg) scale(1.1)";
+          slide.style.transform = "translate3d(0px, 0px, " + String(translateZ) +  "px) rotateX(0deg) rotateY(0deg) scale(" + scale + ")";
           slide.style.transitionDuration = "300ms";
           }
   
