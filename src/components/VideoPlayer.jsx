@@ -75,7 +75,7 @@ class VideoPlayer extends React.Component {
     constructor(props) {
         super(props);
 
-        this.showPlayer = false;
+        this.showPlayer = true;
         this.youtubePlayerRef = React.createRef();
 
         this.state = {
@@ -177,9 +177,9 @@ class VideoPlayer extends React.Component {
 
         return (
                 <div id="player-container">
-                    <div id="logo-container">
+                    {/* <div id="logo-container">
                         <img id="deuspi-visual" onClick={this.onUpdateVideo} src={deuspiImage} alt="deuspi visual"/>
-                    </div>
+                    </div> */}
                     <div id="video-container" className="embed-responsive embed-responsive-16by9">
                         <div id="video-player" className="">
                             <YouTube videoId={this.state.videoId} className="random-video" ref={this.youtubePlayerRef} opts={opts} onReady={this.onReady} onEnd={this.onEnd}/>
