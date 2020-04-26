@@ -11,7 +11,7 @@ class Slider extends React.Component {
       this.state = {
         swiper: null,
         currentSlide: null,
-        showSlider: true
+        showSlider: true,
         isClicked: false,
       };
               
@@ -74,34 +74,26 @@ class Slider extends React.Component {
           click: (event) => {
             if (event.target.tagName === 'IMG') {
               this.setState({
-                currentSlide: event.target
+                currentSlide: event.target,
                 isClicked: true
-              
+              });
+
               let url = this.state.currentSlide.getAttribute("data-url");
               if (url !== null) {
                 // go to special site
                 window.location.href = url;
               } else if (this.state.isClicked && this.state.currentSlide && this.state.swiper.isBeginning) {
                 // if first slide
-                  resolve();
-              } else if (this.state.isClicked && this.state.currentSlide && this.state.swiper.isEnd) {
-                  // get playlist
                 this.swapToPlayer();
-                  console.log("PLAYLIST: ", playlist);
-                }).then(() => {
-                  // swap slider with video player
-                  this.props.handleSwap("open");
-                }).catch(() => {
-              
-                }).finally(() => {
-              
-                });        
+              } else if (this.state.isClicked && this.state.currentSlide && this.state.swiper.isEnd) {
+                // if last slide
+                this.swapToPlayer();
               }
             }
           },
           transitionEnd: () => {
-            if(this.state.currentSlide) {
-              
+            if((this.state.isClicked && this.state.currentSlide)) {
+              this.swapToPlayer();
             }
           }
         }      
