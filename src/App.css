@@ -21,29 +21,53 @@
   padding: 0;
 }
 
-#link-title {
+#banner-title {
   color: #dadada;
   margin-left: 5vw;
   margin-top: 2vh;
   font-size: 3.5em;
+  opacity: 1;
 }
 
-#link-title:focus {
+#banner-title:focus {
   text-decoration: none;
 }
 
-#link-info {
+#banner-info {
   margin-right: 5vw;
   margin-top: 2vh;
-#link-info:hover {
+  opacity: 1;
+}
+
+#banner-info:hover {
   cursor: pointer;
 }
 
-#link-info img {
+#banner-info img {
   width: 4vw;
   height: auto;
-  max-width: 35px;
-  min-width: 25px;
+  max-width: 30px;
+  min-width: 20px;
+}
+
+#banner-close {
+  display: none;
+  position: relative;
+  top: 10px;
+  margin-right: 10vw;
+  margin-top: 2vh;
+  opacity: 0;
+}
+
+#banner-close:hover {
+  cursor: pointer;
+}
+
+#banner-close img {
+  width: 4vw;
+  height: auto;
+  max-width: 20px;
+  min-width: 15px;
 }
 
 .swiper-container { 
