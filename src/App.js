@@ -5,11 +5,11 @@ import { authenticationService } from './services';
 import { LoginPage } from './pages';
 import { PrivateRoute } from './components/PrivateRoute';
 import Admin from './components/Admin';
+import BannerTop from './components/BannerTop';
 import Slider from './components/Slider';
 import VideoPlayer from './components/VideoPlayer';
 import Footer from './components/Footer';
 import './App.css';
-import  infoIcon from './assets/img/info-icon.png';
 
 let data = [];
 
@@ -106,10 +106,7 @@ class App extends React.Component {
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Switch>
           <Route exact path="/">
-            <nav id="banner-top" className="navbar navbar-expand-lg">
-              <a id="link-title" className="navbar-nav mr-auto navbar-brand" href="/">DONATS</a>
-              <a id="link-info" className="navbar-nav ml-auto" href="/"><img src={infoIcon} alt="info icon" /></a>
-            </nav>
+            <BannerTop />
             <div className="App">
               <div className="app-container">
                 <div className="row">

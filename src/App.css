@@ -35,6 +35,8 @@
 #link-info {
   margin-right: 5vw;
   margin-top: 2vh;
+#link-info:hover {
+  cursor: pointer;
 }
 
 #link-info img {
