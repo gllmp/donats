@@ -11,6 +11,7 @@ class Slider extends React.Component {
       this.state = {
         swiper: null,
         currentSlide: null
+        showSlider: true
       };
               
       this.params = {
@@ -124,6 +125,8 @@ class Slider extends React.Component {
         }      
       }
 
+      this.onShowSlider = this.onShowSlider.bind(this);
+      this.onCloseSlider = this.onCloseSlider.bind(this);
       this.updateSwiper = this.updateSwiper.bind(this);
       //this.goNext = this.goNext.bind(this);
       //this.goPrev = this.goPrev.bind(this);
@@ -137,6 +140,18 @@ class Slider extends React.Component {
 
       // fix click on duplicate slides
       //this.getSlideClickEvent();
+    }
+
+    onShowSlider() {
+      this.setState({
+          showSlider: true
+      });
+    }
+
+    onCloseSlider() {
+        this.setState({
+          showSlider: false
+        });
     }
 
     updateSwiper(swiper) {
