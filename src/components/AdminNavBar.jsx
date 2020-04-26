@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Links from './Links';
 import { Navbar } from 'react-bootstrap';
 
-class NavBar extends Component {
+class AdminNavBar extends Component {
     render() {
         return (
             <Navbar className="admin-container" expand="lg">
@@ -16,4 +16,4 @@ class NavBar extends Component {
     }
 }
 
-export default NavBar;
+export default AdminNavBar;

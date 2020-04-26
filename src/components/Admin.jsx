@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { NavBar } from '../components';
+import { AdminNavBar } from '../components';
 import { AdminPage, VideoList, VideoInsert, VideoUpdate } from '../pages';
 import Footer from './Footer';
 
@@ -27,7 +27,7 @@ class Admin extends React.Component {
                     <div className="stripes"></div>
                     <div className="stripes stripes-right"></div>
                 </div>
-                <NavBar />
+                <AdminNavBar />
                 <Switch>
                     <Route path="/admin/videos/list"  component={VideoList} />
                     <Route path="/admin/videos/create"  component={VideoInsert} />
