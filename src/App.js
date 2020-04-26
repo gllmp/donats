@@ -58,8 +58,8 @@ class App extends React.Component {
     this.videoPlayerRef = React.createRef();
 
     this.handleSwap = this.handleSwap.bind(this);
-    this.swapPlayer = this.swapPlayer.bind(this);
-    this.swapSlider = this.swapSlider.bind(this);
+    this.swapToPlayer = this.swapToPlayer.bind(this);
+    this.swapToSlider = this.swapToSlider.bind(this);
   }
 
   componentDidMount() {
@@ -90,21 +90,19 @@ class App extends React.Component {
       this.sliderRef.current.onCloseSlider();
       this.videoPlayerRef.current.onShowPlayer();
 
+      videoIframe.removeEventListener("animationend", this.swapToSlider());
+
       new Promise((resolve, reject) => {
         resolve();
       }).then(() => {
         this.swiperElement.classList.add("fade-out");
         this.titleElement.classList.add("fade-out");
-        this.infoElement.classList.add("fade-out");
-  
-        videoIframe.removeEventListener("animationend", this.swapSlider());  
-        this.swiperElement.addEventListener("animationend", this.swapPlayer());  
+        this.infoElement.classList.add("fade-out");  
       }).then(() => {
-
+        //videoIframe.removeEventListener("animationend", this.swapToSlider());
+        this.swiperElement.addEventListener("animationend", this.swapToPlayer());  
       }).then(() => {
         this.videoPlayerRef.current.onUpdateVideo();
-      }).then(() => {
-
       }).catch(() => {
   
       }).finally(() => {
@@ -114,18 +112,19 @@ class App extends React.Component {
       this.videoPlayerRef.current.onClosePlayer();
       this.sliderRef.current.onShowSlider();
 
+      this.swiperElement.removeEventListener("animationend", this.swapToPlayer());
+
       new Promise((resolve, reject) => {
         resolve();
       }).then(() => {
         this.videoPlayerRef.current.onPauseVideo();
       }).then(() => {
         videoIframe.classList.add("fade-out");
+        this.playerElement.classList.add("fade-out");
         this.closeElement.classList.add("fade-out");
         
-        this.swiperElement.removeEventListener("animationend", this.swapPlayer());  
-        videoIframe.addEventListener("animationend", this.swapSlider());  
-      }).then(() => {
-
+        //this.swiperElement.removeEventListener("animationend", this.swapToPlayer());
+        videoIframe.addEventListener("animationend", this.swapToSlider());  
       }).catch(() => {
   
       }).finally(() => {
@@ -135,7 +134,9 @@ class App extends React.Component {
 
   }
 
-  swapPlayer() {
+  swapToPlayer() {
+    const swapDuration = 600;
+
     //const swiperElement = document.getElementsByClassName("swiper-container")[0];
     //const playerElement = document.getElementById("player-container");
 
@@ -146,21 +147,27 @@ class App extends React.Component {
     //const infoElement = document.getElementById("banner-info");
     //const closeElement = document.getElementById("banner-close");
 
-    this.swiperElement.style.display = "none";
-    this.playerElement.style.display = "block";  
-    
-    this.titleElement.style.display = "none";
-    this.infoElement.style.display = "none";
-    this.closeElement.style.display = "block";  
-
-    videoIframe.classList.remove("fade-out");
-    this.closeElement.classList.remove("fade-out");
-
-    videoIframe.classList.add("fade-in");
-    this.closeElement.classList.add("fade-in");
+    setTimeout(() => {
+      this.swiperElement.style.display = "none";
+      this.playerElement.style.display = "block";  
+      
+      this.titleElement.style.display = "none";
+      this.infoElement.style.display = "none";
+      this.closeElement.style.display = "block";  
+  
+      videoIframe.classList.remove("fade-out");
+      this.playerElement.classList.remove("fade-out");  
+      this.closeElement.classList.remove("fade-out");
+  
+      videoIframe.classList.add("fade-in");
+      this.playerElement.classList.add("fade-in");  
+      this.closeElement.classList.add("fade-in");  
+    }, swapDuration)
 }
 
-  swapSlider() {
+  swapToSlider() {
+    const swapDuration = 600;
+
     //const swiperElement = document.getElementsByClassName("swiper-container")[0];
     //const playerElement = document.getElementById("player-container");
 
@@ -168,20 +175,22 @@ class App extends React.Component {
     //const infoElement = document.getElementById("banner-info");
     //const closeElement = document.getElementById("banner-close");
 
-    this.playerElement.style.display = "none";  
-    this.swiperElement.style.display = "block";
-
-    this.closeElement.style.display = "none";
-    this.titleElement.style.display = "block";
-    this.infoElement.style.display = "block";
-
-    this.swiperElement.classList.remove("fade-out");
-    this.titleElement.classList.remove("fade-out");
-    this.infoElement.classList.remove("fade-out");
-
-    this.swiperElement.classList.add("fade-in");
-    this.titleElement.classList.add("fade-in");
-    this.infoElement.classList.add("fade-in");
+    setTimeout(() => {
+      this.playerElement.style.display = "none";  
+      this.swiperElement.style.display = "block";
+  
+      this.closeElement.style.display = "none";
+      this.titleElement.style.display = "block";
+      this.infoElement.style.display = "block";
+  
+      this.swiperElement.classList.remove("fade-out");
+      this.titleElement.classList.remove("fade-out");
+      this.infoElement.classList.remove("fade-out");
+  
+      this.swiperElement.classList.add("fade-in");
+      this.titleElement.classList.add("fade-in");
+      this.infoElement.classList.add("fade-in");
+    }, swapDuration)
   }
 
   logout() {
