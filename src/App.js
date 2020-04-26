@@ -54,6 +54,7 @@ class App extends React.Component {
       isAdmin: false
     };
 
+    this.sliderRef = React.createRef();
     this.videoPlayerRef = React.createRef();
 
     this.handleSwap = this.handleSwap.bind(this);
@@ -112,7 +113,7 @@ class App extends React.Component {
                 <div className="row">
                   <div className="col-lg">
                     <div className="align-items-center justify-content-center">
-                      <Slider swapHandler={this.handleSwap} />
+                      <Slider handleSwap={this.handleSwap} ref={this.sliderRef} />
                       <VideoPlayer data={data} ref={this.videoPlayerRef} />
                       {/* <button onClick={() => this.videoPlayerRef.current.onUpdateVideo()}>RANDOM</button> */}
                       <Footer />
