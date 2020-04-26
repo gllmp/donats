@@ -70,7 +70,8 @@ class Slider extends React.Component {
           //   this.state.swiper.slideTo(this.state.swiper.slides.length-1);
           // },
           click: (event) => {
-            this.setState({
+            if (event.target.tagName === 'IMG') {
+              this.setState({
               currentSlide: event.target
             });        
             
