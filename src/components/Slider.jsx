@@ -10,7 +10,7 @@ class Slider extends React.Component {
 
       this.state = {
         swiper: null,
-        currentSlide: null
+        currentSlide: null,
         showSlider: true
       };
               
@@ -89,7 +89,7 @@ class Slider extends React.Component {
                   console.log("PLAYLIST: ", playlist);
                 }).then(() => {
                   // swap slider with video player
-                  this.props.swapHandler();
+                  this.props.handleSwap("open");
                 }).catch(() => {
               
                 }).finally(() => {
@@ -99,29 +99,10 @@ class Slider extends React.Component {
             }
           },
           transitionEnd: () => {
-            if (this.state.currentSlide) {
-              new Promise((resolve, reject) => {
-                resolve();
-              }).then(() => {
-                // get playlist
-                let playlist = this.state.currentSlide.getAttribute("data-playlist");
-                console.log("PLAYLIST: ", playlist);
-              }).then(() => {
-                // mount video player
-                let swiperElement = document.getElementsByClassName("swiper-container");
-                swiperElement[0].style.display = "none";
-
-                let playerElement = document.getElementById("player-container");
-                playerElement.style.display = "block";
-              }).then(() => {
-                  
-              }).catch(() => {
-            
-              }).finally(() => {
-            
-              });        
+            if(this.state.currentSlide) {
+              
             }
-          },
+          }
         }      
       }
 
