@@ -12,6 +12,7 @@ class Slider extends React.Component {
         swiper: null,
         currentSlide: null,
         showSlider: true
+        isClicked: false,
       };
               
       this.params = {
@@ -74,18 +75,18 @@ class Slider extends React.Component {
             if (event.target.tagName === 'IMG') {
               this.setState({
                 currentSlide: event.target
-              });        
+                isClicked: true
               
               let url = this.state.currentSlide.getAttribute("data-url");
               if (url !== null) {
                 // go to special site
                 window.location.href = url;
-              } else {
-                new Promise((resolve, reject) => {
+              } else if (this.state.isClicked && this.state.currentSlide && this.state.swiper.isBeginning) {
+                // if first slide
                   resolve();
-                }).then(() => {
+              } else if (this.state.isClicked && this.state.currentSlide && this.state.swiper.isEnd) {
                   // get playlist
-                  let playlist = this.state.currentSlide.getAttribute("data-playlist");
+                this.swapToPlayer();
                   console.log("PLAYLIST: ", playlist);
                 }).then(() => {
                   // swap slider with video player
