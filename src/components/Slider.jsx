@@ -109,6 +109,7 @@ class Slider extends React.Component {
       this.onShowSlider = this.onShowSlider.bind(this);
       this.onCloseSlider = this.onCloseSlider.bind(this);
       this.updateSwiper = this.updateSwiper.bind(this);
+      this.swapToPlayer = this.swapToPlayer.bind(this);
       //this.goNext = this.goNext.bind(this);
       //this.goPrev = this.goPrev.bind(this);
       this.setSlidesTransform = this.setSlidesTransform.bind(this);
@@ -137,6 +138,27 @@ class Slider extends React.Component {
 
     updateSwiper(swiper) {
       this.setState({ swiper });
+    }
+
+    swapToPlayer() {
+      this.setState({
+        isClicked: false
+      });        
+
+      new Promise((resolve, reject) => {
+        resolve();
+      }).then(() => {
+        // get playlist
+        let playlist = this.state.currentSlide.getAttribute("data-playlist");
+        console.log("PLAYLIST: ", playlist);
+      }).then(() => {
+        // swap slider with video player
+        this.props.handleSwap("open");
+      }).catch(() => {
+    
+      }).finally(() => {
+    
+      });        
     }
 
     // goNext() {
