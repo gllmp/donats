@@ -78,18 +78,6 @@
   display: none;
 }
 
-#logo-container {
-  opacity: 1;
-  z-index: 1;
-  margin: auto;
-  position: absolute;
-  top: 0px;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  height: 150px;
-}
-
 #quarantine-logo {
   width: 100%;
   max-width: 480px;
@@ -102,21 +90,6 @@
 }
 
 #quarantine-logo:hover {
-  cursor: pointer;
-}
-
-#deuspi-visual {
-  width: 100%;
-  max-width: 540px;
-  height: auto;
-  margin: 0;
-  position: absolute;
-  top: 5%;
-  left: 50%;
-  transform: translate(-50%, -50%)
-}
-
-#deuspi-visual:hover {
   cursor: pointer;
 }
 
