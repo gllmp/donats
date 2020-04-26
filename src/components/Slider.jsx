@@ -209,11 +209,11 @@ class Slider extends React.Component {
         return (
           <div>
             <Swiper getSwiper={this.updateSwiper} {...this.params}>
-                <div><img className="swiper-slide-image" data-playlist="aaaaaaa" src={categoryCover} alt="category cover" /></div>
-                <div><img className="swiper-slide-image" data-playlist="bbbbbbb" src={categoryCover} alt="category cover" /></div>
+                <div><img className="swiper-slide-image" data-playlist="music" src={categoryCover} alt="category cover" /></div>
+                <div><img className="swiper-slide-image" data-playlist="rap" src={categoryCover} alt="category cover" /></div>
                 <div><img className="swiper-slide-image" data-playlist="deuspi" data-url="http://deuspi.biz/" src={deuspiCover} alt="deuspi cover" /></div>
-                <div><img className="swiper-slide-image" data-playlist="ccccccc" src={categoryCover} alt="category cover" /></div>
-                <div><img className="swiper-slide-image" data-playlist="ddddddd" src={categoryCover} alt="category cover" /></div>
+                <div><img className="swiper-slide-image" data-playlist="skate" src={categoryCover} alt="category cover" /></div>
+                <div><img className="swiper-slide-image" data-playlist="category" src={categoryCover} alt="category cover" /></div>
             </Swiper>
             {/* <button onClick={this.goPrev}>Prev</button>
             <button onClick={this.goNext}>Next</button> */}
