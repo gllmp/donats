@@ -84,16 +84,16 @@ class Slider extends React.Component {
                 window.location.href = url;
               } else if (this.state.isClicked && this.state.currentSlide && this.state.swiper.isBeginning) {
                 // if first slide
-                this.swapToPlayer();
+                this.onSlideClick();
               } else if (this.state.isClicked && this.state.currentSlide && this.state.swiper.isEnd) {
                 // if last slide
-                this.swapToPlayer();
+                this.onSlideClick();
               }
             }
           },
           transitionEnd: () => {
             if((this.state.isClicked && this.state.currentSlide)) {
-              this.swapToPlayer();
+              this.onSlideClick();
             }
           }
         }      
@@ -101,8 +101,8 @@ class Slider extends React.Component {
 
       this.onShowSlider = this.onShowSlider.bind(this);
       this.onCloseSlider = this.onCloseSlider.bind(this);
+      this.onSlideClick = this.onSlideClick.bind(this);
       this.updateSwiper = this.updateSwiper.bind(this);
-      this.swapToPlayer = this.swapToPlayer.bind(this);
       //this.goNext = this.goNext.bind(this);
       //this.goPrev = this.goPrev.bind(this);
       this.setSlidesTransform = this.setSlidesTransform.bind(this);
@@ -133,7 +133,7 @@ class Slider extends React.Component {
       this.setState({ swiper });
     }
 
-    swapToPlayer() {
+    onSlideClick() {
       this.setState({
         isClicked: false
       });        
