@@ -58,6 +58,8 @@ class App extends React.Component {
     this.videoPlayerRef = React.createRef();
 
     this.handleSwap = this.handleSwap.bind(this);
+    this.swapPlayer = this.swapPlayer.bind(this);
+    this.swapSlider = this.swapSlider.bind(this);
   }
 
   componentDidMount() {
@@ -67,33 +69,119 @@ class App extends React.Component {
       currentUser: x,
       isAdmin: x && x.role === Role.Admin
     }));
+
+    this.swiperElement = document.getElementsByClassName("swiper-container")[0];
+    this.playerElement = document.getElementById("player-container");
+
+    this.videoPlayer = document.getElementById("video-player");
+    //this.videoIframe = this.videoPlayer.children[0].children[0];
+
+    this.titleElement = document.getElementById("banner-title");
+    this.infoElement = document.getElementById("banner-info");
+    this.closeElement = document.getElementById("banner-close");
   }
 
-  handleSwap() {
-    const swiperElement = document.getElementsByClassName("swiper-container")[0];
-    const playerElement = document.getElementById("player-container");
+  handleSwap(swap) {
+    const swapDirection = swap;
 
-    const videoPlayer = document.getElementById("video-player");
-    const videoIframe = videoPlayer.children[0].children[0]; 
+    const videoIframe = this.videoPlayer.children[0].children[0];
 
-    new Promise((resolve, reject) => {
-      resolve();
-    }).then(() => {
-      swiperElement.classList.add("fade-out");
+    if (swapDirection === "open") {
+      this.sliderRef.current.onCloseSlider();
+      this.videoPlayerRef.current.onShowPlayer();
 
-      swiperElement.addEventListener("animationend", () => {
-        swiperElement.style.display = "none";
-        playerElement.style.display = "block";  
+      new Promise((resolve, reject) => {
+        resolve();
+      }).then(() => {
+        this.swiperElement.classList.add("fade-out");
+        this.titleElement.classList.add("fade-out");
+        this.infoElement.classList.add("fade-out");
+  
+        videoIframe.removeEventListener("animationend", this.swapSlider());  
+        this.swiperElement.addEventListener("animationend", this.swapPlayer());  
+      }).then(() => {
+
+      }).then(() => {
+        this.videoPlayerRef.current.onUpdateVideo();
+      }).then(() => {
+
+      }).catch(() => {
+  
+      }).finally(() => {
+        
       });  
-    }).then(() => {
-      videoIframe.classList.add("fade-in");  
-    }).then(() => {
-      this.videoPlayerRef.current.onUpdateVideo();
-    }).catch(() => {
+    } else if (swapDirection === "close") {
+      this.videoPlayerRef.current.onClosePlayer();
+      this.sliderRef.current.onShowSlider();
 
-    }).finally(() => {
+      new Promise((resolve, reject) => {
+        resolve();
+      }).then(() => {
+        this.videoPlayerRef.current.onPauseVideo();
+      }).then(() => {
+        videoIframe.classList.add("fade-out");
+        this.closeElement.classList.add("fade-out");
+        
+        this.swiperElement.removeEventListener("animationend", this.swapPlayer());  
+        videoIframe.addEventListener("animationend", this.swapSlider());  
+      }).then(() => {
 
-    });
+      }).catch(() => {
+  
+      }).finally(() => {
+        
+      });  
+    }
+
+  }
+
+  swapPlayer() {
+    //const swiperElement = document.getElementsByClassName("swiper-container")[0];
+    //const playerElement = document.getElementById("player-container");
+
+    //const videoPlayer = document.getElementById("video-player");
+    const videoIframe = this.videoPlayer.children[0].children[0];
+
+    //const titleElement = document.getElementById("banner-title");
+    //const infoElement = document.getElementById("banner-info");
+    //const closeElement = document.getElementById("banner-close");
+
+    this.swiperElement.style.display = "none";
+    this.playerElement.style.display = "block";  
+    
+    this.titleElement.style.display = "none";
+    this.infoElement.style.display = "none";
+    this.closeElement.style.display = "block";  
+
+    videoIframe.classList.remove("fade-out");
+    this.closeElement.classList.remove("fade-out");
+
+    videoIframe.classList.add("fade-in");
+    this.closeElement.classList.add("fade-in");
+}
+
+  swapSlider() {
+    //const swiperElement = document.getElementsByClassName("swiper-container")[0];
+    //const playerElement = document.getElementById("player-container");
+
+    //const titleElement = document.getElementById("banner-title");
+    //const infoElement = document.getElementById("banner-info");
+    //const closeElement = document.getElementById("banner-close");
+
+    this.playerElement.style.display = "none";  
+    this.swiperElement.style.display = "block";
+
+    this.closeElement.style.display = "none";
+    this.titleElement.style.display = "block";
+    this.infoElement.style.display = "block";
+
+    this.swiperElement.classList.remove("fade-out");
+    this.titleElement.classList.remove("fade-out");
+    this.infoElement.classList.remove("fade-out");
+
+    this.swiperElement.classList.add("fade-in");
+    this.titleElement.classList.add("fade-in");
+    this.infoElement.classList.add("fade-in");
   }
 
   logout() {
