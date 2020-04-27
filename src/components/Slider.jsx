@@ -12,7 +12,8 @@ class Slider extends React.Component {
         swiper: null,
         currentSlide: null,
         showSlider: true,
-        isClicked: false,
+        currentSlide: null,
+        //isClicked: false
       };
               
       this.params = {
@@ -23,7 +24,7 @@ class Slider extends React.Component {
         centeredSlides: true,
         prevenClicks: true,
         preventClicksPropagation: true,
-        slideToClickedSlide: true,
+        slideToClickedSlide: false,
         loop: false,
         navigation: {
           nextEl: '.swiper-button-next',
@@ -72,29 +73,31 @@ class Slider extends React.Component {
           //   this.state.swiper.slideTo(this.state.swiper.slides.length-1);
           // },
           click: (event) => {
-            if (event.target.tagName === 'IMG') {
-              this.setState({
-                currentSlide: event.target,
-                isClicked: true
-              });
+            this.onSlideClick(event);
 
-              let url = this.state.currentSlide.getAttribute("data-url");
-              if (url !== null) {
-                // go to special site
-                window.location.href = url;
-              } else if (this.state.isClicked && this.state.currentSlide && this.state.swiper.isBeginning) {
-                // if first slide
-                this.onSlideClick();
-              } else if (this.state.isClicked && this.state.currentSlide && this.state.swiper.isEnd) {
-                // if last slide
-                this.onSlideClick();
-              }
-            }
+            // if (event.target.tagName === 'IMG') {              
+            //   this.setState({
+            //     currentSlide: event.target,
+            //     isClicked: true
+            //   });
+
+            //   let url = this.state.currentSlide.getAttribute("data-url");
+            //   if (url !== null) {
+            //     // go to special site
+            //     window.location.href = url;
+            //   } else if (this.state.isClicked && this.state.currentSlide && this.state.swiper.isBeginning) {
+            //     // if first slide
+            //     this.onSlideClick();
+            //   } else if (this.state.isClicked && this.state.currentSlide && this.state.swiper.isEnd) {
+            //     // if last slide
+            //     this.onSlideClick();
+            //   }
+            // }
           },
           transitionEnd: () => {
-            if((this.state.isClicked && this.state.currentSlide)) {
-              this.onSlideClick();
-            }
+            // if((this.state.isClicked && this.state.currentSlide)) {
+            //   this.onSlideClick();
+            // }
           }
         }      
       }
@@ -133,25 +136,71 @@ class Slider extends React.Component {
       this.setState({ swiper });
     }
 
-    onSlideClick() {
-      this.setState({
-        isClicked: false
-      });        
+    onSlideClick(event) {
+      if (event.target.tagName === 'IMG') {              
+        this.setState({
+          currentSlide: event.target,
+          //isClicked: true
+        });
 
-      new Promise((resolve, reject) => {
-        resolve();
-      }).then(() => {
-        // get playlist
-        let playlist = this.state.currentSlide.getAttribute("data-playlist");
-        console.log("PLAYLIST: ", playlist);
-      }).then(() => {
-        // swap slider with video player
-        this.props.handleSwap("open");
-      }).catch(() => {
+        let url = this.state.currentSlide.getAttribute("data-url");
+        if (url !== null) {
+          // go to special site
+          window.location.href = url;
+        // } else if (this.state.isClicked && this.state.currentSlide && this.state.swiper.isBeginning) {
+        //   // if first slide
+        //   this.onSlideClick();
+        // } else if (this.state.isClicked && this.state.currentSlide && this.state.swiper.isEnd) {
+        //   // if last slide
+        //   this.onSlideClick();
+        // }
+        } else {
+          new Promise((resolve, reject) => {
+            resolve();
+          }).then(() => {
+            // get playlist
+            this.setState({
+              playlist: this.state.currentSlide.getAttribute("data-playlist")
+            })
+            //let playlist = this.state.currentSlide.getAttribute("data-playlist");
+            console.log("PLAYLIST: ", this.state.playlist);
+          }).then(() => {
+            this.state.swiper.slideTo(this.state.swiper.clickedIndex);
+          }).then(() => {
+            // swap slider with video player
+            setTimeout(() => {
+              this.props.handleSwap("open");
+            }, this.params.speed)
+          }).catch(() => {
+        
+          }).finally(() => {
+        
+          });            
+        }
+      }
+
+
+      // this.setState({
+      //   isClicked: false
+      // });        
+
+      // new Promise((resolve, reject) => {
+      //   resolve();
+      // }).then(() => {
+      //   // get playlist
+      //   this.setState({
+      //     playlist: this.state.currentSlide.getAttribute("data-playlist")
+      //   })
+      //   //let playlist = this.state.currentSlide.getAttribute("data-playlist");
+      //   console.log("PLAYLIST: ", this.state.playlist);
+      // }).then(() => {
+      //   // swap slider with video player
+      //   this.props.handleSwap("open");
+      // }).catch(() => {
     
-      }).finally(() => {
+      // }).finally(() => {
     
-      });        
+      // });        
     }
 
     // goNext() {
