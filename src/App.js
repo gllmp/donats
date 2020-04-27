@@ -74,7 +74,6 @@ class App extends React.Component {
     this.playerElement = document.getElementById("player-container");
 
     this.videoPlayer = document.getElementById("video-player");
-    //this.videoIframe = this.videoPlayer.children[0].children[0];
 
     this.titleElement = document.getElementById("banner-title");
     this.infoElement = document.getElementById("banner-info");
@@ -99,7 +98,6 @@ class App extends React.Component {
         this.titleElement.classList.add("fade-out");
         this.infoElement.classList.add("fade-out");  
       }).then(() => {
-        //videoIframe.removeEventListener("animationend", this.swapToSlider());
         this.swiperElement.addEventListener("animationend", this.swapToPlayer());  
       }).then(() => {
         this.videoPlayerRef.current.onUpdateVideo();
@@ -123,7 +121,7 @@ class App extends React.Component {
         this.playerElement.classList.add("fade-out");
         this.closeElement.classList.add("fade-out");
         
-        //this.swiperElement.removeEventListener("animationend", this.swapToPlayer());
+
         videoIframe.addEventListener("animationend", this.swapToSlider());  
       }).catch(() => {
   
@@ -137,15 +135,7 @@ class App extends React.Component {
   swapToPlayer() {
     const swapDuration = 600;
 
-    //const swiperElement = document.getElementsByClassName("swiper-container")[0];
-    //const playerElement = document.getElementById("player-container");
-
-    //const videoPlayer = document.getElementById("video-player");
     const videoIframe = this.videoPlayer.children[0].children[0];
-
-    //const titleElement = document.getElementById("banner-title");
-    //const infoElement = document.getElementById("banner-info");
-    //const closeElement = document.getElementById("banner-close");
 
     setTimeout(() => {
       this.swiperElement.style.display = "none";
@@ -167,13 +157,6 @@ class App extends React.Component {
 
   swapToSlider() {
     const swapDuration = 600;
-
-    //const swiperElement = document.getElementsByClassName("swiper-container")[0];
-    //const playerElement = document.getElementById("player-container");
-
-    //const titleElement = document.getElementById("banner-title");
-    //const infoElement = document.getElementById("banner-info");
-    //const closeElement = document.getElementById("banner-close");
 
     setTimeout(() => {
       this.playerElement.style.display = "none";  
