@@ -10,17 +10,16 @@ class Slider extends React.Component {
 
       this.state = {
         swiper: null,
-        currentSlide: null,
+        playlist: null,
         showSlider: true,
-        currentSlide: null,
-        //isClicked: false
+        currentSlide: null
       };
               
       this.params = {
         slidesPerView: 3,
         spaceBetween: 40,
         speed: 300,
-        initialSlide: 2,
+        initialSlide: 3,
         centeredSlides: true,
         prevenClicks: true,
         preventClicksPropagation: true,
@@ -74,30 +73,6 @@ class Slider extends React.Component {
           // },
           click: (event) => {
             this.onSlideClick(event);
-
-            // if (event.target.tagName === 'IMG') {              
-            //   this.setState({
-            //     currentSlide: event.target,
-            //     isClicked: true
-            //   });
-
-            //   let url = this.state.currentSlide.getAttribute("data-url");
-            //   if (url !== null) {
-            //     // go to special site
-            //     window.location.href = url;
-            //   } else if (this.state.isClicked && this.state.currentSlide && this.state.swiper.isBeginning) {
-            //     // if first slide
-            //     this.onSlideClick();
-            //   } else if (this.state.isClicked && this.state.currentSlide && this.state.swiper.isEnd) {
-            //     // if last slide
-            //     this.onSlideClick();
-            //   }
-            // }
-          },
-          transitionEnd: () => {
-            // if((this.state.isClicked && this.state.currentSlide)) {
-            //   this.onSlideClick();
-            // }
           }
         }      
       }
@@ -140,20 +115,12 @@ class Slider extends React.Component {
       if (event.target.tagName === 'IMG') {              
         this.setState({
           currentSlide: event.target,
-          //isClicked: true
         });
 
         let url = this.state.currentSlide.getAttribute("data-url");
         if (url !== null) {
           // go to special site
           window.location.href = url;
-        // } else if (this.state.isClicked && this.state.currentSlide && this.state.swiper.isBeginning) {
-        //   // if first slide
-        //   this.onSlideClick();
-        // } else if (this.state.isClicked && this.state.currentSlide && this.state.swiper.isEnd) {
-        //   // if last slide
-        //   this.onSlideClick();
-        // }
         } else {
           new Promise((resolve, reject) => {
             resolve();
@@ -178,29 +145,6 @@ class Slider extends React.Component {
           });            
         }
       }
-
-
-      // this.setState({
-      //   isClicked: false
-      // });        
-
-      // new Promise((resolve, reject) => {
-      //   resolve();
-      // }).then(() => {
-      //   // get playlist
-      //   this.setState({
-      //     playlist: this.state.currentSlide.getAttribute("data-playlist")
-      //   })
-      //   //let playlist = this.state.currentSlide.getAttribute("data-playlist");
-      //   console.log("PLAYLIST: ", this.state.playlist);
-      // }).then(() => {
-      //   // swap slider with video player
-      //   this.props.handleSwap("open");
-      // }).catch(() => {
-    
-      // }).finally(() => {
-    
-      // });        
     }
 
     // goNext() {
@@ -287,9 +231,11 @@ class Slider extends React.Component {
             <Swiper getSwiper={this.updateSwiper} {...this.params}>
                 <div><img className="swiper-slide-image" data-playlist="music" src={categoryCover} alt="category cover" /></div>
                 <div><img className="swiper-slide-image" data-playlist="rap" src={categoryCover} alt="category cover" /></div>
-                <div><img className="swiper-slide-image" data-playlist="deuspi" data-url="http://deuspi.biz/" src={deuspiCover} alt="deuspi cover" /></div>
                 <div><img className="swiper-slide-image" data-playlist="skate" src={categoryCover} alt="category cover" /></div>
-                <div><img className="swiper-slide-image" data-playlist="category" src={categoryCover} alt="category cover" /></div>
+                <div><img className="swiper-slide-image" data-playlist="deuspi" data-url="http://deuspi.biz/" src={deuspiCover} alt="deuspi cover" /></div>
+                <div><img className="swiper-slide-image" data-playlist="music_rap" src={categoryCover} alt="category cover" /></div>
+                <div><img className="swiper-slide-image" data-playlist="music_skate" src={categoryCover} alt="category cover" /></div>
+                <div><img className="swiper-slide-image" data-playlist="rap_skate" src={categoryCover} alt="category cover" /></div>
             </Swiper>
             {/* <button onClick={this.goPrev}>Prev</button>
             <button onClick={this.goNext}>Next</button> */}
