@@ -130,7 +130,7 @@ class Slider extends React.Component {
               playlist: this.state.currentSlide.getAttribute("data-playlist")
             })
             //let playlist = this.state.currentSlide.getAttribute("data-playlist");
-            console.log("PLAYLIST: ", this.state.playlist);
+            //console.log("PLAYLIST: ", this.state.playlist);
           }).then(() => {
             this.state.swiper.slideTo(this.state.swiper.clickedIndex);
           }).then(() => {
