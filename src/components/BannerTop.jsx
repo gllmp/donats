@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import  infoIcon from '../assets/img/info-icon.png';
 import  closeIcon from '../assets/img/close-icon.png';
 
-class BannerTop extends Component {
+class BannerTop extends React.Component {
     constructor(props) {
         super(props);
 
