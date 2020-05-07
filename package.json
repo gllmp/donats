@@ -11,6 +11,7 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "bootswatch": "^4.4.1",
+    "emailjs-com": "^2.4.1",
     "formik": "^2.1.4",
     "get-youtube-title": "^1.0.0",
     "history": "^4.10.1",
