@@ -72,6 +72,87 @@
   min-width: 15px;
 }
 
+/* CONTACT */
+#contact-container {
+  display: table;
+  font-family: 'Antique-Bold', 'Helvetica Neue', sans-serif;
+  margin: 0 auto;
+  position: relative;
+}
+
+#contact-text {
+  max-width: 50%;
+  margin: 0;
+  float: left;
+  text-align: left;
+}
+
+#contact-text h1 {
+  font-size: 1.2em;
+  margin-top: 0;
+}
+
+#contact-text p {
+  position: relative;
+  top: 2em;
+  font-size: 0.7em;
+  line-height: 2em;
+}
+
+#contact-text a {
+  color: #fff;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+#contact-form {
+  max-width: 50%;
+  margin: 0;
+  position: relative;
+  float: right;
+  text-align: left;
+}
+
+#contact-form input, #contact-form textarea {
+  background-color: #000;
+  color: #fff;
+  border: 0;
+  border-bottom: 1px solid #fff;
+  width: 100%;
+}
+
+#contact-form input:focus, #contact-form textarea:focus {
+  outline: none;
+}
+
+#contact-form textarea {
+  margin: 0;
+  height: 20vh;
+  font-size: 0.7em;
+}
+
+#contact-email {
+  position: relative;
+  top: 1.5em;
+}
+
+#contact-message {
+  position: relative;
+  top: 3em;
+  display: block;
+  margin: 0 auto;
+}
+
+#contact-button {
+  position: relative;
+  top: 6em;
+  width: 25% !important;
+  min-width: 80px;
+  border: 1px solid #fff !important;
+  font-size: 0.7em;
+}
+
+/* SWIPER */
 .swiper-container { 
   width: 100%;
   opacity: 1;
@@ -180,6 +261,37 @@
 }
 
 @media only screen and (max-width: 600px) {
+  #contact-container {
+    top: -10vh;
+  }
+
+  #contact-text {
+    max-width: 100%;
+    font-size: 1.5em;
+  }
+
+  #contact-text h1 {
+    margin-bottom: 0;
+  }
+
+  #contact-text p {
+    top: 1em;
+    line-height: 1.5em;
+  }
+
+  #contact-form {
+    max-width: 100%;
+    top: 5vh;
+  }
+
+  #contact-form textarea {
+    height: 10vh;
+  }
+
+  #contact-form button {
+    top: 5em;
+  }
+
   #logo-container {
     height: 80px;
   }
@@ -194,7 +306,7 @@
   
   #video-button-img {
     max-width: 124px;
-  }  
+  }
 }
 
 /* Mobile landscape mode */
