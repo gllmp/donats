@@ -1,8 +1,8 @@
 @import-normalize; /* bring in normalize.css styles */
 
 @font-face {
-  font-family: 'Antique-Regular';
-  src: url(./assets/font/Antique-Olive-Regular.otf);
+  font-family: 'Antique-Compact';
+  src: url(./assets/font/Antique-Olive-Compact.otf);
 }
 
 @font-face {
@@ -20,7 +20,7 @@ body {
   background-color: #000;
   margin: 0;
   overflow: hidden; /* Hide scrollbars */
-  font-family: 'Antique-Regular', 'Helvetica Neue', sans-serif;
+  font-family: 'Antique-Compact', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* Prevent text highlight */
