@@ -6,6 +6,7 @@ import { LoginPage } from './pages';
 import { PrivateRoute } from './components/PrivateRoute';
 import Admin from './components/Admin';
 import BannerTop from './components/BannerTop';
+import ContactForm from '../components/ContactForm';
 import Slider from './components/Slider';
 import VideoPlayer from './components/VideoPlayer';
 import Footer from './components/Footer';
