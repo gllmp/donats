@@ -25,16 +25,26 @@ class ContactForm extends React.Component {
 
     render() {
         return (
-            <form className="contact-form" onSubmit={this.sendEmail}>
-            <input type="hidden" name="contact_number" />
-            <label>Name</label>
-            <input type="text" name="user_name" />
-            <label>Email</label>
-            <input type="email" name="user_email" />
-            <label>Message</label>
-            <textarea name="message" />
-            <input type="submit" value="Send" />
-            </form>
+            <div id="contact-container">
+                <div id="contact-text">
+                    <h1>Écrivez-nous</h1>
+                    <p>
+                        Envoyez-nous vos commentaires,<br/>
+                        questions ou juste un bonjour !<br/>
+                        Écrivez-nous à partir du formulaire<br/>
+                        ou envoyez un e-mail à <a href="mailto:bonjour@donats.net">bonjour@donats.net</a>
+                    </p>
+                </div>
+                <div id="contact-form">
+                    <form className="contact-form" onSubmit={this.sendEmail}>
+                        {/* <input type="hidden" name="contact_number" /> */}
+                        <input id="contact-name" type="text" name="user_name" placeholder="Nom" />
+                        <input id="contact-email" type="email" name="user_email" placeholder="Email" />
+                        <textarea id="contact-message" name="message" placeholder="Votre message" />
+                        <input id="contact-button" type="submit" value="Envoyer" />
+                    </form>
+                </div>
+            </div>
         );    
     }
 }
