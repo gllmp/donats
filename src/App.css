@@ -1,3 +1,4 @@
+/* APP */
 .App {
   text-align: center;
   background-color: #000;
@@ -17,6 +18,7 @@
   top: -15vh;
 }
 
+/* BANNER */
 #banner-top {
   padding: 0;
 }
@@ -100,6 +102,7 @@
   text-decoration: none !important;
 }
 
+/* PLAYER */
 #player-container {
   display: none;
 }
@@ -166,6 +169,8 @@
 #views {
   margin-right: 10px;
 }
+
+/* MEDIA QUERIES */
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-height: 768px) {
