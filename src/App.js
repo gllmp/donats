@@ -59,8 +59,10 @@ class App extends React.Component {
     this.videoPlayerRef = React.createRef();
 
     this.handleSwap = this.handleSwap.bind(this);
+    this.handleContactSwap = this.handleContactSwap.bind(this);
     this.swapToPlayer = this.swapToPlayer.bind(this);
     this.swapToSlider = this.swapToSlider.bind(this);
+    this.swapToContact = this.swapToContact.bind(this);
   }
 
   componentDidMount() {
@@ -79,11 +81,54 @@ class App extends React.Component {
     this.titleElement = document.getElementById("banner-title");
     this.infoElement = document.getElementById("banner-info");
     this.closeElement = document.getElementById("banner-close");
+    this.contactElement = document.getElementById("contact-container");
   }
 
   handleSwap(swap) {
     const swapDirection = swap;
 
+  handleContactSwap() {
+    if (this.state.swapDirection === "open") {
+      this.sliderRef.current.onCloseSlider();
+      this.contactRef.current.onShowContact();
+
+      this.contactElement.removeEventListener("animationend", this.swapToSlider());
+
+      new Promise((resolve, reject) => {
+        resolve();
+      }).then(() => {
+        this.swiperElement.classList.add("fade-out");
+        this.titleElement.classList.add("fade-out");
+        this.infoElement.classList.add("fade-out");  
+      }).then(() => {
+        this.swiperElement.addEventListener("animationend", this.swapToContact());  
+      }).catch(() => {
+  
+      }).finally(() => {
+        
+      });  
+    } else if (this.state.swapDirection === "close") {
+      this.contactRef.current.onCloseContact();
+      this.sliderRef.current.onShowSlider();
+
+      this.swiperElement.removeEventListener("animationend", this.swapToContact());
+
+      new Promise((resolve, reject) => {
+        resolve();
+      }).then(() => {
+        this.contactElement.classList.add("fade-out");
+        this.closeElement.classList.add("fade-out");
+        
+        this.contactElement.addEventListener("animationend", this.swapToSlider());  
+      }).catch(() => {
+  
+      }).finally(() => {
+        
+      });  
+    }
+  }
+
+  handlePlayerSwap() {
     const videoIframe = this.videoPlayer.children[0].children[0];
 
     if (swapDirection === "open") {
@@ -122,7 +167,6 @@ class App extends React.Component {
         this.playerElement.classList.add("fade-out");
         this.closeElement.classList.add("fade-out");
         
-
         videoIframe.addEventListener("animationend", this.swapToSlider());  
       }).catch(() => {
   
@@ -130,7 +174,25 @@ class App extends React.Component {
         
       });  
     }
+  }
 
+  swapToContact() {
+    const swapDuration = 600;
+
+    setTimeout(() => {
+      this.swiperElement.style.display = "none";
+      this.contactElement.style.display = "table";  
+      
+      this.titleElement.style.display = "none";
+      this.infoElement.style.display = "none";
+      this.closeElement.style.display = "block";  
+  
+      this.contactElement.classList.remove("fade-out");  
+      this.closeElement.classList.remove("fade-out");
+  
+      this.contactElement.classList.add("fade-in");  
+      this.closeElement.classList.add("fade-in");  
+    }, swapDuration)
   }
 
   swapToPlayer() {
@@ -194,6 +256,7 @@ class App extends React.Component {
                 <div className="row">
                   <div className="col-lg">
                     <div className="align-items-center justify-content-center">
+                      <ContactForm ref={this.contactRef} />
                       <Slider handleSwap={this.handleSwap} ref={this.sliderRef} />
                       <VideoPlayer data={data} ref={this.videoPlayerRef} />
                       {/* <button onClick={() => this.videoPlayerRef.current.onUpdateVideo()}>RANDOM</button> */}
