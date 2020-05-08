@@ -19,7 +19,7 @@ class BannerTop extends React.Component {
     }
 
     onClose() {
-        this.props.handleSwap("close");
+        this.props.handleSwap(this.props.swapElement, "close");
     }
 
     render() {

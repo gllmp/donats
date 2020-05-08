@@ -136,7 +136,7 @@ class Slider extends React.Component {
           }).then(() => {
             // swap slider with video player
             setTimeout(() => {
-              this.props.handleSwap("open");
+              this.props.handleSwap("slider", "open");
             }, this.params.speed)
           }).catch(() => {
         

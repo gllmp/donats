@@ -52,14 +52,14 @@ class App extends React.Component {
 
     this.state = {
       currentUser: null,
-      isAdmin: false
+      isAdmin: false,
+      swapElement: null,
+      swapDirection: null
     };
-
-    this.sliderRef = React.createRef();
-    this.videoPlayerRef = React.createRef();
 
     this.handleSwap = this.handleSwap.bind(this);
     this.handleContactSwap = this.handleContactSwap.bind(this);
+    this.handlePlayerSwap = this.handlePlayerSwap.bind(this);
     this.swapToPlayer = this.swapToPlayer.bind(this);
     this.swapToSlider = this.swapToSlider.bind(this);
     this.swapToContact = this.swapToContact.bind(this);
@@ -73,6 +73,10 @@ class App extends React.Component {
       isAdmin: x && x.role === Role.Admin
     }));
 
+    this.sliderRef = React.createRef();
+    this.videoPlayerRef = React.createRef();
+    this.contactRef = React.createRef();
+
     this.swiperElement = document.getElementsByClassName("swiper-container")[0];
     this.playerElement = document.getElementById("player-container");
 
@@ -81,11 +85,30 @@ class App extends React.Component {
     this.titleElement = document.getElementById("banner-title");
     this.infoElement = document.getElementById("banner-info");
     this.closeElement = document.getElementById("banner-close");
+
     this.contactElement = document.getElementById("contact-container");
   }
 
-  handleSwap(swap) {
-    const swapDirection = swap;
+  handleSwap(element, direction) {
+    new Promise((resolve, reject) => {
+      resolve();
+    }).then(() => {
+      this.setState({
+        swapElement: element,
+        swapDirection: direction
+      });  
+    }).then(() => {
+      if (this.state.swapElement === "slider") {
+        this.handlePlayerSwap();
+      } else if (this.state.swapElement === "contact") {
+        this.handleContactSwap();
+      }  
+    }).catch(() => {
+
+    }).finally(() => {
+      
+    });  
+  }
 
   handleContactSwap() {
     if (this.state.swapDirection === "open") {
@@ -131,7 +154,7 @@ class App extends React.Component {
   handlePlayerSwap() {
     const videoIframe = this.videoPlayer.children[0].children[0];
 
-    if (swapDirection === "open") {
+    if (this.state.swapDirection === "open") {
       this.sliderRef.current.onCloseSlider();
       this.videoPlayerRef.current.onShowPlayer();
 
@@ -152,7 +175,7 @@ class App extends React.Component {
       }).finally(() => {
         
       });  
-    } else if (swapDirection === "close") {
+    } else if (this.state.swapDirection === "close") {
       this.videoPlayerRef.current.onClosePlayer();
       this.sliderRef.current.onShowSlider();
 
@@ -216,12 +239,13 @@ class App extends React.Component {
       this.playerElement.classList.add("fade-in");  
       this.closeElement.classList.add("fade-in");  
     }, swapDuration)
-}
+  }
 
   swapToSlider() {
     const swapDuration = 600;
 
     setTimeout(() => {
+      this.contactElement.style.display = "none";  
       this.playerElement.style.display = "none";  
       this.swiperElement.style.display = "block";
   
@@ -250,7 +274,7 @@ class App extends React.Component {
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Switch>
           <Route exact path="/">
-            <BannerTop handleSwap={this.handleSwap} />
+            <BannerTop swapElement={this.state.swapElement} handleSwap={this.handleSwap} />
             <div className="App">
               <div className="app-container">
                 <div className="row">
