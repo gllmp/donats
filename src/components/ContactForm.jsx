@@ -5,11 +5,29 @@ class ContactForm extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            showContact: false
+        };
+
+        this.onShowContact = this.onShowContact.bind(this);
+        this.onCloseContact = this.onCloseContact.bind(this);
         this.sendEmail = this.sendEmail.bind(this);
     }
 
     componentDidMount() {
     
+    }
+
+    onShowContact() {
+        this.setState({
+            showContact: true
+        });
+    }
+
+    onCloseContact() {
+        this.setState({
+            showContact: false
+        });
     }
 
     sendEmail(e) {
