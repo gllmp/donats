@@ -2,12 +2,33 @@ import React from 'react';
 import YouTube from 'react-youtube';
 import RandomButton from './RandomButton';
 
+let playlist;
+let selectedPlaylist;
 let category;
 
+function getPlaylist(playlists) {
+    playlist = playlists;
+}
+
+function setPlaylist(sliderRef) {
+    Object.keys(playlist).forEach(element => {
+        if (element === sliderRef.current.state.playlist) {
+            selectedPlaylist = playlist[element];
+            console.log("PLAYLIST: ", selectedPlaylist);
+        }
+    });
+}
+
 function setCategory(data) {
-    let index = Math.floor(Math.random() * Object.keys(data).length);
+    let selectedData = [];
+
+    selectedPlaylist.forEach(element => {
+        selectedData.push(element);
+    })
+
+    let index = Math.floor(Math.random() * Object.keys(selectedData).length);
     
-    category = Object.keys(data)[index];
+    category = selectedData[index];
 }
 
 function setRandomId(data) {
@@ -129,6 +150,10 @@ class VideoPlayer extends React.Component {
     onUpdateVideo() {
         new Promise((resolve, reject) => {
             resolve();
+        }).then(() => {
+            getPlaylist(this.props.playlist);
+        }).then(() => {
+            setPlaylist(this.props.selectedPlaylist);
         }).then(() => {
             setCategory(this.props.data);
         }).then(() => {

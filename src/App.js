@@ -13,6 +13,15 @@ import Footer from './components/Footer';
 import './App.css';
 
 let data = [];
+// /!\ get playlist from database
+let playlist = {
+  music: ["music"],
+  rap: ["rap"],
+  skate: ["skate"],
+  music_rap: ["music", "rap"],
+  music_skate: ["music", "skate"],
+  rap_skate: ["rap", "skate"]
+};
 
 function parseData(appData) {
   JSON.parse(appData).forEach(element => {
@@ -282,7 +291,7 @@ class App extends React.Component {
                     <div className="align-items-center justify-content-center">
                       <ContactForm ref={this.contactRef} />
                       <Slider handleSwap={this.handleSwap} ref={this.sliderRef} />
-                      <VideoPlayer data={data} ref={this.videoPlayerRef} />
+                      <VideoPlayer data={data} playlist={playlist} selectedPlaylist={this.sliderRef} ref={this.videoPlayerRef} />
                       {/* <button onClick={() => this.videoPlayerRef.current.onUpdateVideo()}>RANDOM</button> */}
                       <Footer />
                     </div>
