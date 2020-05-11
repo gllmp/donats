@@ -28,8 +28,8 @@ class DeleteVideo extends Component {
                 api.deleteVideoById(this.props.id).then( () => {
                     resolve();
                 });    
-            }).catch(() => {
-        
+            }).catch((error) => {
+                console.error(error);
             }).finally(() => {
                 window.location.reload(true);        
             });

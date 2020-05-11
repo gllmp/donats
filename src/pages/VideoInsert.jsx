@@ -109,8 +109,8 @@ class VideoInsert extends Component {
     //                     //window.location.href = `/admin`;
     //                 });
         
-    //             }).catch(() => {
-            
+    //             }).catch((error) => {
+    //                  console.error(error);
     //             }).finally(() => {
             
     //             });    
@@ -155,8 +155,8 @@ class VideoInsert extends Component {
                     //window.location.href = `/admin`;
                 });
     
-            }).catch(() => {
-        
+            }).catch((error) => {
+                console.error(error);
             }).finally(() => {
         
             });    

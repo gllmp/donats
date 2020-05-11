@@ -75,8 +75,8 @@ class VideoUpdate extends Component {
                 window.alert(`Video updated successfully`);
                 resolve();
             })
-        }).catch(() => {
-
+        }).catch((error) => {
+            console.error(error);
         }).finally(() => {
             history.push(process.env.PUBLIC_URL + "/admin/videos/list");
             window.location.reload(true);

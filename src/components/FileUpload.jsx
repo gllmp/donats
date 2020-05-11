@@ -47,8 +47,8 @@ class FileUpload extends React.Component {
 			});
 
 			console.log(this.state.data);
-		}).catch(() => {
-	
+		}).catch((error) => {
+			console.error(error);
 		}).finally(() => {
 
 		});

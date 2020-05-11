@@ -23,8 +23,8 @@ const start = async () => {
                 document.getElementById('root')
             );            
         });
-    }).catch(() => {
-
+    }).catch((error) => {
+        console.error(error);
     }).finally(() => {
 
     });

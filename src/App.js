@@ -31,8 +31,8 @@ function parseData(appData) {
       getCategories(data, element);
     }).then(() => {
       parseItemsByCategory(data, element);        
-    }).catch(() => {
-
+    }).catch((error) => {
+      console.error(error);
     }).finally(() => {
 
     });
@@ -112,8 +112,8 @@ class App extends React.Component {
       } else if (this.state.swapElement === "contact") {
         this.handleContactSwap();
       }  
-    }).catch(() => {
-
+    }).catch((error) => {
+        console.error(error);
     }).finally(() => {
       
     });  
@@ -134,8 +134,8 @@ class App extends React.Component {
         this.infoElement.classList.add("fade-out");  
       }).then(() => {
         this.swiperElement.addEventListener("animationend", this.swapToContact());  
-      }).catch(() => {
-  
+      }).catch((error) => {
+        console.error(error);
       }).finally(() => {
         
       });  
@@ -152,8 +152,8 @@ class App extends React.Component {
         this.closeElement.classList.add("fade-out");
         
         this.contactElement.addEventListener("animationend", this.swapToSlider());  
-      }).catch(() => {
-  
+      }).catch((error) => {
+        console.error(error);
       }).finally(() => {
         
       });  
@@ -179,8 +179,8 @@ class App extends React.Component {
         this.swiperElement.addEventListener("animationend", this.swapToPlayer());  
       }).then(() => {
         this.videoPlayerRef.current.onUpdateVideo();
-      }).catch(() => {
-  
+      }).catch((error) => {
+        console.error(error);
       }).finally(() => {
         
       });  
@@ -200,8 +200,8 @@ class App extends React.Component {
         this.closeElement.classList.add("fade-out");
         
         videoIframe.addEventListener("animationend", this.swapToSlider());  
-      }).catch(() => {
-  
+      }).catch((error) => {
+        console.error(error);
       }).finally(() => {
         
       });  

@@ -80,8 +80,8 @@ class VideoPlayer extends React.Component {
             this.setCategory(this.props.data);
         }).then(() => {
             this.onRandomVideo();
-        }).catch(() => {
-
+        }).catch((error) => {
+            console.error(error);
         }).finally(() => {
 
         });
@@ -99,8 +99,9 @@ class VideoPlayer extends React.Component {
             });
         }).then(() => {
             this.state.player.playVideo();
-        }).catch(() => {
+        }).catch((error) => {
             //use `.catch()` to do something after `reject()` has been called
+            console.error(error);
         }).finally(() => {
             //use `.finally()` to do something either way
         });

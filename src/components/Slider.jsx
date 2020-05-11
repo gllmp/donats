@@ -138,8 +138,8 @@ class Slider extends React.Component {
             setTimeout(() => {
               this.props.handleSwap("slider", "open");
             }, this.params.speed)
-          }).catch(() => {
-        
+          }).catch((error) => {
+              console.error(error);
           }).finally(() => {
         
           });            
@@ -204,15 +204,15 @@ class Slider extends React.Component {
     //         if (url === null) {
     //           // mount video player
     //           new Promise((resolve, reject) => {
-    //             resolve();
+    //              resolve();
     //           }).then(() => {
                   
     //           }).then(() => {
                   
     //           }).then(() => {
                   
-    //           }).catch(() => {
-            
+    //           }).catch((error) => {
+    //              console.error(error);
     //           }).finally(() => {
             
     //           });        
