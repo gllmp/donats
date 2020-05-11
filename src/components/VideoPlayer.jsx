@@ -6,83 +6,6 @@ let playlist;
 let selectedPlaylist;
 let category;
 
-function getPlaylist(playlists) {
-    playlist = playlists;
-}
-
-function setPlaylist(sliderRef) {
-    Object.keys(playlist).forEach(element => {
-        if (element === sliderRef.current.state.playlist) {
-            selectedPlaylist = playlist[element];
-            console.log("PLAYLIST: ", selectedPlaylist);
-        }
-    });
-}
-
-function setCategory(data) {
-    let selectedData = [];
-
-    selectedPlaylist.forEach(element => {
-        selectedData.push(element);
-    })
-
-    let index = Math.floor(Math.random() * Object.keys(selectedData).length);
-    
-    category = selectedData[index];
-}
-
-function setRandomId(data) {
-    // set data category
-    let dataCategory = data[category];
-
-    // set video index
-    let videoIndex;
-    const videoLength = dataCategory.length;
-
-    videoIndex = Math.floor(Math.random() * videoLength);
-
-    // shuffle category array
-    let randomArray = dataCategory;
-
-    shuffleId(randomArray)
-
-    // set video title
-    let videoTitle;
-    let videoId;
-
-    videoTitle = randomArray[videoIndex].title;
-    //console.log("videoTitle: ", videoTitle);
-
-    // set video id
-    videoId = randomArray[videoIndex].url;
-    //console.log("videoId: ", videoId);
-
-    let videoData = {
-        category: category,
-        title: videoTitle,
-        id: videoId
-    };
-    console.log(videoData);
-
-    return videoData;
-}
-
-function shuffleId(array) {
-    // set random id using Fisher-Yates shuffle
-    // see Mike Bostock article: https://bost.ocks.org/mike/shuffle/
-    let i = array.length;
-    let j, t;
-
-    while (i) {
-        j = Math.floor(Math.random() * i--);
-        t = array[i];
-        array[i] = array[j];
-        array[j] = t;
-    }
-    //console.log("shuffle: ", array);
-    return array;
-}
-
 // function setViews() {
 //   let categoryName = category;
 
@@ -99,7 +22,8 @@ class VideoPlayer extends React.Component {
         this.state = {
             videoId: "",
             player: null,
-            showPlayer: false
+            showPlayer: false,
+            currentPlaylist: null
         };
 
         this.onReady = this.onReady.bind(this);
@@ -110,6 +34,11 @@ class VideoPlayer extends React.Component {
         this.onPauseVideo = this.onPauseVideo.bind(this);
         this.onUpdateVideo = this.onUpdateVideo.bind(this);
         this.onRandomVideo = this.onRandomVideo.bind(this);
+        this.getPlaylist = this.getPlaylist.bind(this);
+        this.setPlaylist = this.setPlaylist.bind(this);
+        this.setCategory = this.setCategory.bind(this);
+        this.setRandomId = this.setRandomId.bind(this);
+        this.shuffleId = this.shuffleId.bind(this);
     }
 
     componentDidMount() {
@@ -151,11 +80,11 @@ class VideoPlayer extends React.Component {
         new Promise((resolve, reject) => {
             resolve();
         }).then(() => {
-            getPlaylist(this.props.playlist);
+            this.getPlaylist(this.props.playlist);
         }).then(() => {
-            setPlaylist(this.props.selectedPlaylist);
+            this.setPlaylist(this.props.selectedPlaylist);
         }).then(() => {
-            setCategory(this.props.data);
+            this.setCategory(this.props.data);
         }).then(() => {
             this.onRandomVideo();
         }).then(() => {
@@ -168,7 +97,7 @@ class VideoPlayer extends React.Component {
     }
 
     onRandomVideo() {
-        let randomData = setRandomId(this.props.data);
+        let randomData = this.setRandomId(this.props.data);
 
         new Promise((resolve, reject) => {
             resolve();
@@ -185,6 +114,88 @@ class VideoPlayer extends React.Component {
             //use `.finally()` to do something either way
         });
     }
+
+    getPlaylist(playlists) {
+        playlist = playlists;
+    }
+    
+    setPlaylist(sliderRef) {
+        Object.keys(playlist).forEach(element => {
+            if (element === sliderRef.current.state.playlist) {
+                selectedPlaylist = playlist[element];
+    
+                this.setState({
+                    currentPlaylist: selectedPlaylist
+                })
+    
+                console.log("PLAYLIST: ", this.state.currentPlaylist);
+            }
+        });
+    }
+    
+    setCategory(data) {
+        let selectedData = [];
+    
+        selectedPlaylist.forEach(element => {
+            selectedData.push(element);
+        })
+    
+        let index = Math.floor(Math.random() * Object.keys(selectedData).length);
+        
+        category = selectedData[index];
+    }
+    
+    setRandomId(data) {
+        // set data category
+        let dataCategory = data[category];
+    
+        // set video index
+        let videoIndex;
+        const videoLength = dataCategory.length;
+    
+        videoIndex = Math.floor(Math.random() * videoLength);
+    
+        // shuffle category array
+        let randomArray = dataCategory;
+    
+        this.shuffleId(randomArray)
+    
+        // set video title
+        let videoTitle;
+        let videoId;
+    
+        videoTitle = randomArray[videoIndex].title;
+        //console.log("videoTitle: ", videoTitle);
+    
+        // set video id
+        videoId = randomArray[videoIndex].url;
+        //console.log("videoId: ", videoId);
+    
+        let videoData = {
+            category: category,
+            title: videoTitle,
+            id: videoId
+        };
+        console.log(videoData);
+    
+        return videoData;
+    }
+    
+    shuffleId(array) {
+        // set random id using Fisher-Yates shuffle
+        // see Mike Bostock article: https://bost.ocks.org/mike/shuffle/
+        let i = array.length;
+        let j, t;
+    
+        while (i) {
+            j = Math.floor(Math.random() * i--);
+            t = array[i];
+            array[i] = array[j];
+            array[j] = t;
+        }
+        //console.log("shuffle: ", array);
+        return array;
+    }    
 
     render() {
         const opts = {
