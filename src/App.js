@@ -9,6 +9,7 @@ import BannerTop from './components/BannerTop';
 import ContactForm from './components/ContactForm';
 import Slider from './components/Slider';
 import VideoPlayer from './components/VideoPlayer';
+import RandomButton from './components/RandomButton';
 import Footer from './components/Footer';
 import './App.css';
 
@@ -292,6 +293,7 @@ class App extends React.Component {
                       <ContactForm ref={this.contactRef} />
                       <Slider handleSwap={this.handleSwap} ref={this.sliderRef} />
                       <VideoPlayer data={data} playlist={playlist} selectedPlaylist={this.sliderRef} ref={this.videoPlayerRef} />
+                      <RandomButton onClick={(e) => this.sliderRef.current.onSlideClick(e.target)} />
                       {/* <button onClick={() => this.videoPlayerRef.current.onUpdateVideo()}>RANDOM</button> */}
                       <Footer />
                     </div>

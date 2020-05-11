@@ -1,6 +1,5 @@
 import React from 'react';
 import YouTube from 'react-youtube';
-import RandomButton from './RandomButton';
 
 let playlist;
 let selectedPlaylist;
@@ -210,7 +209,6 @@ class VideoPlayer extends React.Component {
                             <YouTube videoId={this.state.videoId} className="random-video" ref={this.youtubePlayerRef} opts={opts} onReady={this.onReady} onEnd={this.onEnd} />
                         </div>
                     </div>
-                    <RandomButton onClick={this.onUpdateVideo} />
                 </div>
         );
     }
