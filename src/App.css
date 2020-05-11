@@ -157,6 +157,7 @@
 /* SWIPER */
 .swiper-container { 
   width: 100%;
+  margin-bottom: 2vh;
   opacity: 1;
 }
 
@@ -221,7 +222,7 @@
   position: fixed;
   left: 50%;
   transform: translate(-50%, 50%);
-  bottom: 18vh;
+  bottom: 15vh;
 }
 
 #video-button {
