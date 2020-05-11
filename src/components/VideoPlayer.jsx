@@ -6,13 +6,6 @@ let playlist;
 let selectedPlaylist;
 let category;
 
-// function setViews() {
-//   let categoryName = category;
-
-//   let views = data.category[categoryName].views;
-//   //console.log(views);
-// }
-
 class VideoPlayer extends React.Component {
     constructor(props) {
         super(props);
@@ -87,8 +80,6 @@ class VideoPlayer extends React.Component {
             this.setCategory(this.props.data);
         }).then(() => {
             this.onRandomVideo();
-        }).then(() => {
-            //setViews();
         }).catch(() => {
 
         }).finally(() => {
