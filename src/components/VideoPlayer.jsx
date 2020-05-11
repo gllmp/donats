@@ -168,7 +168,7 @@ class VideoPlayer extends React.Component {
             title: videoTitle,
             id: videoId
         };
-        console.log(videoData);
+        console.log("VIDEO: ", videoData);
     
         return videoData;
     }
