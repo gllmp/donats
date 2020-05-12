@@ -157,34 +157,35 @@ class Slider extends React.Component {
       }
     }
 
-        let url = this.state.currentSlide.getAttribute("data-url");
-        if (url !== null) {
-          // go to special site
-          window.location.href = url;
-        } else {
-          new Promise((resolve, reject) => {
-            resolve();
-          }).then(() => {
-            // get playlist
-            this.setState({
-              playlist: this.state.currentSlide.getAttribute("data-playlist")
-            })
-            //let playlist = this.state.currentSlide.getAttribute("data-playlist");
-            //console.log("PLAYLIST: ", this.state.playlist);
-          }).then(() => {
-            this.state.swiper.slideTo(this.state.swiper.clickedIndex);
-          }).then(() => {
-            // swap slider with video player
-            setTimeout(() => {
-              this.props.handleSwap("slider", "open");
-            }, this.params.speed)
-          }).catch((error) => {
-              console.error(error);
-          }).finally(() => {
-        
-          });            
-        }
+    slideAndSwap() {
+      let url = this.state.currentSlide.getAttribute("data-url");
+
+      if (url !== null) {
+        // go to special site
+        window.location.href = url;
+      } else {
+        new Promise((resolve, reject) => {
+          resolve();
+        }).then(() => {
+          // get playlist
+          this.setState({
+            playlist: this.state.currentSlide.getAttribute("data-playlist")
+          })
+        }).then(() => {
+          console.log(this.state.swiper.clickedIndex)
+          this.state.swiper.slideTo(this.state.swiper.clickedIndex);
+        }).then(() => {
+          // swap slider with video player
+          setTimeout(() => {
+            this.props.handleSwap("slider", "open");
+          }, this.params.speed)
+        }).catch((error) => {
+            console.error(error);
+        }).finally(() => {
+      
+        });            
       }
+    }
 
     setSlidesTransform() {
       let slides = document.getElementsByClassName("swiper-slide");
