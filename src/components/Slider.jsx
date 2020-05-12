@@ -172,7 +172,6 @@ class Slider extends React.Component {
             playlist: this.state.currentSlide.getAttribute("data-playlist")
           })
         }).then(() => {
-          console.log(this.state.swiper.clickedIndex)
           this.state.swiper.slideTo(this.state.swiper.clickedIndex);
         }).then(() => {
           // swap slider with video player
