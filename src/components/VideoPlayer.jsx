@@ -1,8 +1,6 @@
 import React from 'react';
 import YouTube from 'react-youtube';
 
-//let playlist;
-//let selectedPlaylist;
 let category;
 
 class VideoPlayer extends React.Component {
@@ -127,33 +125,6 @@ class VideoPlayer extends React.Component {
                 console.log("PLAYLIST: ", this.state.currentPlaylist);
             }
         });    
-        // if (sliderPlaylist === null) {
-        //     // select playlist randomly
-        //     let index = Math.floor(Math.random() * Object.keys(this.state.playlists).length);
-            
-        //     sliderPlaylist = Object.keys(this.state.playlists)[index];
-
-        //     let selectedPlaylist = this.state.playlists[Object.keys(this.state.playlists)[index]];
-        
-        //     this.setState({
-        //         currentPlaylist: selectedPlaylist
-        //     })
-
-        //     console.log("PLAYLIST: ", this.state.currentPlaylist);
-        // } else {
-        //     // select playlist from slider
-        //     Object.keys(this.state.playlists).forEach(element => {
-        //         if (element === sliderPlaylist) {
-        //             let selectedPlaylist = this.state.playlists[element];
-        
-        //             this.setState({
-        //                 currentPlaylist: selectedPlaylist
-        //             })
-        
-        //             console.log("PLAYLIST: ", this.state.currentPlaylist);
-        //         }
-        //     });    
-        // }
     }
     
     setCategory(data) {
