@@ -293,7 +293,7 @@ class App extends React.Component {
                       <ContactForm ref={this.contactRef} />
                       <Slider handleSwap={this.handleSwap} ref={this.sliderRef} />
                       <VideoPlayer data={data} playlist={playlist} ref={this.videoPlayerRef} slider={this.sliderRef} />
-                      <RandomButton onClick={(e) => this.sliderRef.current.onSlideClick(e.target)} />
+                      <RandomButton onClick={(e) => this.sliderRef.current.selectSlide(e.target)} />
                       {/* <button onClick={() => this.videoPlayerRef.current.onUpdateVideo()}>RANDOM</button> */}
                       <Footer />
                     </div>

@@ -72,15 +72,15 @@ class Slider extends React.Component {
           //   this.state.swiper.slideTo(this.state.swiper.slides.length-1);
           // },
           click: (event) => {
-            this.onSlideClick(event.target);
+            this.selectSlide(event.target);
           }
         }      
       }
 
       this.onShowSlider = this.onShowSlider.bind(this);
       this.onCloseSlider = this.onCloseSlider.bind(this);
-      this.onSlideClick = this.onSlideClick.bind(this);
       this.updateSwiper = this.updateSwiper.bind(this);
+      this.selectSlide = this.selectSlide.bind(this);
       this.slideAndSwap = this.slideAndSwap.bind(this);
       this.setSlidesTransform = this.setSlidesTransform.bind(this);
       this.getComputedTranslateZ = this.getComputedTranslateZ.bind(this);
@@ -112,7 +112,7 @@ class Slider extends React.Component {
       this.setState({ swiper });
     }
 
-    onSlideClick(target) {
+    selectSlide(target) {
       if (target.id === "video-button-img" && this.state.showSlider) {
         // select random slide
         new Promise((resolve, reject) => {
