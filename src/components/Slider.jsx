@@ -72,7 +72,7 @@ class Slider extends React.Component {
           //   this.state.swiper.slideTo(this.state.swiper.slides.length-1);
           // },
           click: (event) => {
-            this.onSlideClick(event);
+            this.onSlideClick(event.target);
           }
         }      
       }
@@ -81,10 +81,11 @@ class Slider extends React.Component {
       this.onCloseSlider = this.onCloseSlider.bind(this);
       this.onSlideClick = this.onSlideClick.bind(this);
       this.updateSwiper = this.updateSwiper.bind(this);
-      //this.goNext = this.goNext.bind(this);
-      //this.goPrev = this.goPrev.bind(this);
+      this.slideAndSwap = this.slideAndSwap.bind(this);
       this.setSlidesTransform = this.setSlidesTransform.bind(this);
       this.getComputedTranslateZ = this.getComputedTranslateZ.bind(this);
+      //this.goNext = this.goNext.bind(this);
+      //this.goPrev = this.goPrev.bind(this);
       //this.getSlideClickEvent = this.getSlideClickEvent.bind(this);
     }
     
@@ -111,11 +112,50 @@ class Slider extends React.Component {
       this.setState({ swiper });
     }
 
-    onSlideClick(event) {
-      if (event.target.tagName === 'IMG') {              
-        this.setState({
-          currentSlide: event.target,
-        });
+    onSlideClick(target) {
+      if (target.id === "video-button-img" && this.state.showSlider) {
+        // select random slide
+        new Promise((resolve, reject) => {
+          resolve();
+        }).then(() => {
+          let sliderImages = document.getElementsByClassName("swiper-slide-image");
+
+          let index = Math.floor(Math.random() * Object.keys(sliderImages).length);
+          
+          let swiperDuplicate = this.state.swiper;
+          swiperDuplicate.clickedIndex = index;
+
+          this.setState({
+            currentSlide: sliderImages[index],
+            swiper: swiperDuplicate
+          });
+
+          //this.state.swiper.clickedIndex = index;
+        }).then(() => {
+          this.slideAndSwap();
+        }).catch((error) => {
+            console.error(error);
+        }).finally(() => {
+      
+        });            
+      } else if ((target.classList.contains("swiper-slide-image")) || (target.id === "video-button-img" && !this.state.showSlider)) {       
+        new Promise((resolve, reject) => {
+          resolve();
+        }).then(() => {
+          if (target.classList.contains("swiper-slide-image")) {
+            this.setState({
+              currentSlide: target,
+            });  
+          }
+        }).then(() => {
+          this.slideAndSwap();
+        }).catch((error) => {
+            console.error(error);
+        }).finally(() => {
+      
+        });                   
+      }
+    }
 
         let url = this.state.currentSlide.getAttribute("data-url");
         if (url !== null) {
@@ -145,19 +185,6 @@ class Slider extends React.Component {
           });            
         }
       }
-    }
-
-    // goNext() {
-    //   if (this.state.swiper !== null) {
-    //     this.state.swiper.slideNext();
-    //   }
-    // };
-    
-    // goPrev() {
-    //   if (this.state.swiper !== null) {
-    //     this.state.swiper.slidePrev();
-    //   }
-    // };
 
     setSlidesTransform() {
       let slides = document.getElementsByClassName("swiper-slide");
@@ -188,6 +215,18 @@ class Slider extends React.Component {
   
       return mat ? ~~(mat[1].split(', ')[14]) : 0;
     }
+
+    // goNext() {
+    //   if (this.state.swiper !== null) {
+    //     this.state.swiper.slideNext();
+    //   }
+    // };
+    
+    // goPrev() {
+    //   if (this.state.swiper !== null) {
+    //     this.state.swiper.slidePrev();
+    //   }
+    // };
 
     // getSlideClickEvent() {
     //   let swiperWrapper = document.querySelector('.swiper-wrapper');
