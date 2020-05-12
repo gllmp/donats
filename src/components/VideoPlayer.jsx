@@ -1,8 +1,8 @@
 import React from 'react';
 import YouTube from 'react-youtube';
 
-let playlist;
-let selectedPlaylist;
+//let playlist;
+//let selectedPlaylist;
 let category;
 
 class VideoPlayer extends React.Component {
@@ -15,6 +15,7 @@ class VideoPlayer extends React.Component {
             videoId: "",
             player: null,
             showPlayer: false,
+            playlists: null,
             currentPlaylist: null
         };
 
@@ -74,7 +75,7 @@ class VideoPlayer extends React.Component {
         }).then(() => {
             this.getPlaylist(this.props.playlist);
         }).then(() => {
-            this.setPlaylist(this.props.selectedPlaylist);
+            this.setPlaylist(this.props.slider);
         }).then(() => {
             this.setCategory(this.props.data);
         }).then(() => {
@@ -107,13 +108,17 @@ class VideoPlayer extends React.Component {
     }
 
     getPlaylist(playlists) {
-        playlist = playlists;
+        this.setState({
+            playlists: playlists
+        })
     }
     
     setPlaylist(sliderRef) {
-        Object.keys(playlist).forEach(element => {
-            if (element === sliderRef.current.state.playlist) {
-                selectedPlaylist = playlist[element];
+        let sliderPlaylist = sliderRef.current.state.playlist;
+
+        Object.keys(this.state.playlists).forEach(element => {
+            if (element === sliderPlaylist) {
+                let selectedPlaylist = this.state.playlists[element];
     
                 this.setState({
                     currentPlaylist: selectedPlaylist
@@ -121,13 +126,40 @@ class VideoPlayer extends React.Component {
     
                 console.log("PLAYLIST: ", this.state.currentPlaylist);
             }
-        });
+        });    
+        // if (sliderPlaylist === null) {
+        //     // select playlist randomly
+        //     let index = Math.floor(Math.random() * Object.keys(this.state.playlists).length);
+            
+        //     sliderPlaylist = Object.keys(this.state.playlists)[index];
+
+        //     let selectedPlaylist = this.state.playlists[Object.keys(this.state.playlists)[index]];
+        
+        //     this.setState({
+        //         currentPlaylist: selectedPlaylist
+        //     })
+
+        //     console.log("PLAYLIST: ", this.state.currentPlaylist);
+        // } else {
+        //     // select playlist from slider
+        //     Object.keys(this.state.playlists).forEach(element => {
+        //         if (element === sliderPlaylist) {
+        //             let selectedPlaylist = this.state.playlists[element];
+        
+        //             this.setState({
+        //                 currentPlaylist: selectedPlaylist
+        //             })
+        
+        //             console.log("PLAYLIST: ", this.state.currentPlaylist);
+        //         }
+        //     });    
+        // }
     }
     
     setCategory(data) {
         let selectedData = [];
     
-        selectedPlaylist.forEach(element => {
+        this.state.currentPlaylist.forEach(element => {
             selectedData.push(element);
         })
     
