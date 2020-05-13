@@ -106,6 +106,10 @@
   text-decoration: underline;
 }
 
+#contact-text a:hover {
+  color: #ddd;
+}
+
 #contact-form {
   max-width: 50%;
   margin: 0;
@@ -152,6 +156,10 @@
   min-width: 80px;
   border: 1px solid #fff !important;
   font-size: 0.7em;
+}
+
+#contact-button:hover {
+  color: #ddd;
 }
 
 /* SWIPER */
