@@ -91,6 +91,7 @@ class App extends React.Component {
     this.playerElement = document.getElementById("player-container");
 
     this.videoPlayerElement = document.getElementById("video-player");
+    this.randomButtonElement = document.getElementById("video-button");
 
     this.titleElement = document.getElementById("banner-title");
     this.infoElement = document.getElementById("banner-info");
@@ -132,7 +133,8 @@ class App extends React.Component {
       }).then(() => {
         this.swiperElement.classList.add("fade-out");
         this.titleElement.classList.add("fade-out");
-        this.infoElement.classList.add("fade-out");  
+        this.infoElement.classList.add("fade-out");
+        this.randomButtonElement.classList.add("fade-out");
       }).then(() => {
         this.swiperElement.addEventListener("animationend", this.swapToContact());  
       }).catch((error) => {
@@ -218,7 +220,9 @@ class App extends React.Component {
       
       this.titleElement.style.display = "none";
       this.infoElement.style.display = "none";
-      this.closeElement.style.display = "block";  
+      this.closeElement.style.display = "block";
+
+      this.randomButtonElement.style.display = "none";
   
       this.contactElement.classList.remove("fade-out");  
       this.closeElement.classList.remove("fade-out");
@@ -262,14 +266,20 @@ class App extends React.Component {
       this.closeElement.style.display = "none";
       this.titleElement.style.display = "block";
       this.infoElement.style.display = "block";
+
+      this.randomButtonElement.style.display = "block";
   
       this.swiperElement.classList.remove("fade-out");
       this.titleElement.classList.remove("fade-out");
       this.infoElement.classList.remove("fade-out");
+
+      this.randomButtonElement.classList.remove("fade-out");
   
       this.swiperElement.classList.add("fade-in");
       this.titleElement.classList.add("fade-in");
       this.infoElement.classList.add("fade-in");
+
+      this.randomButtonElement.classList.add("fade-in");
     }, swapDuration)
   }
 
