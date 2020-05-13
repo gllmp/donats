@@ -90,7 +90,7 @@ class App extends React.Component {
     this.swiperElement = document.getElementsByClassName("swiper-container")[0];
     this.playerElement = document.getElementById("player-container");
 
-    this.videoPlayer = document.getElementById("video-player");
+    this.videoPlayerElement = document.getElementById("video-player");
 
     this.titleElement = document.getElementById("banner-title");
     this.infoElement = document.getElementById("banner-info");
@@ -162,7 +162,7 @@ class App extends React.Component {
   }
 
   handlePlayerSwap() {
-    const videoIframe = this.videoPlayer.children[0].children[0];
+    const videoIframe = this.videoPlayerElement.children[0].children[0];
 
     if (this.state.swapDirection === "open") {
       this.sliderRef.current.onCloseSlider();
@@ -231,7 +231,7 @@ class App extends React.Component {
   swapToPlayer() {
     const swapDuration = 600;
 
-    const videoIframe = this.videoPlayer.children[0].children[0];
+    const videoIframe = this.videoPlayerElement.children[0].children[0];
 
     setTimeout(() => {
       this.swiperElement.style.display = "none";
