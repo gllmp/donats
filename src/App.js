@@ -304,26 +304,19 @@ class App extends React.Component {
           </Route>
           <PrivateRoute path="/admin" roles={[Role.Admin]} component={Admin} />
           <Route path="/login">
-            <div>
-                {currentUser &&
-                    <nav className="navbar navbar-expand navbar-dark bg-dark">
-                        <div className="navbar-nav">
-                            <Link to="/login" className="nav-item nav-link">Login</Link>
-                            {isAdmin && <Link to="/admin" className="nav-item nav-link">Admin</Link>}
-                        </div>
-                    </nav>
-                }
-                <div className="jumbotron">
-                    <div className="container">
-                        <div className="row">
-                            <div className="login-container col-sm-4 offset-md-4">
-                                {/* <PrivateRoute exact path="/" component={HomePage} /> */}
-                                <PrivateRoute path="/admin" roles={[Role.Admin]} component={Admin} />
-                                <Route path="/login" component={LoginPage} />
-                            </div>
-                        </div>
+            <div className="admin-container">
+              {currentUser &&
+                <nav className="navbar navbar-expand navbar-dark bg-dark">
+                    <div className="navbar-nav">
+                        <Link to="/login" className="nav-item nav-link">Login</Link>
+                        {isAdmin && <Link to="/admin" className="nav-item nav-link">Admin</Link>}
                     </div>
-                </div>
+                </nav>
+              }
+              {/* <PrivateRoute exact path="/" component={HomePage} /> */}
+              <PrivateRoute path="/admin" roles={[Role.Admin]} component={Admin} />
+              <Route path="/login" component={LoginPage} />
+              <Footer />
             </div>
           </Route>
         </Switch>

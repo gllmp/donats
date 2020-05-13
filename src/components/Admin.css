@@ -2,26 +2,55 @@ body {
     background-color: #000;
 }
 
-.stripes {
-    position: fixed;
-    width: 10px;
+.admin-container {
+    width: 100%;
     height: 100vh;
-    background-image: linear-gradient(45deg, #000000 25%, #ffd900 25%, #ffd900 50%, #000000 50%, #000000 75%, #ffd900 75%, #ffd900 100%);
-    background-size: 56.57px 56.57px;
-    z-index: 2;
+    font-family: 'Helvetica Neue', sans-serif;
 }
 
-.stripes-right {
-    right: 0;
+.admin-container #footer {
+    font-family: 'Antique-Compact', 'Helvetica Neue', sans-serif;
 }
 
 .login-container {
-    border: 1px solid #fff;
-    padding: 20px;
-    margin-top: 120px;
+    width: 100%;
+    max-width: 500px;
+    min-width: 250px;
+    height: auto;
+    margin: 0 auto;
+    position: relative;
+    top: 50%;
+    transform: translate(0, -50%);
 }
 
-.admin-container {
+.login-container .login-link {
+    margin: 0;
+    text-align: center;
+    color: #fff;
+    text-decoration: none;
+}
+
+.login-container #login-title {
+    font-family: 'Antique-Compact', 'Helvetica Neue', sans-serif;
+    font-size: 3em;
+}
+
+.login-container #login-back {
+    margin: 0;
+    margin-top: 2em;
+}
+
+.login-container #login-back:hover {
+    color: #ddd;
+}
+
+.login-form {
+    border: 1px solid #fff;
+    margin-top: 3em;
+    padding: 2em;
+}
+
+.admin-navbar-container {
     position: relative;
     background-color: #000;
     border-bottom: 1px solid #fff;
@@ -197,14 +226,31 @@ option {
     text-align: center;
 }
 
+.stripes {
+    position: fixed;
+    width: 10px;
+    height: 100vh;
+    background-image: linear-gradient(45deg, #000000 25%, #ffd900 25%, #ffd900 50%, #000000 50%, #000000 75%, #ffd900 75%, #ffd900 100%);
+    background-size: 56.57px 56.57px;
+    z-index: 2;
+}
+
+.stripes-right {
+    right: 0;
+}
+
 @media screen and (max-width: 680px) {
     .jumbotron {
         margin-top: 50px;
     }
+
+    .login-container {
+        max-width: 300px;
+    }
 }
 
 @media screen and (max-height: 680px) {
-    .login-container {
+    .login-form {
         margin-top: 20px;
     }
 
@@ -233,8 +279,9 @@ option {
         padding: 0;
     }
 
-    .login-container {
+    .login-form {
         margin-top: 0px;
+        display: none;
     }
 
     .update-form {
