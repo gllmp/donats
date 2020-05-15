@@ -1,3 +1,4 @@
+/* ADMIN */
 body {
     background-color: #000;
 }
@@ -12,6 +13,7 @@ body {
     font-family: 'Antique-Compact', 'Helvetica Neue', sans-serif;
 }
 
+/* LOGIN */
 .login-container {
     width: 100%;
     max-width: 500px;
@@ -84,6 +86,7 @@ body {
     outline: none;
 }
 
+/* FORM */
 .jumbotron {
     background-color: #000;
     border-radius: 0;
@@ -139,6 +142,7 @@ option {
     font-size: 2rem;
 }
 
+/* BUTTON */
 .btn {
     border-radius: 0;
 }
@@ -184,6 +188,25 @@ option {
     border-radius: 0;
 }
 
+/* ADD */
+#drop-area {
+    border: 2px dashed #bbb;
+    border-radius: 5px;
+    padding: 25px;
+    text-align: center;
+}
+
+/* UPDATE */
+.updateLink {
+    color: #ef9b0f;
+}
+
+.updateLink:hover {
+    color: #ebcf9f;
+    text-decoration: none;
+}
+
+/* DELETE */
 .deleteLink {
     color: #ff0000;
 }
@@ -193,14 +216,7 @@ option {
     text-decoration: none;
 }
 
-.updateLink {
-    color: #ef9b0f;
-}
-
-.updateLink:hover {
-    color: #ebcf9f;
-    text-decoration: none;
-}
+/* SCROLLBAR */
 
 /* Table Scrollbar */
 /* Width */
@@ -219,13 +235,7 @@ option {
     background: #fff;
 }
 
-#drop-area {
-    border: 2px dashed #bbb;
-    border-radius: 5px;
-    padding: 25px;
-    text-align: center;
-}
-
+/* STRIPES  */
 .stripes {
     position: fixed;
     width: 10px;
@@ -239,6 +249,7 @@ option {
     right: 0;
 }
 
+/* MEDIA QUERIES */
 @media screen and (max-width: 680px) {
     .jumbotron {
         margin-top: 50px;
