@@ -11,7 +11,7 @@
     /* CUSTOM CSS */
 	border: 1px solid #fff;
     background-color: #000;
-    margin-top: 80px;
+    /* margin-top: 80px; */
     /* Force the table body to overflow and scroll */
     height: 70vh;
 }
@@ -505,9 +505,9 @@
 }
 
 @media screen and (max-width: 640px) {
-    .ReactTable {
+    /* .ReactTable {
         margin-top: 80px !important;
-    }
+    } */
 }
 
 @media screen and (max-height: 740px) {
@@ -519,7 +519,7 @@
 @media screen and (max-height: 680px) {
     .ReactTable {
         height: 80vh !important;
-        margin-top: 30px;
+        /* margin-top: 30px; */
     }
 }
 
@@ -527,7 +527,7 @@
 @media (orientation: landscape) and (max-device-width : 960px) {
     .ReactTable {
         height: 80vh !important;
-        margin-top: 20px !important;
+        /* margin-top: 20px !important; */
     }
 }
 

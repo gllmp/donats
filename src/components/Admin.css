@@ -4,13 +4,32 @@ body {
     font-family: 'Antique-Compact', 'Helvetica Neue', sans-serif;
 }
 
-.admin-container {
+#admin-container {
     width: 100%;
     height: 100vh;
+    position: absolute;
+    top: 0;
 }
 
-.admin-container #footer {
+#admin-container #footer {
     font-family: 'Antique-Compact', 'Helvetica Neue', sans-serif;
+}
+
+#admin-title-container {
+    margin: 0 auto;
+    max-width: 50vw;
+    text-align: center;
+    position: relative;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+#admin-title-main {
+    font-size: 6em;
+}
+
+#admin-title-sub {
+    font-size: 2em;   
 }
 
 /* LOGIN */
@@ -105,6 +124,12 @@ body {
     outline: none;
 }
 
+/* LIST */
+#admin-list-container {
+    position: relative;
+    top: 50%;
+    transform: translate(0, -50%);
+}
 
 /* FORM */
 .jumbotron {
@@ -155,7 +180,9 @@ option {
     margin-top: 0;
     border: 1px solid #fff;
     padding: 25px;
-    top: 20vh;
+    position: relative;
+    top: 50%;
+    transform: translate(0, -50%);
 }
 
 .form-insert h1 {
@@ -306,9 +333,9 @@ button:focus {
         margin-bottom: 10px;
     }
 
-    .form-insert {
+    /* .form-insert {
         top: 16vh;
-    }
+    } */
 
     .form-insert h1 {
         font-size: 1.5rem;

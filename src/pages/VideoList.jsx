@@ -122,7 +122,7 @@ class VideoList extends Component {
         }
 
         return (
-            <Wrapper className="col-sm-8 offset-sm-2">
+            <Wrapper id="admin-list-container" className="col-sm-8 offset-sm-2">
                 {showTable && (
                     <ReactTable
                         data={videos}

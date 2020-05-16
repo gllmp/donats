@@ -314,7 +314,7 @@ class App extends React.Component {
           </Route>
           <PrivateRoute path="/admin" roles={[Role.Admin]} component={Admin} />
           <Route path="/login">
-            <div className="admin-container">
+            <div id="admin-container">
               {currentUser &&
                 <nav className="navbar navbar-expand navbar-dark bg-dark">
                     <div className="navbar-nav">

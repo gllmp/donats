@@ -28,12 +28,14 @@ class Admin extends React.Component {
                     <div className="stripes stripes-right"></div>
                 </div>
                 <AdminNavBar />
-                <Switch>
-                    <Route path="/admin/videos/list"  component={VideoList} />
-                    <Route path="/admin/videos/create"  component={VideoInsert} />
-                    <Route path="/admin/videos/update/:id" component={VideoUpdate} />
-                    <Route path="/"  component={AdminPage} />
-                </Switch>
+                <div id="admin-container">
+                    <Switch>
+                        <Route path="/admin/videos/list"  component={VideoList} />
+                        <Route path="/admin/videos/create"  component={VideoInsert} />
+                        <Route path="/admin/videos/update/:id" component={VideoUpdate} />
+                        <Route path="/"  component={AdminPage} />
+                    </Switch>
+                </div>
                 <Footer />
             </BrowserRouter>
         )    
