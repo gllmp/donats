@@ -1,12 +1,10 @@
 import React from 'react';
-import  quarantineImage from '../assets/img/quarantine-logo.gif';
 
 function AdminPage() {
     return (
-        <div id="logo-container" className="adminLogo">
-            <a href={process.env.PUBLIC_URL + "/"}>
-                <img id="quarantine-logo" src={quarantineImage} width="480" height="268" alt=""/>
-            </a>
+        <div id="admin-title-container">
+            <p id="admin-title-main">DONATS</p>
+            <p id="admin-title-sub">Le hasard fait bien les choses</p>
         </div>
     )
 }
