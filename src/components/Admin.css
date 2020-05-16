@@ -1,12 +1,12 @@
 /* ADMIN */
 body {
     background-color: #000;
+    font-family: 'Antique-Compact', 'Helvetica Neue', sans-serif;
 }
 
 .admin-container {
     width: 100%;
     height: 100vh;
-    font-family: 'Helvetica Neue', sans-serif;
 }
 
 .admin-container #footer {
@@ -52,13 +52,30 @@ body {
     padding: 2em;
 }
 
+/* ADMIN NAVBAR */
 .admin-navbar-container {
     position: relative;
     background-color: #000;
     border-bottom: 1px solid #fff;
+    padding: 0.5em;
     z-index: 2;
 }
-  
+
+#admin-navbar-title {
+    border-right: 1px solid #fff;
+    padding-right: 1em;
+}
+
+#admin-navbar-title p {
+    display: inline;
+    margin-right: 0.5em;
+    font-size: 2em;
+}
+
+#admin-navbar-nav {
+    font-size: 1.5em;
+}
+
 .adminLogo{
     display: flex;
     justify-content: center;
@@ -70,6 +87,8 @@ body {
 .nav-link {
     color: #fff;
     padding: 5px;
+    padding-bottom: 0;
+    margin-right: 1em;
     font-weight: bold;
     border: 0px;
 }
@@ -85,6 +104,7 @@ body {
 .navbar-toggler:focus {
     outline: none;
 }
+
 
 /* FORM */
 .jumbotron {
@@ -143,6 +163,18 @@ option {
 }
 
 /* BUTTON */
+button:focus {
+    outline: none;
+}
+
+#logout-button {
+    font-size: 0.8em;
+}
+
+#logout-button:focus {
+    outline: none !important;
+}
+
 .btn {
     border-radius: 0;
 }
