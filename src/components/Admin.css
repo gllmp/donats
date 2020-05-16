@@ -127,7 +127,7 @@ body {
 /* LIST */
 #admin-list-container {
     position: relative;
-    top: 50%;
+    top: 52%;
     transform: translate(0, -50%);
 }
 
