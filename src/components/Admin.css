@@ -317,6 +317,19 @@ button:focus {
     .login-container {
         max-width: 300px;
     }
+
+    #admin-title-container {
+        max-width: none;
+        width: 100%;
+    }
+
+    #admin-title-main {
+        font-size: 4em;
+    }
+
+    #admin-title-sub {
+        font-size: 1em;
+    }
 }
 
 @media screen and (max-height: 680px) {
