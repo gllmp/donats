@@ -275,6 +275,34 @@ button:focus {
     text-decoration: none;
 }
 
+/* CATEGORY */
+#category-insert-container {
+    margin: 0 auto;
+    margin-top: 12vh;
+    width: 100%;
+    max-width: 50vw;
+}
+
+#category-insert-title {
+    text-align: center;
+}
+
+#category-insert-name {
+    margin-top: 5vh;
+}
+
+#category-insert-name label {
+    font-size: 1.5em;
+}
+
+#category-insert-name input {
+    font-size: 2em;
+}
+
+#category-insert-button-container {
+    margin-top: 5vh;
+}
+
 /* SCROLLBAR */
 
 /* Table Scrollbar */
@@ -329,6 +357,15 @@ button:focus {
 
     #admin-title-sub {
         font-size: 1em;
+    }
+
+    #category-insert-container {
+        max-width: none;
+        width: 60%;
+    }
+
+    #category-insert-title h1 {
+        font-size: 2.5em;;
     }
 }
 
