@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../api';
 //import FileUpload from '../components/FileUpload'
+import DragAndDrop from '../components/DragAndDrop'
 
 //import data from '../data.json'
 
@@ -155,10 +156,14 @@ class CategoryInsert extends Component {
                 
                 <h1 id="category-insert-title">CATEGORY MANAGER</h1>
 
-                <div id="category-insert-name">
+                <section id="category-insert-name" className="category-insert-section">
                     <label>NOM: </label>
                     <input id="category-name-input" className="form-control" type="text" value={name} onChange={this.handleChangeInputName} />
-                </div>
+                </section>
+
+                <section id="category-insert-cover" className="category-insert-section">
+                    <DragAndDrop />
+                </section>
 
                 {/* <label className="mt-4">CATEGORY: </label>
                 <select className="form-control" type="text" value={category} onChange={this.handleChangeInputCategory}>
