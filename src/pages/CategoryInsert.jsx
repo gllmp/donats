@@ -182,8 +182,8 @@ class CategoryInsert extends Component {
                 <input className="form-control" type="text" value={url} onChange={this.handleChangeInputUrl} /> */}
 
                 <div id="category-insert-button-container">
-                    <button className="btn btn-primary" onClick={this.handleIncludeCategory}>SAVE</button>
-                    <Link to="/admin/categories/list" className="btn btn-danger">CANCEL</Link>
+                    <button id="category-button-save" className="btn btn-primary" onClick={this.handleIncludeCategory}>SAVE</button>
+                    <Link to="/admin/categories/list" id="category-button-cancel" className="btn btn-danger">CANCEL</Link>
                 </div>
             </div>
         )
