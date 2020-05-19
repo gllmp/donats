@@ -17,7 +17,7 @@ export default function DragAndDrop (props) {
       reader.onload = () => {
       // Do whatever you want with the file contents
         console.log(file);
-
+        
         const binaryStr = reader.result
         console.log(binaryStr)
 
@@ -33,7 +33,7 @@ export default function DragAndDrop (props) {
   }, []);
 
   const {acceptedFiles, getRootProps, getInputProps, isDragActive} = useDropzone({
-    accept: 'image/jpeg, image/png',
+    accept: 'image/jpeg, image/png, image/gif',
     onDrop
   });
 
