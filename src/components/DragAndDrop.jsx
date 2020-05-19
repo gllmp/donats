@@ -33,7 +33,7 @@ export default function DragAndDrop (props) {
   }, []);
 
   const {acceptedFiles, getRootProps, getInputProps, isDragActive} = useDropzone({
-    accept: 'image/jpeg, image/png, image/gif',
+    accept: 'image/jpeg, image/png',
     onDrop
   });
 
