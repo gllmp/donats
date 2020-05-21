@@ -110,6 +110,8 @@ class CategoryInsert extends Component {
         
         if (!name) {
             alert("Please add name");
+        } else if (!this.dragAndDropRef.current.state.src.length) {
+            alert("Please add cover image");
         } else {
             let payload = { name, category, cover, url };
         
@@ -154,7 +156,13 @@ class CategoryInsert extends Component {
                 // .then(res => {
                 //     window.alert(`Video inserted successfully`);
 
-                    this.setState({
+                //     this.setState({
+                //         name: '',
+                //         category: '',
+                //         cover: '',
+                //         url: ''
+                //     })
+                // });
             }).catch((error) => {
                 console.error(error);
             }).finally(() => {
