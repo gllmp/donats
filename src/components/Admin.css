@@ -363,7 +363,7 @@ button:focus {
 }
 
 #category-cover-files p {
-
+    margin-bottom: 0.5em;
 }
 
 #category-cover-files ul {
