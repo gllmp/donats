@@ -66,16 +66,29 @@ class DragAndDrop extends Component {
         reader.onabort = () => console.log('file reading was aborted')
         reader.onerror = () => console.log('file reading has failed')
         reader.onload = () => {
-      // Do whatever you want with the file contents
-        console.log(file);
-        
+          // Process file content
+          //console.log("FILE READER: ", reader);
+
+          //const binaryStr = reader.result;
+          //console.log(binaryStr);
+
+          // encode compressed file
+          //const encodedString = Base64.encode(reader.result);
+          //console.log("ENCODED STRING: ", encodedString);
+
+          //const blob = _this.base64toBlob(encodedString, _this.state.type);
+          //const blob = Base64.decode(encodedString);
+          //console.log("BLOB: ", blob);
+
+          let base64String = _this.arrayBufferToBase64(reader.result);
+          //console.log("BASE64 ENCODED STR: ", base64String);
+
         const binaryStr = reader.result
         console.log(binaryStr)
 
         let imageSrc = require("../assets/img/" + file.path);
 
         let coverImage = document.getElementById("category-cover-image");
-        coverImage.src = imageSrc;
       }
       
         reader.readAsArrayBuffer(this.state.file);
