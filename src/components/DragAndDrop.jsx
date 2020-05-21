@@ -19,6 +19,7 @@ class DragAndDrop extends Component {
     this.onDrop = this.onDrop.bind(this);
     this.handleDrag = this.handleDrag.bind(this);
     this.arrayBufferToBase64 = this.arrayBufferToBase64.bind(this);
+    this.base64toBlob = this.base64toBlob.bind(this);
   componentDidMount() {
     this.setState({
       preview: categoryCover
@@ -74,7 +75,25 @@ class DragAndDrop extends Component {
     return window.btoa(binary);
   }
 
+  base64toBlob(base64Data, contentType='', sliceSize=512) {
+    const byteCharacters = window.atob(base64Data);
+    const byteArrays = [];
+  
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      const slice = byteCharacters.slice(offset, offset + sliceSize);
+  
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+  
+      const byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
     }
+  
+    const blob = new Blob(byteArrays, {type: contentType});
+
+    return blob;
   }
   const files = acceptedFiles.map(file => (
     <li key={file.path}>
