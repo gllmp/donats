@@ -127,19 +127,23 @@ class CategoryInsert extends Component {
                 // Add cover to payload
                 payload.category = category;
                 payload.cover = cover;
+            }).then(() => {
+                // Add url to payload
+
                 payload.url = url;
             }).then(() => {
-                api.insertCategory(payload)
-                .then(res => {
-                    window.alert(`Video inserted successfully`);
+                // payload.name = name;
+                // payload.category = category;
+                // payload.cover = cover;
+                // payload.url = url;
+
+                console.log("CATEGORY STATE: ", this.state);
+            }).then(() => {
+                // api.insertCategory(payload)
+                // .then(res => {
+                //     window.alert(`Video inserted successfully`);
 
                     this.setState({
-                        name: '',
-                        category: '',
-                        cover: '',
-                        url: ''
-                    })
-                });
             }).catch((error) => {
                 console.error(error);
             }).finally(() => {
