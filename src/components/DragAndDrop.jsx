@@ -18,6 +18,7 @@ class DragAndDrop extends Component {
 
     this.onDrop = this.onDrop.bind(this);
     this.handleDrag = this.handleDrag.bind(this);
+    this.arrayBufferToBase64 = this.arrayBufferToBase64.bind(this);
   componentDidMount() {
     this.setState({
       preview: categoryCover
@@ -63,12 +64,18 @@ class DragAndDrop extends Component {
     }
   }
 
-  const {acceptedFiles, getRootProps, getInputProps, isDragActive} = useDropzone({
-    accept: 'image/jpeg, image/png',
-  }), [
-    isDragActive,
-  ]);
-  
+  arrayBufferToBase64(buffer) {
+    let binary = '';
+    let bytes = new Uint8Array(buffer);
+    let len = bytes.byteLength;
+    for (let i = 0; i < len; i++) {
+        binary += String.fromCharCode(bytes[i]);
+    }
+    return window.btoa(binary);
+  }
+
+    }
+  }
   const files = acceptedFiles.map(file => (
     <li key={file.path}>
       {file.path} - {file.size} bytes
