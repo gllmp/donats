@@ -83,14 +83,16 @@ class DragAndDrop extends Component {
           let base64String = _this.arrayBufferToBase64(reader.result);
           //console.log("BASE64 ENCODED STR: ", base64String);
 
-        const binaryStr = reader.result
-        console.log(binaryStr)
+          let imageSrc = "data:" + this.state.type + ";base64," + base64String;      
 
-        let imageSrc = require("../assets/img/" + file.path);
+          _this.setState({
+            data: reader.result,
+            src: imageSrc
+          })
 
-        let coverImage = document.getElementById("category-cover-image");
-      }
-      
+          console.log("STATE: ", _this.state);
+        }
+
         reader.readAsArrayBuffer(this.state.file);
         //reader.readAsText(image.file);
       }).catch((error) => {
