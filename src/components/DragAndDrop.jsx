@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 import Compressor from 'compressorjs';
-//import { Base64 } from 'js-base64';
 import categoryCover from '../assets/img/category-cover.png';
 
 class DragAndDrop extends Component {
@@ -22,7 +21,6 @@ class DragAndDrop extends Component {
     this.handleDrag = this.handleDrag.bind(this);
     this.arrayBufferToBase64 = this.arrayBufferToBase64.bind(this);
     this.base64toBlob = this.base64toBlob.bind(this);
-    // this.showImage = this.showImage.bind(this);
   }
 
   componentDidMount() {
@@ -74,17 +72,7 @@ class DragAndDrop extends Component {
           // Process file content
           //console.log("FILE READER: ", reader);
 
-          //const binaryStr = reader.result;
-          //console.log(binaryStr);
-
           // encode compressed file
-          //const encodedString = Base64.encode(reader.result);
-          //console.log("ENCODED STRING: ", encodedString);
-
-          //const blob = _this.base64toBlob(encodedString, _this.state.type);
-          //const blob = Base64.decode(encodedString);
-          //console.log("BLOB: ", blob);
-
           let base64String = _this.arrayBufferToBase64(reader.result);
           //console.log("BASE64 ENCODED STR: ", base64String);
 
@@ -99,7 +87,6 @@ class DragAndDrop extends Component {
         }
 
         reader.readAsArrayBuffer(this.state.file);
-        //reader.readAsText(image.file);
       }).catch((error) => {
         console.error(error);
       }).finally(() => {
@@ -151,19 +138,6 @@ class DragAndDrop extends Component {
     return blob;
   }
 
-  // showImage() {  
-  //   let str = this.arrayBufferToBase64(this.state.data);
-  //   console.log("BASE64 ENCODE: ", str);
-  //   //let str2 = Base64.atob(str)
-  //   let str2 = this.base64toBlob(str, this.state.type);
-  //   console.log("BASE64 DECODE: ", str2);
-  //   let img = document.createElement('img');
-  //   img.src = "data:" + this.state.type + ";base64," + str;
-  //   document.body.appendChild(img);
-
-  //   console.log(img);
-  // }
-
   render() {
     return (
       <section id="category-cover-container">
@@ -192,7 +166,6 @@ class DragAndDrop extends Component {
               </div>
           )}
         </Dropzone>
-        {/* <button onClick={this.showImage}>SHOW</button> */}
       </section>
     );
   }
