@@ -181,15 +181,15 @@ class CategoryInsert extends Component {
                 <h1 id="category-insert-title">CATEGORY MANAGER</h1>
 
                 <section id="category-insert-name" className="category-insert-section">
-                    <label>NOM: </label>
-                    <input id="category-name-input" className="form-control" type="text" value={name} onChange={this.handleChangeInputName} />
+                    {/* <label>NOM: </label> */}
+                    <input id="category-name-input" className="form-control" type="text" value={name} placeholder="NOM" onChange={this.handleChangeInputName} />
                 </section>
 
                 <section id="category-insert-cover" className="category-insert-section">
                     <DragAndDrop ref={this.dragAndDropRef} />
                 </section>
 
-                <section id="category-insert-url">
+                <section id="category-insert-url" className="category-insert-section">
                     <input id="category-url-input" className="form-control" type="text" value={url} placeholder="URL" onChange={this.handleChangeInputUrl} />
                 </section>
 

@@ -116,6 +116,21 @@ body {
     color: #bbb !important;
 }
 
+.nav-link-button {
+    background-color: #ffcf00;
+    color: #000 !important;
+    border-radius: 3px;
+    max-width: 50%;
+    padding-top: 0.2em;
+    text-align: center;
+    opacity: 1;
+}
+
+.nav-link-button:hover {
+    color: #000 !important;
+    opacity: 0.75;
+}
+
 .navbar-collapse {
     margin-left: 25px;
 }
@@ -304,7 +319,7 @@ button:focus {
 }
 
 #category-insert-url {
-    margin-top: 2vh;
+    
 }
 
 #category-insert-url input {
@@ -340,6 +355,10 @@ button:focus {
 
 #category-cover-container:focus {
     outline: none;
+}
+
+#category-cover-container p {
+    font-size: 1em;
 }
 
 #category-cover-image {
@@ -440,9 +459,17 @@ button:focus {
     #admin-title-sub {
         font-size: 1em;
     }
-
+    
     #category-insert-title {
         font-size: 2.5em;;
+    }
+
+    #category-cover-container p {
+        font-size: 0.7em;
+    }
+
+    #category-cover-files ul {
+        font-size: 0.7em;
     }
 }
 
@@ -474,6 +501,16 @@ button:focus {
     #category-insert-container {
         max-width: none;
         width: 80%;
+    }
+}
+
+/* Small/Medium/Large devices (1200px and down) */
+@media only screen and (max-width: 1200px) {
+    .nav-link-button {
+        background-color: transparent;
+        color: #fff !important;
+        border-radius: 0px;
+        text-align: left;
     }
 }
 
