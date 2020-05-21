@@ -151,8 +151,8 @@ class DragAndDrop extends Component {
                 <input {...getInputProps()} />
                 {
                   isDragActive ?
-                    ( <p>Déposez votre fichier ici...</p>, this.handleDrag(isDragActive) ) :
-                    ( <p>Glissez et déposez votre image ici, ou cliquez pour sélectionner un fichier</p>, this.handleDrag(isDragActive) )
+                    [<p key="text-active">Déposez votre fichier ici...</p>, this.handleDrag(isDragActive)] :
+                    [<p key="text-inactive">Glissez et déposez votre image ici, ou cliquez pour sélectionner un fichier</p>, this.handleDrag(isDragActive)]
                 }
                 {isDragReject && "Ce type de fichier n'est pas accepté, désolé !"}
                 <div id="category-cover-files">
