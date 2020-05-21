@@ -108,7 +108,8 @@ class CategoryInsert extends Component {
             new Promise((resolve, reject) => {
                 resolve();
             }).then(() => {
-
+                // Add name to payload
+                payload.name = name;
             }).then(() => {
                 // ADD NAME TO CATEGORY ARRAY
                 let categoryArray = [];
