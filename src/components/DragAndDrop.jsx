@@ -1,14 +1,34 @@
-import React,  {useCallback, useMemo} from 'react';
+import React, { Component } from 'react';
 import {useDropzone} from 'react-dropzone';
 import categoryCover from '../assets/img/category-cover.png';
 
-const activeStyle = {
-  borderColor: '#2196f3',
-  opacity: 0.75
-};
+class DragAndDrop extends Component {
+  constructor(props) {
+    super(props);
 
-export default function DragAndDrop (props) {
-  const onDrop = useCallback((acceptedFiles) => {
+    this.state = {
+      name: "",
+      type: "",
+      size: "",
+      file: "",
+      data: "",
+      src: "",
+      preview: "",
+    };
+
+    this.onDrop = this.onDrop.bind(this);
+    this.handleDrag = this.handleDrag.bind(this);
+  componentDidMount() {
+    this.setState({
+      preview: categoryCover
+    });
+
+    this.dropzoneElement = document.getElementsByClassName("dropzone")[0];
+  }
+
+  onDrop(acceptedFiles) {
+    const _this = this;
+
     acceptedFiles.forEach((file) => {
       const reader = new FileReader()
       
@@ -49,21 +69,38 @@ export default function DragAndDrop (props) {
     </li>
   ));
 
-  return (
-    <section id="category-cover-container">
-      <img id="category-cover-image" src={categoryCover} alt="category cover" />
-      <div {...getRootProps({className: 'dropzone', style})}>
-        <input {...getInputProps()} />
-        {
-          isDragActive ?
+  render() {
+    return (
+      <section id="category-cover-container">
+        <img id="category-cover-image" src={this.state.preview} alt="category cover" />
+        <Dropzone 
+          onDrop={this.onDrop}
+          accept="image/jpeg, image/png"
+        >
+          {({getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject}) => (
+              <div {...getRootProps({className: 'dropzone'})}>
+                <input {...getInputProps()} />
+                {
+                  isDragActive ?
             <p>Déposez votre fichier ici...</p> :
             <p>Glissez et déposez votre image ici, ou cliquez pour sélectionner un fichier</p>
-        }
-        <div id="category-cover-files">
-          <p>File:</p>
-          <ul>{files}</ul>
-        </div>
-      </div>
-    </section>
-  );
+                }
+                {isDragReject && "Ce type de fichier n'est pas accepté, désolé !"}
+                <div id="category-cover-files">
+                  <p>File:</p>
+                  <ul>
+                    <li key={this.state.file.name}>
+                      {this.state.file.name} - {this.state.size}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+          )}
+        </Dropzone>
+        {/* <button onClick={this.showImage}>SHOW</button> */}
+      </section>
+    );
+  }
 }
+
+export default DragAndDrop;
