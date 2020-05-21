@@ -20,6 +20,9 @@ class DragAndDrop extends Component {
     this.handleDrag = this.handleDrag.bind(this);
     this.arrayBufferToBase64 = this.arrayBufferToBase64.bind(this);
     this.base64toBlob = this.base64toBlob.bind(this);
+    // this.showImage = this.showImage.bind(this);
+  }
+
   componentDidMount() {
     this.setState({
       preview: categoryCover
@@ -95,11 +98,19 @@ class DragAndDrop extends Component {
 
     return blob;
   }
-  const files = acceptedFiles.map(file => (
-    <li key={file.path}>
-      {file.path} - {file.size} bytes
-    </li>
-  ));
+
+  // showImage() {  
+  //   let str = this.arrayBufferToBase64(this.state.data);
+  //   console.log("BASE64 ENCODE: ", str);
+  //   //let str2 = Base64.atob(str)
+  //   let str2 = this.base64toBlob(str, this.state.type);
+  //   console.log("BASE64 DECODE: ", str2);
+  //   let img = document.createElement('img');
+  //   img.src = "data:" + this.state.type + ";base64," + str;
+  //   document.body.appendChild(img);
+
+  //   console.log(img);
+  // }
 
   render() {
     return (
