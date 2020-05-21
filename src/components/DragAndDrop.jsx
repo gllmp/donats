@@ -78,7 +78,13 @@ class DragAndDrop extends Component {
         coverImage.src = imageSrc;
       }
       
-      reader.readAsArrayBuffer(file)
+        reader.readAsArrayBuffer(this.state.file);
+        //reader.readAsText(image.file);
+      }).catch((error) => {
+        console.error(error);
+      }).finally(() => {
+
+      });    
     })
   }
 
