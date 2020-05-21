@@ -33,6 +33,11 @@ class DragAndDrop extends Component {
     this.dropzoneElement = document.getElementsByClassName("dropzone")[0];
   }
 
+  componentWillUnmount() {
+    // Make sure to revoke the data uris to avoid memory leaks
+    URL.revokeObjectURL(this.state.preview);
+  }
+
   onDrop(acceptedFiles) {
     const _this = this;
 
