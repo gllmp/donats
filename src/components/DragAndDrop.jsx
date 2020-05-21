@@ -49,16 +49,22 @@ class DragAndDrop extends Component {
       
       reader.readAsArrayBuffer(file)
     })
-    
-  }, []);
+  }
+
+  handleDrag(dragActive) {
+    if (this.dropzoneElement !== undefined) {
+      if (dragActive) {
+        this.dropzoneElement.style.opacity = "0.75";
+        this.dropzoneElement.style.borderColor = "#2196f3";
+      } else {
+        this.dropzoneElement.style.opacity = "1.0";
+        this.dropzoneElement.style.borderColor = "#fff";
+      }  
+    }
+  }
 
   const {acceptedFiles, getRootProps, getInputProps, isDragActive} = useDropzone({
     accept: 'image/jpeg, image/png',
-    onDrop
-  });
-
-  const style = useMemo(() => ({
-    ...(isDragActive ? activeStyle : {}),
   }), [
     isDragActive,
   ]);
@@ -82,8 +88,8 @@ class DragAndDrop extends Component {
                 <input {...getInputProps()} />
                 {
                   isDragActive ?
-            <p>Déposez votre fichier ici...</p> :
-            <p>Glissez et déposez votre image ici, ou cliquez pour sélectionner un fichier</p>
+                    ( <p>Déposez votre fichier ici...</p>, this.handleDrag(isDragActive) ) :
+                    ( <p>Glissez et déposez votre image ici, ou cliquez pour sélectionner un fichier</p>, this.handleDrag(isDragActive) )
                 }
                 {isDragReject && "Ce type de fichier n'est pas accepté, désolé !"}
                 <div id="category-cover-files">
