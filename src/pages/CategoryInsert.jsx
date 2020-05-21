@@ -23,6 +23,14 @@ class CategoryInsert extends Component {
         this.handleChangeInputUrl = this.handleChangeInputUrl.bind(this);
     }
 
+    componentDidMount() {
+        this.dragAndDropRef = React.createRef();
+    }
+
+    componentWillUnmount() {
+
+    }
+    
     handleChangeInputName = async event => {
         const name = event.target.value;
         this.setState({ name });
@@ -125,7 +133,10 @@ class CategoryInsert extends Component {
                 payload.category = category;
             }).then(() => {
                 // Add cover to payload
-                payload.category = category;
+                this.setState({ 
+                    cover: this.dragAndDropRef.current.state.src 
+                });
+
                 payload.cover = cover;
             }).then(() => {
                 // Add url to payload
@@ -167,7 +178,7 @@ class CategoryInsert extends Component {
                 </section>
 
                 <section id="category-insert-cover" className="category-insert-section">
-                    <DragAndDrop />
+                    <DragAndDrop ref={this.dragAndDropRef} />
                 </section>
 
                 {/* <label className="mt-4">CATEGORY: </label>
