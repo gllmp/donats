@@ -111,7 +111,7 @@ class CategoryInsert extends Component {
                 // Add name to payload
                 payload.name = name;
             }).then(() => {
-                // ADD NAME TO CATEGORY ARRAY
+                // Add categorie(s) to payload
                 let categoryArray = [];
                 categoryArray.push(name);
 
@@ -120,11 +120,11 @@ class CategoryInsert extends Component {
 
                 this.setState({ 
                     category: categoryArray
-                })
-        
-                console.log("CATEGORY STATE: ", this.state);
+                });
+
+                payload.category = category;
             }).then(() => {
-                payload.name = name;
+                // Add cover to payload
                 payload.category = category;
                 payload.cover = cover;
                 payload.url = url;
