@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
+import Compressor from 'compressorjs';
+//import { Base64 } from 'js-base64';
 import categoryCover from '../assets/img/category-cover.png';
 
 class DragAndDrop extends Component {
@@ -35,11 +37,35 @@ class DragAndDrop extends Component {
     const _this = this;
 
     acceptedFiles.forEach((file) => {
-      const reader = new FileReader()
-      
-      reader.onabort = () => console.log('file reading was aborted')
-      reader.onerror = () => console.log('file reading has failed')
-      reader.onload = () => {
+      new Promise((resolve, reject) => {
+        console.log("FILE: ", file);
+
+        // compress image file
+        new Compressor(file, {
+          quality: 0.6,
+          success(fileCompressed) {
+            console.log("COMPRESSED: ", fileCompressed);
+
+            _this.setState({
+              name: fileCompressed.name,
+              type: fileCompressed.type,
+              size: fileCompressed.size + " bytes",
+              file: fileCompressed,
+              preview: URL.createObjectURL(fileCompressed)
+            })
+
+            resolve();
+          },
+          error(err) {
+            console.log(err.message);
+          },
+        });
+      }).then(() => {
+        const reader = new FileReader();
+
+        reader.onabort = () => console.log('file reading was aborted')
+        reader.onerror = () => console.log('file reading has failed')
+        reader.onload = () => {
       // Do whatever you want with the file contents
         console.log(file);
         
