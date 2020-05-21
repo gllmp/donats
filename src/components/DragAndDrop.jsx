@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {useDropzone} from 'react-dropzone';
+import Dropzone from 'react-dropzone';
 import categoryCover from '../assets/img/category-cover.png';
 
 class DragAndDrop extends Component {
