@@ -189,6 +189,10 @@ class CategoryInsert extends Component {
                     <DragAndDrop ref={this.dragAndDropRef} />
                 </section>
 
+                <section id="category-insert-url">
+                    <input id="category-url-input" className="form-control" type="text" value={url} placeholder="URL" onChange={this.handleChangeInputUrl} />
+                </section>
+
                 {/* <label className="mt-4">CATEGORY: </label>
                 <select className="form-control" type="text" value={category} onChange={this.handleChangeInputCategory}>
                     <option value="" hidden></option>
