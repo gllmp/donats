@@ -41,13 +41,16 @@ class DragAndDrop extends Component {
 
     acceptedFiles.forEach((file) => {
       new Promise((resolve, reject) => {
-        console.log("FILE: ", file);
+        //console.log("FILE: ", file);
 
         // compress image file
         new Compressor(file, {
           quality: 0.6,
           success(fileCompressed) {
-            console.log("COMPRESSED: ", fileCompressed);
+            //console.log("COMPRESSED: ", fileCompressed);
+            let compressedSize = file.size - fileCompressed.size;
+            compressedSize = Math.floor((compressedSize * 100) / file.size);
+            console.log("COMPRESSED SIZE: ", compressedSize + "%")
 
             _this.setState({
               name: fileCompressed.name,
@@ -83,7 +86,7 @@ class DragAndDrop extends Component {
             src: imageSrc
           })
 
-          console.log("STATE: ", _this.state);
+          console.log("UPLOADED FILE: ", _this.state);
         }
 
         reader.readAsArrayBuffer(this.state.file);
