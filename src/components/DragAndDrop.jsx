@@ -140,7 +140,7 @@ class DragAndDrop extends Component {
 
   render() {
     return (
-      <section id="category-cover-container">
+      <div id="category-cover-container">
         <img id="category-cover-image" src={this.state.preview} alt="category cover" />
         <Dropzone 
           onDrop={this.onDrop}
@@ -166,7 +166,7 @@ class DragAndDrop extends Component {
               </div>
           )}
         </Dropzone>
-      </section>
+      </div>
     );
   }
 }
