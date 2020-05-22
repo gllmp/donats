@@ -6,31 +6,64 @@ import api from './api';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-let data;
+let data = [];
 
-const start = async () => {
-    await api.getAllVideos().then(videos => {
-        data = videos.data.data;
-    }).then( () => {
-        const loadingContainer = document.getElementById("loading-container");
-        loadingContainer.classList.add("fade-out");
-        loadingContainer.addEventListener("animationend", () => {
-            loadingContainer.classList.add("hide");
+let routes = {
+    home: "/",
+    login: "/login",
+    admin: "/admin",
+    adminVideo: "/admin/videos",
+    adminCategory: "/admin/categories"
+    // adminVideoList: "/admin/videos/list",
+    // adminVideoCreate: "/admin/videos/create",
+    // adminVideoUpdate: "/admin/videos/update",
+    // adminCategoryList: "/admin/categories/list",
+    // adminCategoryCreate: "/admin/categories/create",
+    // adminCategoryUpdate: "/admin/categories/update"
+}
 
-            document.getElementById('root').classList.add("fade-in");
-            ReactDOM.render(
-                <App appData={JSON.stringify(data)}/>,
-                document.getElementById('root')
-            );            
+const startApp = async () => {
+    if (window.location.pathname === "/" || window.location.pathname.includes(routes.adminVideo)) {
+        await api.getAllVideos().then(videos => {
+            data = videos.data.data;
+        }).then( () => {
+            renderApp(data);
+        }).catch((error) => {
+            console.error(error);
+        }).finally(() => {
+
         });
-    }).catch((error) => {
-        console.error(error);
-    }).finally(() => {
+    } else if (window.location.pathname.includes(routes.adminCategory)) {
+        await api.getAllCategories().then(categories => {
+            console.log(categories);
+        }).then( () => {
+            renderApp(data);
+        }).catch((error) => {
+            console.error(error);
+        }).finally(() => {
+    
+        });
+    } else {
+        renderApp(data);
+    }
+}
 
+function renderApp(_data) {
+    const loadingContainer = document.getElementById("loading-container");
+    loadingContainer.classList.add("fade-out");
+    loadingContainer.addEventListener("animationend", () => {
+        loadingContainer.classList.add("hide");
+   
+        document.getElementById('root').classList.add("fade-in");
+        
+        ReactDOM.render(
+            <App appData={JSON.stringify(_data)} />,
+            document.getElementById('root')
+        );                    
     });
 }
 
-start();
+startApp();
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
