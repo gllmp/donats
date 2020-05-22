@@ -6,7 +6,8 @@ import api from './api';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-let data = [];
+let videoData = [];
+let categoryData = [];
 
 let routes = {
     home: "/",
@@ -14,20 +15,14 @@ let routes = {
     admin: "/admin",
     adminVideo: "/admin/videos",
     adminCategory: "/admin/categories"
-    // adminVideoList: "/admin/videos/list",
-    // adminVideoCreate: "/admin/videos/create",
-    // adminVideoUpdate: "/admin/videos/update",
-    // adminCategoryList: "/admin/categories/list",
-    // adminCategoryCreate: "/admin/categories/create",
-    // adminCategoryUpdate: "/admin/categories/update"
 }
 
 const startApp = async () => {
     if (window.location.pathname === "/" || window.location.pathname.includes(routes.adminVideo)) {
         await api.getAllVideos().then(videos => {
-            data = videos.data.data;
+            videoData = videos.data.data;
         }).then( () => {
-            renderApp(data);
+            renderApp(videoData);
         }).catch((error) => {
             console.error(error);
         }).finally(() => {
@@ -35,20 +30,20 @@ const startApp = async () => {
         });
     } else if (window.location.pathname.includes(routes.adminCategory)) {
         await api.getAllCategories().then(categories => {
-            console.log(categories);
+            categoryData = categories.data.data;
         }).then( () => {
-            renderApp(data);
+            renderApp(categoryData);
         }).catch((error) => {
             console.error(error);
         }).finally(() => {
     
         });
     } else {
-        renderApp(data);
+        renderApp();
     }
 }
 
-function renderApp(_data) {
+function renderApp(_data = []) {
     const loadingContainer = document.getElementById("loading-container");
     loadingContainer.classList.add("fade-out");
     loadingContainer.addEventListener("animationend", () => {
@@ -57,7 +52,7 @@ function renderApp(_data) {
         document.getElementById('root').classList.add("fade-in");
         
         ReactDOM.render(
-            <App appData={JSON.stringify(_data)} />,
+            <App videoData={JSON.stringify(_data)} categoryData={_data} appRoute={window.location.pathname} />,
             document.getElementById('root')
         );                    
     });

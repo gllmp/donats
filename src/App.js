@@ -24,8 +24,8 @@ let playlist = {
   rap_skate: ["rap", "skate"]
 };
 
-function parseData(appData) {
-  JSON.parse(appData).forEach(element => {
+function parseVideoData(videoData) {
+  JSON.parse(videoData).forEach(element => {
     new Promise((resolve, reject) => {
       resolve();
     }).then(() => {
@@ -56,6 +56,24 @@ function parseItemsByCategory(_data, item) {
   })
 }
 
+function parseCategoryData(categoryData) {
+  categoryData.forEach(element => {
+    new Promise((resolve, reject) => {
+      resolve();
+    }).then(() => {
+      //getCategories(data, element);
+    }).then(() => {
+      //parseItemsByCategory(data, element);        
+    }).catch((error) => {
+      console.error(error);
+    }).finally(() => {
+
+    });
+  })
+
+  console.log("DATA: ", categoryData);
+}
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -76,7 +94,14 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    parseData(this.props.appData);
+    //parseVideoData(this.props.videoData);
+
+    if (this.props.appRoute === "/" || this.props.appRoute.includes("/admin/videos")) {
+      parseVideoData(this.props.videoData);
+    } else if (this.props.appRoute.includes("/admin/categories")) {
+      parseCategoryData(this.props.categoryData);
+    }
+
 
     authenticationService.currentUser.subscribe(x => this.setState({
       currentUser: x,
