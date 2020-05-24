@@ -163,7 +163,7 @@
 }
 
 /* SWIPER */
-.swiper-container { 
+#app-container .swiper-container { 
   width: 100%;
   margin-bottom: 2vh;
   opacity: 1;
