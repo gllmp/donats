@@ -28,7 +28,9 @@ class CategoryInsert extends Component {
             name: '',
             category: [],
             cover: '',
-            url: ''
+            url: '',
+            categories: [],
+            isLoading: false
         }
 
         this.handleChangeInputName = this.handleChangeInputName.bind(this);
@@ -37,8 +39,17 @@ class CategoryInsert extends Component {
         this.handleChangeInputUrl = this.handleChangeInputUrl.bind(this);
     }
 
-    componentDidMount() {
+    componentDidMount = async () => {
         this.dragAndDropRef = React.createRef();
+
+        this.setState({ isLoading: true });
+        
+        await api.getAllCategories().then(categories => {
+            this.setState({
+                categories: categories.data.data,
+                isLoading: false,
+            });
+        })
     }
 
     componentWillUnmount() {
