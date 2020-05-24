@@ -295,7 +295,7 @@ button:focus {
     margin: 0 auto;
     margin-top: 12vh;
     width: 100%;
-    max-width: 35vw;
+    max-width: 40vw;
 }
 
 #category-insert-title {
@@ -303,7 +303,7 @@ button:focus {
 }
 
 .category-insert-section {
-    margin-top: 2vh;
+    margin-top: 6vh;
 }
 
 #category-insert-name label {
@@ -326,42 +326,17 @@ button:focus {
 }
 
 #category-insert-categories {
-    height: 25vh;
+    margin-top: 5vh;
+    height: 10vh;
 }
-
-/* #category-insert-categories::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-    margin-left: 10px;
-} */
-
-/* #grid-container {
-    width: 100%;
-    height: auto;
-    display: grid;
-    grid-template-columns: auto auto auto auto;
-    grid-column-gap: 1em;
-    grid-row-gap: 1em;
-    padding-right: 1em;
-}
-
-.grid-item {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.8);
-    padding: 20px;
-    font-size: 30px;
-    text-align: center;
-} */
 
 #category-toggle-container {
-    margin-top: 2vh;
+    margin-top: 3vh;
 }
 
 #category-toggle-title {
     text-align: center;
-    font-size: 1.3em;
+    font-size: 1.5em;
 }
 
 #category-toggle-container .swiper-slide {
@@ -374,6 +349,7 @@ button:focus {
 }
 
 #category-insert-button-container {
+    margin-top: 6vh;
     text-align: center;
 }
 
@@ -507,6 +483,10 @@ button:focus {
     #admin-title-sub {
         font-size: 1em;
     }
+
+    .category-insert-section {
+        margin-top: 4vh;
+    }
     
     #category-insert-title {
         font-size: 2.5em;;
@@ -518,6 +498,10 @@ button:focus {
 
     #category-cover-files ul {
         font-size: 0.7em;
+    }
+
+    #category-toggle-title {
+        font-size: 1.3em;
     }
 }
 
