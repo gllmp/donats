@@ -64,7 +64,7 @@ function TogglesList(props) {
   const categories = categoryToggleRef.state.categories;
   
   const categoriesToggles = categories.map((category) =>
-    <FormGroup row className="category-switch-toggle" key={category.name.toString()}>
+    <FormGroup row className="swiper-slide category-switch-toggle" key={category.name.toString()}>
       <FormControlLabel
         control={
           <IOSSwitch 
@@ -90,63 +90,68 @@ class CategoryToggle extends React.Component {
       this.state = {
         categories: props.categories,
         togglesChecked: [],
-        swiper: null,
+        swiper: null
       };
               
       this.params = {
-        slidesPerView: 9,
-        spaceBetween: 40,
+        slidesPerView: 3,
+        spaceBetween: 30,
         speed: 300,
-        initialSlide: "auto",
+        initialSlide: 1,
         centeredSlides: true,
         prevenClicks: false,
         preventClicksPropagation: true,
         slideToClickedSlide: false,
-        loop: false,
+        //loop: false,
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev'
         },
-        // pagination: {
-        //   el: '.swiper-pagination',
-        //   clickable: true,
-        //   dynamicBullets: true
-        // },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+          type: 'bullets',
+          dynamicBullets: true
+        },
         // breakpoints: {
         //   1024: {
-        //     slidesPerView: 9,
+        //     slidesPerView: 4,
         //     spaceBetween: 40
         //   },
         //   768: {
-        //     slidesPerView: 9,
+        //     slidesPerView: 4,
         //     spaceBetween: 30
         //   },
         //   640: {
-        //     slidesPerView: 9,
+        //     slidesPerView: 4,
         //     spaceBetween: 20
         //   },
         //   320: {
-        //     slidesPerView: 9,
+        //     slidesPerView: 4,
         //     spaceBetween: 10
         //   }
-        },
-        on: {
-          init: () => {
-            //console.log("INIT SWIPER");
-          },
-          click: (event) => {
+        // },
+        // on: {
+        //   init: () => {
+        //     //console.log("INIT SWIPER");
+        //   },
+        //   click: (event) => {
 
-          }
-        }      
+        //   }
+        // }      
       }
 
       this.initiateToggleList = this.initiateToggleList.bind(this);
       this.handleToggle = this.handleToggle.bind(this);
       this.updateSwiper = this.updateSwiper.bind(this);
     }
-    
+
     componentDidMount() {
-      this.initiateToggleList();
+      this.initiateToggleList();      
+    }
+
+    componentWillUnmount() {
+
     }
 
     initiateToggleList() {
@@ -183,7 +188,7 @@ class CategoryToggle extends React.Component {
       }).catch((error) => {
           console.error(error);
       }).finally(() => {
-
+        
       });    
     }
 
@@ -193,13 +198,11 @@ class CategoryToggle extends React.Component {
 
     render() {
 
-        return (
-          <div id="category-toggle-container">
-            <Swiper getSwiper={this.updateSwiper} {...this.params}>
-              <TogglesList categoryToggleRef={this} />
-            </Swiper>
-          </div>
-        )
+      return (
+        <Swiper getSwiper={this.updateSwiper} {...this.params} >
+            <TogglesList categoryToggleRef={this} />
+        </Swiper>
+      )
     }
   };
 
