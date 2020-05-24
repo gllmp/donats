@@ -7,6 +7,19 @@ import CategoryToggle from '../components/CategoryToggle'
 
 //import data from '../data.json'
 
+function CategoriesList(props) {
+    const categories = props.categories;
+
+    const categoriesElements = categories.map((category) =>
+      <div className="grid-item" key={category.name.toString()}>
+        {category.name}
+      </div>
+    );
+    return (
+      <div id="grid-container">{categoriesElements}</div>
+    );
+}
+
 class CategoryInsert extends Component {
     constructor(props) {
         super(props);
