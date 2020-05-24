@@ -188,34 +188,40 @@ class CategoryInsert extends Component {
             <div id="category-insert-wrapper">
                 {!this.state.isLoading && (
                     <div id="category-insert-container">
-                        {/* <FileUpload /> */}
-                        
-                        <h1 id="category-insert-title">CATEGORY MANAGER</h1>
+                        <div className="row">
+                            <div className="col-lg">
+                                <div className="align-items-center justify-content-center">
+                                    {/* <FileUpload /> */}
+                                    
+                                    <h1 id="category-insert-title">CATEGORY MANAGER</h1>
 
-                        <section id="category-insert-name" className="category-insert-section">
-                            {/* <label>NOM: </label> */}
-                            <input id="category-name-input" className="form-control" type="text" value={name} placeholder="NOM" onChange={this.handleChangeInputName} />
-                        </section>
+                                    <section id="category-insert-name" className="category-insert-section">
+                                        {/* <label>NOM: </label> */}
+                                        <input id="category-name-input" className="form-control" type="text" value={name} placeholder="NOM" onChange={this.handleChangeInputName} />
+                                    </section>
 
-                        <section id="category-insert-cover" className="category-insert-section">
-                            <DragAndDrop ref={this.dragAndDropRef} />
-                        </section>
+                                    <section id="category-insert-cover" className="category-insert-section">
+                                        <DragAndDrop ref={this.dragAndDropRef} />
+                                    </section>
 
-                        <section id="category-insert-url" className="category-insert-section">
-                            <input id="category-url-input" className="form-control" type="text" value={url} placeholder="URL" onChange={this.handleChangeInputUrl} />
-                        </section>
+                                    <section id="category-insert-url" className="category-insert-section">
+                                        <input id="category-url-input" className="form-control" type="text" value={url} placeholder="URL" onChange={this.handleChangeInputUrl} />
+                                    </section>
 
-                        <section id="category-insert-categories" className="category-insert-section">
-                            <p id="category-toggle-title">{this.state.categories.length} CATÉGORIES DISPONIBLES</p>
-                            <CategoryToggle categories={this.state.categories} />
-                        </section>
+                                    <section id="category-insert-categories" className="category-insert-section">
+                                        <p id="category-toggle-title">{this.state.categories.length} CATÉGORIES DISPONIBLES</p>
+                                        <CategoryToggle categories={this.state.categories} />
+                                    </section>
 
-                        <section id="category-insert-button-container" className="category-insert-section">
-                            <button id="category-button-save" className="btn btn-primary" onClick={this.handleIncludeCategory}>SAVE</button>
-                            <Link to="/admin/categories/list" id="category-button-cancel" className="btn btn-danger">CANCEL</Link>
-                        </section>
+                                    <section id="category-insert-button-container" className="category-insert-section">
+                                        <button id="category-button-save" className="btn btn-primary" onClick={this.handleIncludeCategory}>SAVE</button>
+                                        <Link to="/admin/categories/list" id="category-button-cancel" className="btn btn-danger">CANCEL</Link>
+                                    </section>
+                                </div>
+                            </div>
                         </div>
-                    )}
+                    </div>
+                )}
             </div>
         )
     }
