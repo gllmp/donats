@@ -299,6 +299,7 @@ button:focus {
 }
 
 #category-insert-title {
+    font-size: 3em;
     text-align: center;
 }
 
@@ -355,6 +356,7 @@ button:focus {
 
 #category-button-save {
     margin-right: 1em;
+    width: 25%;
     opacity: 1;
 }
 
@@ -543,6 +545,13 @@ button:focus {
         color: #fff !important;
         border-radius: 0px;
         text-align: left;
+    }
+}
+
+/* Small/Medium/Large devices (1300px and down) */
+@media only screen and (max-width: 1300px) {
+    #category-insert-title {
+        font-size: 2.5em;
     }
 }
 
