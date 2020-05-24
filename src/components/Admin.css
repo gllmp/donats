@@ -301,6 +301,7 @@ button:focus {
 #category-insert-title {
     font-size: 3em;
     text-align: center;
+    margin-bottom: 0;
 }
 
 .category-insert-section {
@@ -419,14 +420,14 @@ button:focus {
     transform: scale(0.5);
     position: relative;
     left: 0;
-    bottom: 5px;
+    bottom: 0;
 }
 
 #category-insert-categories .swiper-button-next  {
     transform: scale(0.5);
     position: relative;
     right: 0;
-    bottom: 5px;
+    bottom: 0;
     float: right;
 }
 
