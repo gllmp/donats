@@ -1,9 +1,9 @@
 DONATS
 ---
 
-RANDOM PLAYER
+YOUTUBE RANDOM PLAYER
 
-See [random-player-server](https://github.com/specialgee/random-player-server) for the back-end implementation.
+See [donats-server](https://github.com/specialgee/donats-server) for the server-side API implementation.
 
 ## Available Scripts
 
