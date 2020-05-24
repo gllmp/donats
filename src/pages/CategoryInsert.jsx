@@ -169,10 +169,10 @@ class CategoryInsert extends Component {
                 //         cover: '',
                 //         url: ''
                 //     })
-                }).catch((error) => {
-                    window.alert(`Category upload failed`);
-                    console.error(error);
-                });
+                // }).catch((error) => {
+                //     window.alert(`Category upload failed`);
+                //     console.error(error);
+                // });
             }).catch((error) => {
                 console.error(error);
             }).finally(() => {
