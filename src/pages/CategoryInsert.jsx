@@ -57,7 +57,7 @@ class CategoryInsert extends Component {
     }
     
     handleChangeInputName = async event => {
-        const name = event.target.value;
+        const name = event.target.value.toUpperCase();
         this.setState({ name });
     }
 
@@ -131,7 +131,7 @@ class CategoryInsert extends Component {
     // }
 
     handleIncludeCategory = async () => {
-        const { name, category, cover, url } = this.state;
+        const { name, category, cover, url, categories, isLoading } = this.state;
         
         if (!name) {
             alert("Please add name");
@@ -144,7 +144,7 @@ class CategoryInsert extends Component {
                 resolve();
             }).then(() => {
                 // Add name to payload
-                payload.name = name;
+                payload.name = this.state.name;
             }).then(() => {
                 // Add categorie(s) to payload
                 let categoryArray = [];
@@ -157,29 +157,24 @@ class CategoryInsert extends Component {
                     category: categoryArray
                 });
 
-                payload.category = category;
+                payload.category = this.state.category;
             }).then(() => {
                 // Add cover to payload
                 this.setState({ 
                     cover: this.dragAndDropRef.current.state.src 
                 });
 
-                payload.cover = cover;
+                payload.cover = this.state.cover;
             }).then(() => {
                 // Add url to payload
 
-                payload.url = url;
+                payload.url = this.state.url;
             }).then(() => {
-                // payload.name = name;
-                // payload.category = category;
-                // payload.cover = cover;
-                // payload.url = url;
-
                 console.log("CATEGORY STATE: ", this.state);
             }).then(() => {
                 // api.insertCategory(payload)
                 // .then(res => {
-                //     window.alert(`Video inserted successfully`);
+                //     window.alert(`Category inserted successfully`);
 
                 //     this.setState({
                 //         name: '',
@@ -200,49 +195,66 @@ class CategoryInsert extends Component {
         const { name, category, cover, url } = this.state;
 
         return (
-            <div id="category-insert-container">
-                {/* <FileUpload /> */}
-                
-                <h1 id="category-insert-title">CATEGORY MANAGER</h1>
+            <div id="category-insert-wrapper">
+                {!this.state.isLoading && (
+                    <div id="category-insert-container">
+                        {/* <FileUpload /> */}
+                        
+                        <h1 id="category-insert-title">CATEGORY MANAGER</h1>
 
-                <section id="category-insert-name" className="category-insert-section">
-                    {/* <label>NOM: </label> */}
-                    <input id="category-name-input" className="form-control" type="text" value={name} placeholder="NOM" onChange={this.handleChangeInputName} />
-                </section>
+                        <section id="category-insert-name" className="category-insert-section">
+                            {/* <label>NOM: </label> */}
+                            <input id="category-name-input" className="form-control" type="text" value={name} placeholder="NOM" onChange={this.handleChangeInputName} />
+                        </section>
 
-                <section id="category-insert-cover" className="category-insert-section">
-                    <DragAndDrop ref={this.dragAndDropRef} />
-                </section>
+                        <section id="category-insert-cover" className="category-insert-section">
+                            <DragAndDrop ref={this.dragAndDropRef} />
+                        </section>
 
-                <section id="category-insert-url" className="category-insert-section">
-                    <input id="category-url-input" className="form-control" type="text" value={url} placeholder="URL" onChange={this.handleChangeInputUrl} />
-                </section>
+                        <section id="category-insert-url" className="category-insert-section">
+                            <input id="category-url-input" className="form-control" type="text" value={url} placeholder="URL" onChange={this.handleChangeInputUrl} />
+                        </section>
 
-                {/* <label className="mt-4">CATEGORY: </label>
-                <select className="form-control" type="text" value={category} onChange={this.handleChangeInputCategory}>
-                    <option value="" hidden></option>
-                    <option value="MUSIC">MUSIC</option>
-                    <option value="RAP">RAP FR</option>
-                    <option value="SKATE">SKATE</option>
-                </select>
-                <ul>
-                    {this.state.category.map(item => (
-                        <li key={item}>{item}</li>
-                    ))}
-                </ul>
+                        <section id="category-insert-categories" className="category-insert-section">
+                            <p id="category-toggle-title">{this.state.categories.length} CATÉGORIES DISPONIBLES</p>
+                            {/* <ul>
+                                <li>1</li>
+                                <li>2</li>
+                                <li>3</li>
+                                <li>4</li>
+                                <li>5</li>
+                                <li>6</li>
+                                <li>7</li>
+                            </ul> */}
 
+                            {/* <div id="grid-container">
+                                <div className="grid-item">1</div>
+                                <div className="grid-item">2</div>
+                                <div className="grid-item">3</div>  
+                                <div className="grid-item">4</div>
+                                <div className="grid-item">5</div>
+                                <div className="grid-item">6</div>  
+                                <div className="grid-item">7</div>
+                                <div className="grid-item">8</div>
+                                <div className="grid-item">9</div>  
+                                <div className="grid-item">10</div>  
+                                <div className="grid-item">11</div>  
+                                <div className="grid-item">12</div>  
+                                <div className="grid-item">13</div>  
+                                <div className="grid-item">14</div>  
+                            </div> */}
 
-                <label>COVER: </label>
-                <input className="form-control" type="text" value={cover} onChange={this.handleChangeInputCover} />
+                            {/* <CategoriesList categories={this.state.categories} /> */}
 
+                            <CategoryToggle categories={this.state.categories} />
+                        </section>
 
-                <label>URL: </label>
-                <input className="form-control" type="text" value={url} onChange={this.handleChangeInputUrl} /> */}
-
-                <div id="category-insert-button-container">
-                    <button id="category-button-save" className="btn btn-primary" onClick={this.handleIncludeCategory}>SAVE</button>
-                    <Link to="/admin/categories/list" id="category-button-cancel" className="btn btn-danger">CANCEL</Link>
-                </div>
+                        <section id="category-insert-button-container" className="category-insert-section">
+                            <button id="category-button-save" className="btn btn-primary" onClick={this.handleIncludeCategory}>SAVE</button>
+                            <Link to="/admin/categories/list" id="category-button-cancel" className="btn btn-danger">CANCEL</Link>
+                        </section>
+                        </div>
+                    )}
             </div>
         )
     }
