@@ -266,7 +266,7 @@ class Slider extends React.Component {
     render() {
 
         return (
-          <div>
+          <div id="slider-container">
             <Swiper getSwiper={this.updateSwiper} {...this.params}>
                 <div><img className="swiper-slide-image" data-playlist="music" src={categoryCover} alt="category cover" /></div>
                 <div><img className="swiper-slide-image" data-playlist="rap" src={categoryCover} alt="category cover" /></div>
