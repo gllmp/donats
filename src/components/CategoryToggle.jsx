@@ -91,7 +91,6 @@ class CategoryToggle extends React.Component {
         categories: props.categories,
         togglesChecked: [],
         swiper: null,
-        currentSlide: null
       };
               
       this.params = {
@@ -113,42 +112,30 @@ class CategoryToggle extends React.Component {
         //   clickable: true,
         //   dynamicBullets: true
         // },
-        // effect: 'coverflow',
-        // coverflowEffect: {
-        //   rotate: 0,
-        //   stretch: 0,
-        //   depth: 100,
-        //   modifier: 1,
-        //   slideShadows: true
-        // },
-        // zoom: {
-        //   maxRatio: 1.1,
-        //   toggle: false
-        // },
         // breakpoints: {
         //   1024: {
-        //     slidesPerView: 3,
+        //     slidesPerView: 9,
         //     spaceBetween: 40
         //   },
         //   768: {
-        //     slidesPerView: 3,
+        //     slidesPerView: 9,
         //     spaceBetween: 30
         //   },
         //   640: {
-        //     slidesPerView: 2,
+        //     slidesPerView: 9,
         //     spaceBetween: 20
         //   },
         //   320: {
-        //     slidesPerView: 2,
+        //     slidesPerView: 9,
         //     spaceBetween: 10
         //   }
-        // },
+        },
         on: {
           init: () => {
-            console.log("INIT SWIPER");
+            //console.log("INIT SWIPER");
           },
           click: (event) => {
-            this.selectSlide(event.target);
+
           }
         }      
       }
@@ -156,10 +143,6 @@ class CategoryToggle extends React.Component {
       this.initiateToggleList = this.initiateToggleList.bind(this);
       this.handleToggle = this.handleToggle.bind(this);
       this.updateSwiper = this.updateSwiper.bind(this);
-      this.selectSlide = this.selectSlide.bind(this);
-      this.slideAndSwap = this.slideAndSwap.bind(this);
-      //this.goNext = this.goNext.bind(this);
-      //this.goPrev = this.goPrev.bind(this);
     }
     
     componentDidMount() {
@@ -196,7 +179,7 @@ class CategoryToggle extends React.Component {
           togglesChecked: toggleStateDuplicate
         });
 
-        console.log(this.state.togglesChecked);
+        console.log("CATEGORY TOGGLE: ", this.state.togglesChecked);
       }).catch((error) => {
           console.error(error);
       }).finally(() => {
@@ -208,92 +191,6 @@ class CategoryToggle extends React.Component {
       this.setState({ swiper });
     }
 
-    selectSlide(target) {
-      // if (target.id === "video-button-img" && this.state.showSlider) {
-      //   // select random slide
-      //   new Promise((resolve, reject) => {
-      //     resolve();
-      //   }).then(() => {
-      //     let sliderImages = document.getElementsByClassName("swiper-slide-image");
-
-      //     let index = Math.floor(Math.random() * Object.keys(sliderImages).length);
-          
-      //     let swiperDuplicate = this.state.swiper;
-      //     swiperDuplicate.clickedIndex = index;
-
-      //     this.setState({
-      //       currentSlide: sliderImages[index],
-      //       swiper: swiperDuplicate
-      //     });
-
-      //     //this.state.swiper.clickedIndex = index;
-      //   }).then(() => {
-      //     this.slideAndSwap();
-      //   }).catch((error) => {
-      //       console.error(error);
-      //   }).finally(() => {
-      
-      //   });            
-      // } else if ((target.classList.contains("swiper-slide-image")) || (target.id === "video-button-img" && !this.state.showSlider)) {       
-      //   new Promise((resolve, reject) => {
-      //     resolve();
-      //   }).then(() => {
-      //     if (target.classList.contains("swiper-slide-image")) {
-      //       this.setState({
-      //         currentSlide: target,
-      //       });  
-      //     }
-      //   }).then(() => {
-      //     this.slideAndSwap();
-      //   }).catch((error) => {
-      //       console.error(error);
-      //   }).finally(() => {
-      
-      //   });                   
-      // }
-    }
-
-    slideAndSwap() {
-      // let url = this.state.currentSlide.getAttribute("data-url");
-
-      // if (url !== null) {
-      //   // go to special site
-      //   window.location.href = url;
-      // } else {
-      //   new Promise((resolve, reject) => {
-      //     resolve();
-      //   }).then(() => {
-      //     // get playlist
-      //     this.setState({
-      //       playlist: this.state.currentSlide.getAttribute("data-playlist")
-      //     })
-      //   }).then(() => {
-      //     this.state.swiper.slideTo(this.state.swiper.clickedIndex);
-      //   }).then(() => {
-      //     // swap slider with video player
-      //     setTimeout(() => {
-      //       this.props.handleSwap("slider", "open");
-      //     }, this.params.speed)
-      //   }).catch((error) => {
-      //       console.error(error);
-      //   }).finally(() => {
-      
-      //   });            
-      // }
-    }
-
-    // goNext() {
-    //   if (this.state.swiper !== null) {
-    //     this.state.swiper.slideNext();
-    //   }
-    // };
-    
-    // goPrev() {
-    //   if (this.state.swiper !== null) {
-    //     this.state.swiper.slidePrev();
-    //   }
-    // };
-
     render() {
 
         return (
@@ -301,8 +198,6 @@ class CategoryToggle extends React.Component {
             <Swiper getSwiper={this.updateSwiper} {...this.params}>
               <TogglesList categoryToggleRef={this} />
             </Swiper>
-            {/* <button onClick={this.goPrev}>Prev</button>
-            <button onClick={this.goNext}>Next</button> */}
           </div>
         )
     }
