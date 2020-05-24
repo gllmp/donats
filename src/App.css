@@ -183,7 +183,7 @@
 }
 
 .swiper-button-next:focus {
-  text-decoration: none !important;
+  outline: none;
 }
 
 .swiper-button-prev {
@@ -191,7 +191,7 @@
 }
 
 .swiper-button-prev:focus {
-  text-decoration: none !important;
+  outline: none;
 }
 
 /* PLAYER */
