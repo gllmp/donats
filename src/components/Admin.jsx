@@ -12,8 +12,8 @@ class Admin extends React.Component {
     }
     
     componentDidMount() {
-        require('bootswatch/dist/darkly/bootstrap.min.css')
-        require('./Admin.css')
+        require('bootswatch/dist/darkly/bootstrap.min.css');
+        require('./Admin.css');
     }
 
     componentWillUnmount() {
