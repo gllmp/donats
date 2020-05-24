@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import api from '../api';
 //import FileUpload from '../components/FileUpload'
 import DragAndDrop from '../components/DragAndDrop'
+import CategoryToggle from '../components/CategoryToggle'
 
 //import data from '../data.json'
 
