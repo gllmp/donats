@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { history } from '../helpers';
+import { history } from '../utils';
 import api from '../api';
 
 import styled from 'styled-components';
