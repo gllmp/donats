@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 import Compressor from 'compressorjs';
-import categoryCover from '../assets/img/category-cover.png';
 
 class DragAndDrop extends Component {
   constructor(props) {
@@ -13,7 +12,7 @@ class DragAndDrop extends Component {
       size: "",
       file: "",
       data: "",
-      src: "",
+      preview: "https://res.cloudinary.com/donats/image/upload/v1590425039/category-cover_ulikx1.png",
       preview: "",
     };
 
@@ -24,10 +23,6 @@ class DragAndDrop extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      preview: categoryCover
-    });
-
     this.dropzoneElement = document.getElementsByClassName("dropzone")[0];
   }
 
