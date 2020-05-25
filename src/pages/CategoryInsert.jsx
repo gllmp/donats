@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { CloudinaryContext } from "cloudinary-react";
+import request from 'superagent';
 import api from '../api';
 //import FileUpload from '../components/FileUpload'
 import DragAndDrop from '../components/DragAndDrop'
@@ -14,16 +16,17 @@ class CategoryInsert extends Component {
         this.state = {
             name: '',
             category: [],
-            cover: '',
+            cover: 'https://res.cloudinary.com/donats/image/upload/v1590425039/category-cover_ulikx1.png',
             url: '',
-            categories: [],
+            savedCategories: [],
+            isVisible: true,
             isLoading: false
         }
 
         this.handleChangeInputName = this.handleChangeInputName.bind(this);
-        this.handleChangeInputCategory = this.handleChangeInputCategory.bind(this);
-        this.handleChangeInputCover = this.handleChangeInputCover.bind(this);
         this.handleChangeInputUrl = this.handleChangeInputUrl.bind(this);
+        this.uploadFileToCloudinary = this.uploadFileToCloudinary.bind(this);
+        this.uploadCategory = this.uploadCategory.bind(this);
     }
 
     componentDidMount = async () => {
@@ -33,7 +36,7 @@ class CategoryInsert extends Component {
         
         await api.getAllCategories().then(categories => {
             this.setState({
-                categories: categories.data.data,
+                savedCategories: categories.data.data,
                 isLoading: false,
             });
         })
@@ -46,16 +49,6 @@ class CategoryInsert extends Component {
     handleChangeInputName = async event => {
         const name = event.target.value.toUpperCase();
         this.setState({ name });
-    }
-
-    handleChangeInputCategory = async event => {
-        const category = event.target.value;
-        this.setState({ category });
-    }
-
-    handleChangeInputCover = async event => {
-        const cover = event.target.value;
-        this.setState({ cover });
     }
 
     handleChangeInputUrl = async event => {
@@ -156,19 +149,25 @@ class CategoryInsert extends Component {
         });    
     }
 
+    uploadCategory = async () => {
+        const { name, category, cover, url, savedCategories } = this.state;
+
         if (!name) {
             alert("Please add name");
-        } else if (!this.dragAndDropRef.current.state.src.length) {
+        } else if (this.state.isVisible && !this.dragAndDropRef.current.state.hasLoaded) {
             alert("Please add cover image");
-        } else {
+        } else {        
             let payload = { name, category, cover, url };
-        
-            new Promise((resolve, reject) => {
-                resolve();
-            }).then(() => {
+
+            await new Promise((resolve, reject) => {
+            
+                resolve(payload);
+            }).then((result) => {
                 // Add name to payload
-                payload.name = this.state.name;
-            }).then(() => {
+                result.name = this.state.name;
+
+                return result;
+            }).then((result) => {
                 // Add categorie(s) to payload
                 let categoryArray = [];
                 categoryArray.push(name);
@@ -180,40 +179,59 @@ class CategoryInsert extends Component {
                     category: categoryArray
                 });
 
-                payload.category = this.state.category;
-            }).then(() => {
+                result.category = this.state.category;
+
+                return result;
+            }).then(async (result) => {
+                // Upload cover only if category is visible
+                if (this.state.isVisible) {                
+                    await this.uploadFileToCloudinary(this.dragAndDropRef.current.state.file, result);
+
+                    return result;
+                } else {
+
+                    return await result;
+                }
+            }).then((result) => {
                 // Add cover to payload
-                this.setState({ 
-                    cover: this.dragAndDropRef.current.state.src 
-                });
+                result.cover = this.state.cover;
 
-                payload.cover = this.state.cover;
-            }).then(() => {
+                return result;
+            }).then((result) => {
                 // Add url to payload
+                result.url = this.state.url;    
 
-                payload.url = this.state.url;
-            }).then(() => {
+                return result;
+            }).then((result) => {
+                payload.name = result.name;
+                payload.category = result.category;
+                payload.cover = result.cover;
+                payload.url = result.url;
+
+                console.log("PAYLOAD: ", payload);
                 console.log("CATEGORY STATE: ", this.state);
-            }).then(() => {
-                // api.insertCategory(payload)
-                // .then(res => {
-                //     window.alert(`Category inserted successfully`);
 
-                //     this.setState({
-                //         name: '',
-                //         category: '',
-                //         cover: '',
-                //         url: ''
-                //     })
-                // }).catch((error) => {
-                //     window.alert(`Category upload failed`);
-                //     console.error(error);
-                // });
+                return payload;
+            }).then((result) => {
+                api.insertCategory(result)
+                .then(res => {
+                    window.alert(`Category upload successful`);
+
+                    this.setState({
+                        name: '',
+                        category: '',
+                        cover: '',
+                        url: ''
+                    })
+                }).catch((error) => {
+                    window.alert(`Category upload failed`);
+                    console.error(error);
+                });
             }).catch((error) => {
                 console.error(error);
             }).finally(() => {
         
-            });    
+            });
         }        
     }
 
@@ -237,7 +255,9 @@ class CategoryInsert extends Component {
                                     </section>
 
                                     <section id="category-insert-cover" className="category-insert-section">
-                                        <DragAndDrop ref={this.dragAndDropRef} />
+                                        <CloudinaryContext cloudName={process.env.REACT_APP_CLOUDINARY_CLOUDNAME}>
+                                            <DragAndDrop ref={this.dragAndDropRef} />
+                                        </CloudinaryContext>
                                     </section>
 
                                     <section id="category-insert-url" className="category-insert-section">
@@ -245,12 +265,12 @@ class CategoryInsert extends Component {
                                     </section>
 
                                     <section id="category-insert-categories" className="category-insert-section">
-                                        <p id="category-toggle-title">{this.state.categories.length} CATÉGORIES DISPONIBLES</p>
-                                        <CategoryToggle categories={this.state.categories} />
+                                        <p id="category-toggle-title">{this.state.savedCategories.length} CATÉGORIES DISPONIBLES</p>
+                                        <CategoryToggle categories={this.state.savedCategories} />
                                     </section>
 
                                     <section id="category-insert-button-container" className="category-insert-section">
-                                        <button id="category-button-save" className="btn btn-primary" onClick={this.handleIncludeCategory}>SAVE</button>
+                                        <button id="category-button-save" className="btn btn-primary" onClick={this.uploadCategory}>SAVE</button>
                                         <Link to="/admin/categories/list" id="category-button-cancel" className="btn btn-danger">CANCEL</Link>
                                     </section>
                                 </div>
