@@ -117,9 +117,45 @@ class CategoryInsert extends Component {
     //     })
     // }
 
-    handleIncludeCategory = async () => {
-        const { name, category, cover, url, categories, isLoading } = this.state;
-        
+    uploadFileToCloudinary = async (file, payload) => {
+        // upload compressed file to Cloudinary with unsigned preset
+        const url = `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUDNAME}/upload`;
+
+        await new Promise((resolve, reject) => {
+            request
+            .post(url)
+            .field("file", file)
+            .field("upload_preset", process.env.REACT_APP_CLOUDINARY_PRESET)
+            .field("context", this.state.name ? `photo=${this.state.name}` : '')
+            .field("tags", this.state.name ? `myphotoalbum,${this.state.name}` : 'myphotoalbum')
+            .field("multiple", true)
+            .end((error, response) => {
+                //console.log("CLOUDINARY RESPONSE: ", response);
+                if (error != null) {
+                    // upload failed
+                    console.log(error);
+                    window.alert(`File upload to Cloudinary has failed`);
+                } else if (response.status === 200) {
+                    // upload success
+                    resolve(response);
+                } else {
+                    //reject();
+                }
+            });        
+        }).then((result) => {
+            this.setState({
+                cover: result.body.url
+            })
+
+            //console.log("UPLOADED FILE: ", this.state);
+            console.log("File upload to Cloudinary successful");
+        }).catch((error) => {
+            console.error(error);
+        }).finally(() => {
+    
+        });    
+    }
+
         if (!name) {
             alert("Please add name");
         } else if (!this.dragAndDropRef.current.state.src.length) {
