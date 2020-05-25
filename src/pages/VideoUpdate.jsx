@@ -72,7 +72,7 @@ class VideoUpdate extends Component {
         new Promise((resolve, reject) => {
             api.updateVideoById(_id, payload)
             .then(res => {
-                window.alert(`Video updated successfully`);
+                window.alert(`Vidéo mise à jour avec succès`);
                 resolve();
             })
         }).catch((error) => {

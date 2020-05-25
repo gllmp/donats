@@ -145,7 +145,7 @@ class VideoInsert extends Component {
             }).then(() => {
                 api.insertVideo(payload)
                 .then(res => {
-                    window.alert(`Video inserted successfully`);
+                    window.alert(`Vidéo créée avec succès`);
                     this.setState({
                         title: '',
                         url: '',

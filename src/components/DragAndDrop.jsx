@@ -60,8 +60,7 @@ class DragAndDrop extends Component {
             resolve();
           },
           error(err) {
-            console.log(err.message);
-            window.alert(`File compression has failed`)
+            console.log("File compression has failed ", err.message);
           },
         });
       }).then(() => {

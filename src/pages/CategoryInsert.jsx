@@ -126,8 +126,7 @@ class CategoryInsert extends Component {
                 //console.log("CLOUDINARY RESPONSE: ", response);
                 if (error != null) {
                     // upload failed
-                    console.log(error);
-                    window.alert(`File upload to Cloudinary has failed`);
+                    console.log("File upload to Cloudinary has failed ", error);
                 } else if (response.status === 200) {
                     // upload success
                     resolve(response);
@@ -215,7 +214,7 @@ class CategoryInsert extends Component {
             }).then((result) => {
                 api.insertCategory(result)
                 .then(res => {
-                    window.alert(`Category upload successful`);
+                    window.alert(`Catégorie créée avec succès`);
 
                     this.setState({
                         name: '',
@@ -224,7 +223,7 @@ class CategoryInsert extends Component {
                         url: ''
                     })
                 }).catch((error) => {
-                    window.alert(`Category upload failed`);
+                    window.alert(`La création de la catégorie a échouée`);
                     console.error(error);
                 });
             }).catch((error) => {
