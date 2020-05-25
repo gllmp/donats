@@ -62,33 +62,33 @@ class DragAndDrop extends Component {
           },
         });
       }).then(() => {
-        const reader = new FileReader();
+        //   // encode compressed file
+        // const reader = new FileReader();
 
-        reader.onabort = () => console.log('file reading was aborted')
-        reader.onerror = () => console.log('file reading has failed')
-        reader.onload = () => {
-          // Process file content
-          //console.log("FILE READER: ", reader);
+        // reader.onabort = () => console.log('File reading was aborted')
+        // reader.onerror = () => console.log('File reading has failed')
+        // reader.onload = () => {
+        //   // Process file content
+        //   //console.log("FILE READER: ", reader);
 
-          // encode compressed file
-          let base64String = _this.arrayBufferToBase64(reader.result);
-          //console.log("BASE64 ENCODED STR: ", base64String);
+        //   let base64String = _this.arrayBufferToBase64(reader.result);
+        //   //console.log("BASE64 ENCODED STR: ", base64String);
 
-          let imageSrc = "data:" + this.state.type + ";base64," + base64String;      
+        //   let imageSrc = "data:" + this.state.type + ";base64," + base64String;      
 
-          _this.setState({
-            data: reader.result,
-            src: imageSrc
-          })
+        //   _this.setState({
+        //     data: reader.result,
+        //     src: imageSrc
+        //   })
 
-          console.log("UPLOADED FILE: ", _this.state);
-        }
+        //   console.log("UPLOADED FILE: ", _this.state);
+        // }
 
-        reader.readAsArrayBuffer(this.state.file);
+        // reader.readAsArrayBuffer(this.state.file);
       }).catch((error) => {
         console.error(error);
       }).finally(() => {
-
+        console.log("SELECTED FILE: ", this.state);
       });    
     })
   }
