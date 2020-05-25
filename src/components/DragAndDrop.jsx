@@ -7,13 +7,14 @@ class DragAndDrop extends Component {
     super(props);
 
     this.state = {
+      file: "",
       name: "",
       type: "",
       size: "",
-      file: "",
-      data: "",
+      // data: "",
+      // src: "",
       preview: "https://res.cloudinary.com/donats/image/upload/v1590425039/category-cover_ulikx1.png",
-      preview: "",
+      hasLoaded: false
     };
 
     this.onDrop = this.onDrop.bind(this);
@@ -30,7 +31,7 @@ class DragAndDrop extends Component {
     // Make sure to revoke the data uris to avoid memory leaks
     URL.revokeObjectURL(this.state.preview);
   }
-
+  
   onDrop(acceptedFiles) {
     const _this = this;
 
@@ -42,23 +43,25 @@ class DragAndDrop extends Component {
         new Compressor(file, {
           quality: 0.6,
           success(fileCompressed) {
-            //console.log("COMPRESSED: ", fileCompressed);
+            // log compressed size percentage
             let compressedSize = file.size - fileCompressed.size;
             compressedSize = Math.floor((compressedSize * 100) / file.size);
             console.log("COMPRESSED SIZE: ", compressedSize + "%")
 
             _this.setState({
+              file: fileCompressed,
               name: fileCompressed.name,
               type: fileCompressed.type,
               size: fileCompressed.size + " bytes",
-              file: fileCompressed,
-              preview: URL.createObjectURL(fileCompressed)
+              preview: URL.createObjectURL(fileCompressed),
+              hasLoaded: true
             })
 
             resolve();
           },
           error(err) {
             console.log(err.message);
+            window.alert(`File compression has failed`)
           },
         });
       }).then(() => {
