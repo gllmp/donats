@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { CloudinaryContext } from "cloudinary-react";
 import request from 'superagent';
 import api from '../api';
+import { history } from '../utils';
 //import FileUpload from '../components/FileUpload'
 import DragAndDrop from '../components/DragAndDrop'
 import CategoryToggle from '../components/CategoryToggle'
@@ -229,7 +230,8 @@ class CategoryInsert extends Component {
             }).catch((error) => {
                 console.error(error);
             }).finally(() => {
-        
+                history.push(process.env.PUBLIC_URL + "/admin/categories/list");
+                window.location.reload(true);
             });
         }        
     }
