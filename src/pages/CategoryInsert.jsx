@@ -34,6 +34,7 @@ class CategoryInsert extends Component {
 
     componentDidMount = async () => {
         this.dragAndDropRef = React.createRef();
+        this.categoryToggleRef = React.createRef();
 
         this.setState({ isLoading: true });
         
@@ -52,12 +53,12 @@ class CategoryInsert extends Component {
     handleChangeInputName = async event => {
         const name = event.target.value.toUpperCase();
         this.setState({ name });
-    }
+    } 
 
     handleChangeInputUrl = async event => {
         const url = event.target.value;
         this.setState({ url });
-    }    
+    }
     
     handleChangeInputIsVisible() {
         const isVisible = !this.state.isVisible;
@@ -150,6 +151,8 @@ class CategoryInsert extends Component {
 
             //console.log("UPLOADED FILE: ", this.state);
             console.log("File upload to Cloudinary successful");
+
+            return this.state.cover;
         }).catch((error) => {
             console.error(error);
         }).finally(() => {
@@ -157,80 +160,82 @@ class CategoryInsert extends Component {
         });    
     }
 
-    uploadCategory = async () => {
-        const { name, category, cover, url, savedCategories } = this.state;
+    uploadCategory() {        
+        const { name, category, cover, isVisible, url, savedCategories } = this.state;
 
         if (!name) {
             alert("Please add name");
         } else if (this.state.isVisible && !this.dragAndDropRef.current.state.hasLoaded) {
             alert("Please add cover image");
         } else {        
-            let payload = { name, category, cover, url };
+            const promiseName = new Promise((resolve, reject) => {
+                resolve(this.state.name);
+            });
 
-            await new Promise((resolve, reject) => {
-            
-                resolve(payload);
-            }).then((result) => {
-                // Add name to payload
-                result.name = this.state.name;
-
-                return result;
-            }).then((result) => {
-                // Add categorie(s) to payload
+            const promiseCategory = new Promise(async (resolve, reject) => {
                 let categoryArray = [];
-                categoryArray.push(name);
+                categoryArray.push(this.state.name);
 
-                //let categoryArrayDuplicate = [...this.state.category];
-                //categoryArrayDuplicate.push(name);
-
-                this.setState({ 
+                savedCategories.forEach(element => {
+                    if (this.categoryToggleRef.current.state.togglesChecked[element.name] === true) {
+                        categoryArray.push(element.name)
+                    }
+                });
+            
+                await this.setState({ 
                     category: categoryArray
                 });
 
-                result.category = this.state.category;
+                resolve(this.state.category);
+            });
 
-                return result;
-            }).then(async (result) => {
+            const promiseIsVisible = new Promise((resolve, reject) => {
+                resolve(this.state.isVisible);
+            });
+
+            const promiseCover = new Promise(async (resolve, reject) => {
                 // Upload cover only if category is visible
                 if (this.state.isVisible) {                
-                    await this.uploadFileToCloudinary(this.dragAndDropRef.current.state.file, result);
+                    await this.uploadFileToCloudinary(this.dragAndDropRef.current.state.file);
 
-                    return result;
+                    resolve(this.state.cover);
                 } else {
-
-                    return await result;
+                    resolve(this.state.cover);
                 }
-            }).then((result) => {
-                // Add cover to payload
-                result.cover = this.state.cover;
+            })
 
-                return result;
-            }).then((result) => {
-                // Add url to payload
-                result.url = this.state.url;    
+            const promiseUrl = new Promise((resolve, reject) => {
+                resolve(this.state.url);
+            });
 
-                return result;
-            }).then((result) => {
-                payload.name = result.name;
-                payload.category = result.category;
-                payload.cover = result.cover;
-                payload.url = result.url;
+            let payload = { name, category, cover, isVisible, url };
+
+            Promise.all([promiseName, promiseCategory, promiseIsVisible, promiseCover, promiseUrl])
+            .then((values) => {
+                //console.log(values);
+
+                payload.name = values[0];
+                payload.category = values[1];
+                payload.isVisible = values[2];
+                payload.cover = values[3];
+                payload.url = values[4];
 
                 console.log("PAYLOAD: ", payload);
                 console.log("CATEGORY STATE: ", this.state);
 
                 return payload;
-            }).then((result) => {
-                api.insertCategory(result)
+            }).then(async (result) => {
+                await api.insertCategory(result)
                 .then(res => {
-                    window.alert(`Catégorie créée avec succès`);
-
                     this.setState({
                         name: '',
                         category: '',
                         cover: '',
+                        //isVisible: true,
                         url: ''
                     })
+
+                    window.alert(`Catégorie créée avec succès`);
                 }).catch((error) => {
                     window.alert(`La création de la catégorie a échouée`);
                     console.error(error);
@@ -238,10 +243,17 @@ class CategoryInsert extends Component {
             }).catch((error) => {
                 console.error(error);
             }).finally(() => {
-                history.push(process.env.PUBLIC_URL + "/admin/categories/list");
-                window.location.reload(true);
+                //history.push(process.env.PUBLIC_URL + "/admin/categories/list");
+                //window.location.reload(true);
             });
-        }        
+
+            
+
+
+
+
+        }
+
     }
 
     render() {
@@ -279,7 +291,7 @@ class CategoryInsert extends Component {
 
                                     <section id="category-insert-categories" className="category-insert-section">
                                         <p id="category-toggle-title">{this.state.savedCategories.length} CATÉGORIES DISPONIBLES</p>
-                                        <CategoryToggle categories={this.state.savedCategories} />
+                                        <CategoryToggle categories={this.state.savedCategories} ref={this.categoryToggleRef} />
                                     </section>
 
                                     <section id="category-insert-button-container" className="category-insert-section">
