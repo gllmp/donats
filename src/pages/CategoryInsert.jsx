@@ -186,8 +186,8 @@ class CategoryInsert extends Component {
             }).catch((error) => {
                 console.error(error);
             }).finally(() => {
-                //history.push(process.env.PUBLIC_URL + "/admin/categories/list");
-                //window.location.reload(true);
+                history.push(process.env.PUBLIC_URL + "/admin/categories/list");
+                window.location.reload(true);
             });
         }
 
