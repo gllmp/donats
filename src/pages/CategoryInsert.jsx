@@ -107,11 +107,12 @@ class CategoryInsert extends Component {
         const { name, category, cover, isVisible, url, savedCategories } = this.state;
 
         if (!name) {
-            alert("Please add name");
+            alert("Ajoutez un nom avant de continuer");
         } else if (this.state.isVisible && !this.dragAndDropRef.current.state.hasLoaded) {
-            alert("Please add cover image");
+            alert("Ajoutez une image avant de continuer");
         } else {        
             const promiseName = new Promise((resolve, reject) => {
+
                 resolve(this.state.name);
             });
 
