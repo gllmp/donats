@@ -49,6 +49,13 @@ class CategoryInsert extends Component {
     
     handleChangeInputName(event) {
         const name = event.target.value.toUpperCase();
+
+        this.state.savedCategories.forEach(element => {
+            if (name === element.name) {
+                window.alert("Ce nom n'est pas disponible");
+            }
+        });
+
         this.setState({ name });
     } 
 
