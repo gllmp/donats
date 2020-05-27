@@ -4,12 +4,9 @@ import { CloudinaryContext } from "cloudinary-react";
 import request from 'superagent';
 import api from '../api';
 import { history } from '../utils';
-//import FileUpload from '../components/FileUpload'
 import Checkbox from '@material-ui/core/Checkbox';
 import DragAndDrop from '../components/DragAndDrop'
 import CategoryToggle from '../components/CategoryToggle'
-
-//import data from '../data.json'
 
 class CategoryInsert extends Component {
     constructor(props) {
@@ -65,60 +62,6 @@ class CategoryInsert extends Component {
 
         this.setState({ isVisible });
     }   
-
-    // handleIncludeDataFromFile = async () => {
-    //      // /!\ REMEMBER TO ADD [] AT START AND END OF JSON FILE
-    //     const _this = this;
-
-    //     console.log("FILE: ", data);
-
-    //     data.map( (data) => {        
-    //         let skate = data.category.skate;
-        
-    //         skate.forEach(element => {
-    //             console.log(element);
-
-    //             _this.state.url = element.id;
-    //             _this.state.category = "SKATE";
-
-    //             const { title, url, category } = _this.state;
-
-    //             let payload = { title, url, category };
-                
-    //             new Promise((resolve, reject) => {
-    //                 console.log(_this.state)
-    //                 getYoutubeTitle(_this.state.url, API_KEY, function (err, title) {
-    //                     console.log("TITLE: ", title);
-    //                     if (err) console.log("ERROR: ", err);
-        
-    //                     _this.setState({ title });
-    //                     payload.title = title;
-                        
-    //                     resolve();
-    //                 })    
-    //             }).then(() => {
-    //                 api.insertVideo(payload)
-    //                 .then(res => {
-    //                     console.log('Video inserted successfully');
-    //                     this.setState({
-    //                         title: '',
-    //                         url: '',
-    //                         category: '',
-    //                     })
-    //                 }).finally(() => {
-    //                     //window.location.href = `/admin`;
-    //                 });
-        
-    //             }).catch((error) => {
-    //                  console.error(error);
-    //             }).finally(() => {
-            
-    //             });    
-
-                
-    //         });
-    //     })
-    // }
 
     uploadFileToCloudinary = async (file) => {
         // upload compressed file to Cloudinary with unsigned preset
@@ -246,12 +189,6 @@ class CategoryInsert extends Component {
                 //history.push(process.env.PUBLIC_URL + "/admin/categories/list");
                 //window.location.reload(true);
             });
-
-            
-
-
-
-
         }
 
     }
@@ -265,13 +202,10 @@ class CategoryInsert extends Component {
                     <div id="category-insert-container">
                         <div className="row">
                             <div className="col-lg">
-                                <div className="align-items-center justify-content-center">
-                                    {/* <FileUpload /> */}
-                                    
+                                <div className="align-items-center justify-content-center">                                    
                                     <h1 id="category-insert-title">CATEGORY MANAGER</h1>
 
                                     <section id="category-insert-name" className="category-insert-section">
-                                        {/* <label>NOM: </label> */}
                                         <input id="category-name-input" className="form-control" type="text" value={name} placeholder="NOM" onChange={this.handleChangeInputName} />
                                     </section>
 
