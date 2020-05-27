@@ -267,6 +267,21 @@ button:focus {
     border-radius: 0;
 }
 
+/* VIDEO */
+#video-insert-container {
+    position: relative;
+    height: 100%;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+#video-upload-container {
+    position: relative;
+    height: 100%;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
 /* ADD */
 #drop-area {
     border: 2px dashed #bbb;
