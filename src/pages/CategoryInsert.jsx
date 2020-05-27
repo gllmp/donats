@@ -119,7 +119,7 @@ class CategoryInsert extends Component {
     //     })
     // }
 
-    uploadFileToCloudinary = async (file, payload) => {
+    uploadFileToCloudinary = async (file) => {
         // upload compressed file to Cloudinary with unsigned preset
         const url = `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUDNAME}/upload`;
 
