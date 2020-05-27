@@ -20,6 +20,10 @@
     box-sizing: border-box
 }
 
+.ReactTable *:focus {
+    outline: none;
+}
+
 .ReactTable .rt-table {
     -webkit-box-flex: 1;
     -ms-flex: auto 1;
