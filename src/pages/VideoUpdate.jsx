@@ -46,10 +46,55 @@ class VideoUpdate extends Component {
             title: '',
             url: '',
             category: '',
+            savedCategories: [],
+            categoriesSelectItems: [],
+            isLoading: false
         }
     }
-    
 
+    componentDidMount = async () => {
+
+    }
+
+    componentDidMount = async () => {
+        const { _id } = this.state;
+        const video = await api.getVideoById(_id)
+
+        this.setState({
+            title: video.data.data.title,
+            url: video.data.data.url,
+            category: video.data.data.category,
+            isLoading: true
+        })
+        
+        await api.getAllCategories().then(categories => {
+            this.setState({
+                savedCategories: categories.data.data,
+            });
+        })
+
+        await new Promise((resolve, reject) => {
+            resolve(this.state.savedCategories);
+        }).then((result) => {
+            const optionsList = result.map((category) =>
+                <option value={category.name} key={category.name.toString()}>{category.name}</option>
+            );
+
+            this.setState({
+                categoriesSelectItems: optionsList,
+                isLoading: false
+            })
+        }).catch((error) => {
+            console.error(error);
+        }).finally(() => {
+    
+        }); 
+    }
+
+    componentWillUnmount() {
+
+    }
+    
     handleChangeInputTitle = async event => {
         const title = event.target.value;
         this.setState({ title });
@@ -69,7 +114,7 @@ class VideoUpdate extends Component {
         const { _id, title, url, category } = this.state;
         const payload = { title, url, category }
 
-        new Promise((resolve, reject) => {
+        await new Promise((resolve, reject) => {
             api.updateVideoById(_id, payload)
             .then(res => {
                 window.alert(`Vidéo mise à jour avec succès`);
@@ -83,54 +128,48 @@ class VideoUpdate extends Component {
         })    
     }
 
-    componentDidMount = async () => {
-        const { _id } = this.state;
-        const video = await api.getVideoById(_id)
-
-        this.setState({
-            title: video.data.data.title,
-            url: video.data.data.url,
-            category: video.data.data.category,
-        })
-    }
-
     render() {
         const { title, url, category } = this.state;
         return (
-            <Wrapper className="col-sm-4 offset-md-4 update-form">
-                <Title className="mb-4" >UPDATE VIDEO</Title>
+            <div id="video-upload-container">
+                {!this.state.isLoading && (
+                    <Wrapper className="col-sm-4 offset-md-4 update-form">
+                        <Title className="mb-4" >UPDATE VIDEO</Title>
 
-                <Label>TITLE: </Label>
-                <InputText
-                    type="text"
-                    value={title}
-                    onChange={this.handleChangeInputTitle}
-                />
+                        <Label>TITLE: </Label>
+                        <InputText
+                            type="text"
+                            value={title}
+                            onChange={this.handleChangeInputTitle}
+                        />
 
-                <Label className="mt-4">URL: </Label>
-                <InputText
-                    type="text"
-                    value={url}
-                    onChange={this.handleChangeInputUrl}
-                />
+                        <Label className="mt-4">URL: </Label>
+                        <InputText
+                            type="text"
+                            value={url}
+                            onChange={this.handleChangeInputUrl}
+                        />
 
-                <Label className="mt-4">CATEGORY: </Label>
-                <Select
-                    type="text"
-                    value={category}
-                    onChange={this.handleChangeInputCategory}
-                >
-                    <option value="" hidden></option>
-                    <option value="MUSIC">MUSIC</option>
-                    <option value="RAP">RAP FR</option>
-                    <option value="SKATE">SKATEBOARD</option>
-                </Select>
+                        <Label className="mt-4">CATEGORY: </Label>
+                        <Select
+                            type="text"
+                            value={category}
+                            onChange={this.handleChangeInputCategory}
+                        >
+                            <option value="" hidden></option>
+                            {/* <option value="MUSIC">MUSIC</option>
+                            <option value="RAP">RAP FR</option>
+                            <option value="SKATE">SKATEBOARD</option> */}
+                            {this.state.categoriesSelectItems}
+                        </Select>
 
-                <div className="mt-4">
-                    <Button onClick={this.handleUpdateVideo}>UPDATE VIDEO</Button>
-                    <Link to="/admin/videos/list" className="btn btn-danger"> CANCEL </Link>
-                </div>
-            </Wrapper>
+                        <div className="mt-4">
+                            <Button onClick={this.handleUpdateVideo}>UPDATE VIDEO</Button>
+                            <Link to="/admin/videos/list" className="btn btn-danger"> CANCEL </Link>
+                        </div>
+                    </Wrapper>
+                )}
+            </div>
         )
     }
 }
