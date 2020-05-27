@@ -5,6 +5,7 @@ import request from 'superagent';
 import api from '../api';
 import { history } from '../utils';
 //import FileUpload from '../components/FileUpload'
+import Checkbox from '@material-ui/core/Checkbox';
 import DragAndDrop from '../components/DragAndDrop'
 import CategoryToggle from '../components/CategoryToggle'
 
@@ -26,6 +27,7 @@ class CategoryInsert extends Component {
 
         this.handleChangeInputName = this.handleChangeInputName.bind(this);
         this.handleChangeInputUrl = this.handleChangeInputUrl.bind(this);
+        this.handleChangeInputIsVisible = this.handleChangeInputIsVisible.bind(this);
         this.uploadFileToCloudinary = this.uploadFileToCloudinary.bind(this);
         this.uploadCategory = this.uploadCategory.bind(this);
     }
@@ -56,6 +58,12 @@ class CategoryInsert extends Component {
         const url = event.target.value;
         this.setState({ url });
     }    
+    
+    handleChangeInputIsVisible() {
+        const isVisible = !this.state.isVisible;
+
+        this.setState({ isVisible });
+    }   
 
     // handleIncludeDataFromFile = async () => {
     //      // /!\ REMEMBER TO ADD [] AT START AND END OF JSON FILE
@@ -261,8 +269,12 @@ class CategoryInsert extends Component {
                                         </CloudinaryContext>
                                     </section>
 
-                                    <section id="category-insert-url" className="category-insert-section">
+                                    <section id="category-insert-url-visible" className="category-insert-section">
                                         <input id="category-url-input" className="form-control" type="text" value={url} placeholder="URL" onChange={this.handleChangeInputUrl} />
+                                        <div id="category-visible-container">
+                                            <Checkbox className="category-visible-checkbox" checked={this.state.isVisible} disableRipple={true} onChange={this.handleChangeInputIsVisible} />
+                                            <label id="category-visible-label">VISIBLE</label>
+                                        </div>
                                     </section>
 
                                     <section id="category-insert-categories" className="category-insert-section">
