@@ -194,7 +194,7 @@ class CategoryInsert extends Component {
     }
 
     render() {
-        const { name, category, cover, url } = this.state;
+        const { name, url } = this.state;
 
         return (
             <div id="category-insert-wrapper">

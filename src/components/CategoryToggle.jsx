@@ -184,7 +184,7 @@ class CategoryToggle extends React.Component {
           togglesChecked: toggleStateDuplicate
         });
 
-        console.log("CATEGORY TOGGLE: ", this.state.togglesChecked);
+        //console.log("CATEGORY TOGGLE: ", this.state.togglesChecked);
       }).catch((error) => {
           console.error(error);
       }).finally(() => {
