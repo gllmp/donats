@@ -393,14 +393,38 @@ button:focus {
 }
 
 /* CATEGORY URL */
-#category-insert-url label {
+#category-insert-url-visible label {
     font-size: 1.5em;
 }
 
-#category-insert-url input {
+#category-url-input {
+    width: 50%;
+    margin-right: 2em;
+    float: left;
     font-size: 1em;
     border: 1px dashed #fff;
     border-radius: 3px;
+}
+
+/* CATEGORY VISIBLE */
+#category-visible-container {
+    width: auto;
+    display: inline-block;
+}
+
+.category-visible-checkbox {
+    color: #fff !important;
+    padding: 0 !important;
+    margin-right: 0.5em !important;
+}
+
+.category-visible-checkbox svg {
+    width: 1.5em !important;
+    height: 1.5em !important;
+}
+
+#category-visible-label {
+    margin-bottom: 0;
 }
 
 /* CATEGORY TOGGLE */
