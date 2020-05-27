@@ -21,17 +21,18 @@ class DeleteVideo extends Component {
     deleteEntry = async () => {
         if (
             window.confirm(
-                `Do you want to delete the video ${this.props.id} permanently?`,
+                //`Voulez-vous supprimer ${this.props.id} définitivement ?`,
+                "Voulez-vous supprimer cette vidéo définitivement ?",
             )
         ) {
-            new Promise((resolve, reject) => {
-                api.deleteVideoById(this.props.id).then( () => {
+            await new Promise(async (resolve, reject) => {
+                await api.deleteVideoById(this.props.id).then( () => {
                     resolve();
                 });    
             }).catch((error) => {
                 console.error(error);
             }).finally(() => {
-                window.location.reload(true);        
+                window.location.reload(true);
             });
         }        
     }
