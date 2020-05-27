@@ -48,7 +48,41 @@ class VideoInsert extends Component {
             title: '',
             url: '',
             category: '',
+            savedCategories: [],
+            categoriesSelectItems: [],
+            isLoading: false
         }
+    }
+
+    componentDidMount = async () => {
+        this.setState({ isLoading: true });
+        
+        await api.getAllCategories().then(categories => {
+            this.setState({
+                savedCategories: categories.data.data,
+            });
+        })
+
+        new Promise((resolve, reject) => {
+            resolve(this.state.savedCategories);
+        }).then((result) => {
+            const optionsList = result.map((category) =>
+                <option value={category.name} key={category.name.toString()}>{category.name}</option>
+            );
+
+            this.setState({
+                categoriesSelectItems: optionsList,
+                isLoading: false
+            })
+        }).catch((error) => {
+            console.error(error);
+        }).finally(() => {
+    
+        }); 
+    }
+
+    componentWillUnmount() {
+
     }
 
     handleChangeInputTitle = async event => {
@@ -126,13 +160,13 @@ class VideoInsert extends Component {
         const { title, url, category } = this.state;
         
         if (!url) {
-            alert("Please add URL");
+            alert("Ajoutez une URL avant de continer");
         } else if (!category) {
-            alert("Please add category");
+            alert("Ajoutez une catégorie avant de continuer");
         } else {
             let payload = { title, url, category };
         
-            new Promise((resolve, reject) => {
+            await new Promise((resolve, reject) => {
                 getYoutubeTitle(this.state.url, API_KEY, function (err, title) {
                     console.log("TITLE: ", title);
                     if (err) console.log("ERROR: ", err);
@@ -145,7 +179,7 @@ class VideoInsert extends Component {
             }).then(() => {
                 api.insertVideo(payload)
                 .then(res => {
-                    window.alert(`Vidéo créée avec succès`);
+                    window.alert(`Vidéo ajoutée avec succès`);
                     this.setState({
                         title: '',
                         url: '',
@@ -166,36 +200,41 @@ class VideoInsert extends Component {
     render() {
         const { url, category } = this.state;
         return (
-            <Wrapper className="col-sm-4 offset-md-4">
-                {/* <FileUpload /> */}
-                
-                <Title className="mb-4">ADD VIDEO</Title>
+            <div id="video-insert-container">
+                {!this.state.isLoading && (
+                    <Wrapper className="col-sm-4 offset-md-4">
+                        {/* <FileUpload /> */}
+                        
+                        <Title className="mb-4">ADD VIDEO</Title>
 
-                <Label>URL: </Label>
-                <InputText
-                    type="text"
-                    value={url}
-                    onChange={this.handleChangeInputUrl}
-                />
+                        <Label>URL: </Label>
+                        <InputText
+                            type="text"
+                            value={url}
+                            onChange={this.handleChangeInputUrl}
+                        />
 
-                <Label className="mt-4">CATEGORY: </Label>
+                        <Label className="mt-4">CATEGORY: </Label>
 
-                <Select
-                    type="text"
-                    value={category}
-                    onChange={this.handleChangeInputCategory}
-                >
-                    <option value="" hidden></option>
-                    <option value="MUSIC">MUSIC</option>
-                    <option value="RAP">RAP FR</option>
-                    <option value="SKATE">SKATE</option>
-                </Select>
+                        <Select
+                            type="text"
+                            value={category}
+                            onChange={this.handleChangeInputCategory}
+                        >
+                            <option value="" hidden></option>
+                            {/* <option value="MUSIC">MUSIC</option>
+                            <option value="RAP">RAP FR</option>
+                            <option value="SKATE">SKATE</option> */}
+                            {this.state.categoriesSelectItems}
+                        </Select>
 
-                <div className="mt-4">
-                    <Button onClick={this.handleIncludeVideo}>ADD VIDEO</Button>
-                    <Link to="/admin/videos/list" className="btn btn-danger"> CANCEL </Link>
-                </div>
-            </Wrapper>
+                        <div className="mt-4">
+                            <Button onClick={this.handleIncludeVideo}>ADD VIDEO</Button>
+                            <Link to="/admin/videos/list" className="btn btn-danger"> CANCEL </Link>
+                        </div>
+                    </Wrapper>
+                )}
+            </div>
         )
     }
 }
