@@ -131,6 +131,11 @@ body {
     opacity: 0.75;
 }
 
+.nav-link-button:focus {
+    color: #000 !important;
+    outline: none;
+}
+
 .navbar-collapse {
     margin-left: 25px;
 }
