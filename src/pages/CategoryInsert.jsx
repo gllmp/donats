@@ -47,13 +47,14 @@ class CategoryInsert extends Component {
 
     }
     
-    handleChangeInputName = async event => {
+    handleChangeInputName(event) {
         const name = event.target.value.toUpperCase();
         this.setState({ name });
     } 
 
-    handleChangeInputUrl = async event => {
+    handleChangeInputUrl(event) {
         const url = event.target.value;
+        
         this.setState({ url });
     }
     
