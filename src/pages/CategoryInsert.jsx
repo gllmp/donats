@@ -7,6 +7,7 @@ import { history } from '../utils';
 import Checkbox from '@material-ui/core/Checkbox';
 import DragAndDrop from '../components/DragAndDrop'
 import CategoryToggle from '../components/CategoryToggle'
+import loadingCircle from '../assets/img/loading-circle.gif'
 
 class CategoryInsert extends Component {
     constructor(props) {
@@ -19,7 +20,8 @@ class CategoryInsert extends Component {
             url: '',
             savedCategories: [],
             isVisible: true,
-            isLoading: false
+            isLoading: false,
+            isUploading: false
         }
 
         this.handleChangeInputName = this.handleChangeInputName.bind(this);
@@ -118,7 +120,11 @@ class CategoryInsert extends Component {
             alert("Ajoutez un nom avant de continuer");
         } else if (this.state.isVisible && !this.dragAndDropRef.current.state.hasLoaded) {
             alert("Ajoutez une image avant de continuer");
-        } else {        
+        } else {
+            this.setState({
+                isUploading: true
+            });
+            
             const promiseName = new Promise((resolve, reject) => {
 
                 resolve(this.state.name);
@@ -184,13 +190,18 @@ class CategoryInsert extends Component {
                         category: '',
                         cover: '',
                         //isVisible: true,
-                        url: ''
-                    })
+                        url: '',
+                        isUploading: false
+                    });
 
                     window.alert(`Catégorie créée avec succès`);
                 }).catch((error) => {
-                    window.alert(`La création de la catégorie a échouée`);
+                    this.setState({
+                        isUploading: false
+                    });
+
                     console.error(error);
+                    window.alert(`La création de la catégorie a échouée`);
                 });
             }).catch((error) => {
                 console.error(error);
@@ -240,6 +251,9 @@ class CategoryInsert extends Component {
                                     <section id="category-insert-button-container" className="category-insert-section">
                                         <button id="category-button-save" className="btn btn-primary" onClick={this.uploadCategory}>SAVE</button>
                                         <Link to="/admin/categories/list" id="category-button-cancel" className="btn btn-danger">CANCEL</Link>
+                                        {this.state.isUploading &&
+                                            <img className="loading-circle" alt="gif" src={loadingCircle} />
+                                        }
                                     </section>
                                 </div>
                             </div>
