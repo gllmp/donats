@@ -52,7 +52,7 @@ class CategoryList extends Component {
             slidesPerView: 3,
             spaceBetween: 40,
             speed: 300,
-            initialSlide: 3,
+            initialSlide: 1,
             centeredSlides: true,
             prevenClicks: true,
             preventClicksPropagation: true,
