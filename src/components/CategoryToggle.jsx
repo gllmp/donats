@@ -200,7 +200,7 @@ class CategoryToggle extends React.Component {
 
     return (
       <Swiper getSwiper={this.updateSwiper} {...this.params} >
-          <TogglesList categoryToggleRef={this} />
+        <TogglesList categoryToggleRef={this} />
       </Swiper>
     )
   }

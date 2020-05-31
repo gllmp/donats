@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import Swiper from 'react-id-swiper';
 import 'swiper/css/swiper.css';
 import api from '../api';
-import categoryCover from '../assets/img/category-cover.png'
 
 class UpdateVideo extends Component {
     render() {
@@ -139,58 +138,6 @@ class CategoryList extends Component {
         }).finally(() => {
             
         });
-
-
-        // const promiseCategories = new Promise(async (resolve, reject) => {
-        //     await api.getAllCategories()
-        //     .then(async (categories) => {
-        
-        //         await this.setState({
-        //             categories: categories.data.data,
-        //         });
-        
-        //         resolve(this.state.categories)
-        //     }).catch((error) => {
-        //         console.error(error);
-        //     }).finally(() => {
-                
-        //     });
-        // });
-
-        // const promiseCovers = new Promise(async (resolve, reject) => {
-        //     const categories = this.state.categories;
-        
-        //     const categoriesCovers = categories.map(async (category) =>
-        //         await <div key={category.name.toString()}>
-        //             <img className="swiper-slide-image" data-playlist={category.name} src={category.cover} alt="category cover" />
-        //         </div>
-        //     );
-    
-        //     await this.setState({ 
-        //         covers: categoriesCovers
-        //     });
-
-        //     console.log(categories)
-    
-        //     resolve(this.state.covers);
-        // });
-
-        // const promiseLoading = new Promise((resolve, reject) => {
-        //     this.setState({isLoading: false});
-
-        //     resolve(this.state.isLoading);
-        // });
-
-        // Promise.all([promiseCategories, promiseCovers, promiseLoading])
-        // .then((values) => {
-        //     console.log(values);
-
-        //     //return payload;
-        // }).catch((error) => {
-        //     console.error(error);
-        // }).finally(() => {
-
-        // });
     }
 
     componentWillUnmount() {
@@ -216,30 +163,12 @@ class CategoryList extends Component {
                                     <div id="category-slider-container">
                                         <section className="category-list-section">
                                             <Swiper getSwiper={this.updateSwiper} {...this.params}>
-                                                {/* <div><img className="swiper-slide-image" data-playlist="music" src={categoryCover} alt="category cover" /></div>
-                                                <div><img className="swiper-slide-image" data-playlist="rap" src={categoryCover} alt="category cover" /></div>
-                                                <div><img className="swiper-slide-image" data-playlist="skate" src={categoryCover} alt="category cover" /></div>
-                                                <div><img className="swiper-slide-image" data-playlist="music_rap" src={categoryCover} alt="category cover" /></div>
-                                                <div><img className="swiper-slide-image" data-playlist="music_skate" src={categoryCover} alt="category cover" /></div>
-                                                <div><img className="swiper-slide-image" data-playlist="rap_skate" src={categoryCover} alt="category cover" /></div> */}
-
-                                                {/* <Covers categoryListRef={this} /> */}
-
                                                 {covers}
                                             </Swiper>
                                         </section>
 
                                         <section className="category-list-section">
                                             <Swiper getSwiper={this.updateSwiper} {...this.params}>
-                                                {/* <div><img className="swiper-slide-image" data-playlist="music" src={categoryCover} alt="category cover" /></div>
-                                                <div><img className="swiper-slide-image" data-playlist="rap" src={categoryCover} alt="category cover" /></div>
-                                                <div><img className="swiper-slide-image" data-playlist="skate" src={categoryCover} alt="category cover" /></div>
-                                                <div><img className="swiper-slide-image" data-playlist="music_rap" src={categoryCover} alt="category cover" /></div>
-                                                <div><img className="swiper-slide-image" data-playlist="music_skate" src={categoryCover} alt="category cover" /></div>
-                                                <div><img className="swiper-slide-image" data-playlist="rap_skate" src={categoryCover} alt="category cover" /></div> */}
-
-                                                {/* <Covers categoryListRef={this} /> */}
-
                                                 {covers}
                                             </Swiper>
                                         </section>
