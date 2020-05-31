@@ -56,7 +56,7 @@ class CategoryList extends Component {
             centeredSlides: true,
             prevenClicks: true,
             preventClicksPropagation: true,
-            slideToClickedSlide: false,
+            slideToClickedSlide: true,
             loop: false,
             navigation: {
             nextEl: '.swiper-button-next',
