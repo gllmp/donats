@@ -84,126 +84,126 @@ function TogglesList(props) {
 }
 
 class CategoryToggle extends React.Component {
-    constructor(props) {
-      super(props);
+  constructor(props) {
+    super(props);
 
-      this.state = {
-        categories: props.categories,
-        togglesChecked: [],
-        swiper: null
-      };
-              
-      this.params = {
-        slidesPerView: 3,
-        spaceBetween: 30,
-        speed: 300,
-        initialSlide: 1,
-        centeredSlides: true,
-        prevenClicks: false,
-        preventClicksPropagation: true,
-        slideToClickedSlide: false,
-        //loop: false,
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev'
-        },
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-          type: 'bullets',
-          dynamicBullets: true
-        },
-        // breakpoints: {
-        //   1024: {
-        //     slidesPerView: 4,
-        //     spaceBetween: 40
-        //   },
-        //   768: {
-        //     slidesPerView: 4,
-        //     spaceBetween: 30
-        //   },
-        //   640: {
-        //     slidesPerView: 4,
-        //     spaceBetween: 20
-        //   },
-        //   320: {
-        //     slidesPerView: 4,
-        //     spaceBetween: 10
-        //   }
-        // },
-        // on: {
-        //   init: () => {
-        //     //console.log("INIT SWIPER");
-        //   },
-        //   click: (event) => {
+    this.state = {
+      categories: props.categories,
+      togglesChecked: [],
+      swiper: null
+    };
+            
+    this.params = {
+      slidesPerView: 3,
+      spaceBetween: 30,
+      speed: 300,
+      initialSlide: 1,
+      centeredSlides: true,
+      prevenClicks: false,
+      preventClicksPropagation: true,
+      slideToClickedSlide: false,
+      //loop: false,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev'
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+        type: 'bullets',
+        dynamicBullets: true
+      },
+      // breakpoints: {
+      //   1024: {
+      //     slidesPerView: 4,
+      //     spaceBetween: 40
+      //   },
+      //   768: {
+      //     slidesPerView: 4,
+      //     spaceBetween: 30
+      //   },
+      //   640: {
+      //     slidesPerView: 4,
+      //     spaceBetween: 20
+      //   },
+      //   320: {
+      //     slidesPerView: 4,
+      //     spaceBetween: 10
+      //   }
+      // },
+      // on: {
+      //   init: () => {
+      //     //console.log("INIT SWIPER");
+      //   },
+      //   click: (event) => {
 
-        //   }
-        // }      
-      }
-
-      this.initiateToggleList = this.initiateToggleList.bind(this);
-      this.handleToggle = this.handleToggle.bind(this);
-      this.updateSwiper = this.updateSwiper.bind(this);
+      //   }
+      // }      
     }
 
-    componentDidMount() {
-      this.initiateToggleList();      
-    }
+    this.initiateToggleList = this.initiateToggleList.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
+    this.updateSwiper = this.updateSwiper.bind(this);
+  }
 
-    componentWillUnmount() {
+  componentDidMount() {
+    this.initiateToggleList();      
+  }
 
-    }
+  componentWillUnmount() {
 
-    initiateToggleList() {
-      let togglesCheckedArray = [];
+  }
 
-      // set category toggles unchecked by default
-      this.state.categories.forEach(category => {
-        togglesCheckedArray[category.name] = false;
+  initiateToggleList() {
+    let togglesCheckedArray = [];
+
+    // set category toggles unchecked by default
+    this.state.categories.forEach(category => {
+      togglesCheckedArray[category.name] = false;
+    });
+
+    this.setState({
+      togglesChecked: togglesCheckedArray
+    });
+  }
+
+  handleToggle(event) {
+    let toggleName = event.target.name;
+    let toggleStateDuplicate = this.state.togglesChecked;
+
+    new Promise((resolve, reject) => {
+      resolve();
+    }).then(() => {
+      Object.keys(toggleStateDuplicate).forEach(category => {
+        if (toggleName === category) {
+          toggleStateDuplicate[category] = !toggleStateDuplicate[category];
+        }
       });
-
+    }).then(() => {
       this.setState({
-        togglesChecked: togglesCheckedArray
+        togglesChecked: toggleStateDuplicate
       });
-    }
 
-    handleToggle(event) {
-      let toggleName = event.target.name;
-      let toggleStateDuplicate = this.state.togglesChecked;
+      //console.log("CATEGORY TOGGLE: ", this.state.togglesChecked);
+    }).catch((error) => {
+        console.error(error);
+    }).finally(() => {
+      
+    });    
+  }
 
-      new Promise((resolve, reject) => {
-        resolve();
-      }).then(() => {
-        Object.keys(toggleStateDuplicate).forEach(category => {
-          if (toggleName === category) {
-            toggleStateDuplicate[category] = !toggleStateDuplicate[category];
-          }
-        });
-      }).then(() => {
-        this.setState({
-          togglesChecked: toggleStateDuplicate
-        });
+  updateSwiper(swiper) {
+    this.setState({ swiper });
+  }
 
-        //console.log("CATEGORY TOGGLE: ", this.state.togglesChecked);
-      }).catch((error) => {
-          console.error(error);
-      }).finally(() => {
-        
-      });    
-    }
+  render() {
 
-    updateSwiper(swiper) {
-      this.setState({ swiper });
-    }
-
-    render() {
-
-      return (
-        <Swiper getSwiper={this.updateSwiper} {...this.params} >
-            <TogglesList categoryToggleRef={this} />
-        </Swiper>
-      )
-    }
-  };
+    return (
+      <Swiper getSwiper={this.updateSwiper} {...this.params} >
+          <TogglesList categoryToggleRef={this} />
+      </Swiper>
+    )
+  }
+};
 
 export default CategoryToggle;
