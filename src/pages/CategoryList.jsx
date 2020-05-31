@@ -50,7 +50,7 @@ class CategoryList extends Component {
                       
         this.params = {
             slidesPerView: 3,
-            spaceBetween: 30,
+            spaceBetween: 40,
             speed: 300,
             initialSlide: 3,
             centeredSlides: true,
