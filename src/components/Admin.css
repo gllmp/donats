@@ -24,6 +24,17 @@ body {
     transform: translate(0, -50%);
 }
 
+#admin-title-container a {
+    display: block;
+    text-align: center;
+    color: #fff;
+    text-decoration: none;
+}
+
+#admin-title-container a:hover {
+    opacity: 0.75;
+}
+
 #admin-title-main {
     font-size: 6em;
 }
