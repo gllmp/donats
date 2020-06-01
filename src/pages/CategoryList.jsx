@@ -44,6 +44,7 @@ class CategoryList extends Component {
             swiper: null,
             categories: [],
             covers: [],
+            coversGroups: [],
             isLoading: false,
         }
 
@@ -97,6 +98,7 @@ class CategoryList extends Component {
         }
 
         this.updateSwiper = this.updateSwiper.bind(this);
+        this.splitCovers = this.splitCovers.bind(this);
     }
 
     componentDidMount = async () => {
@@ -125,6 +127,16 @@ class CategoryList extends Component {
             });
 
             console.log("COVERS LOADED: ", this.state.covers);
+
+            return this.state.covers;
+        }).then(async (covers) => {
+            let coversGroups = this.splitCovers(covers);
+
+            await this.setState({
+                coversGroups: coversGroups
+            })
+
+            console.log("COVERS SPLITTED: ", this.state.coversGroups);
 
             return this.state;
         }).then(async (state) => {
@@ -172,7 +184,7 @@ class CategoryList extends Component {
     }
 
     render() {
-        const {covers, isLoading} = this.state;
+        const {coversGroups, isLoading} = this.state;
 
         return (                        
             <div id="category-list-wrapper">
@@ -186,13 +198,13 @@ class CategoryList extends Component {
                                     <div id="category-slider-container">
                                         <section className="category-list-section">
                                             <Swiper getSwiper={this.updateSwiper} {...this.params}>
-                                                {covers}
+                                                {coversGroups.firstGroup}
                                             </Swiper>
                                         </section>
 
                                         <section className="category-list-section">
                                             <Swiper getSwiper={this.updateSwiper} {...this.params}>
-                                                {covers}
+                                                {coversGroups.secondGroup}
                                             </Swiper>
                                         </section>
                                     </div>
