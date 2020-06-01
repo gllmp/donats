@@ -147,7 +147,30 @@ class CategoryList extends Component {
     updateSwiper(swiper) {
         this.setState({ swiper });
     }
-    
+
+    splitCovers(coversArray) {
+        let coversLength = coversArray.length;
+        
+        let coversMedian;
+        // even or odd median
+        coversLength % 2 === 0 ? coversMedian = coversLength/2 : coversMedian = Math.floor(coversLength/2);
+
+        let coversElements = {
+            firstGroup: [],
+            secondGroup: []
+        }
+
+        for (let i = 0; i < coversLength; i++) {
+            if (i >= coversMedian) {
+                coversElements.secondGroup.push(coversArray[i]);
+            } else {
+                coversElements.firstGroup.push(coversArray[i]);
+            }
+        } 
+
+        return coversElements;
+    }
+
     render() {
         const {covers, isLoading} = this.state;
 
