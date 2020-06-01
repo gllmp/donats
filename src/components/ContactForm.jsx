@@ -36,8 +36,10 @@ class ContactForm extends React.Component {
         emailjs.sendForm(process.env.REACT_APP_EMAILJS_SERVICEID, process.env.REACT_APP_EMAILJS_TEMPLATEID, e.target, process.env.REACT_APP_EMAILJS_USERID)
         .then((result) => {
             console.log(result.text);
+            window.alert(`Message envoyé avec succès :)`);
         }, (error) => {
             console.log(error.text);
+            window.alert(`L'envoi du message a échoué :(`);
         });
     }
 
