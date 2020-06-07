@@ -43,6 +43,8 @@ class CategoryInsert extends Component {
                 isLoading: false,
             });
         })
+
+        console.log("CATEGORY INSERT STATE: ", this.state);
     }
 
     componentWillUnmount() {
