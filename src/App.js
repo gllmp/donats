@@ -35,6 +35,7 @@ function parseVideoData(videoData) {
     }).catch((error) => {
       console.error(error);
     }).finally(() => {
+    this.getDOMElements = this.getDOMElements.bind(this);
 
     });
   })
@@ -144,6 +145,20 @@ class App extends React.Component {
     }).finally(() => {
       
     });  
+  }
+
+  getDOMElements() {
+    this.swiperElement = document.getElementsByClassName("swiper-container")[0];
+    this.playerElement = document.getElementById("player-container");
+
+    this.videoPlayerElement = document.getElementById("video-player");
+    this.randomButtonElement = document.getElementById("video-button");
+
+    this.titleElement = document.getElementById("banner-title");
+    this.infoElement = document.getElementById("banner-info");
+    this.closeElement = document.getElementById("banner-close");
+
+    this.contactElement = document.getElementById("contact-container");
   }
 
   handleContactSwap() {
