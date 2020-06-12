@@ -19,7 +19,7 @@ class Slider extends React.Component {
         slidesPerView: 3,
         spaceBetween: 40,
         speed: 300,
-        initialSlide: 3,
+        initialSlide: 2,
         centeredSlides: true,
         prevenClicks: true,
         preventClicksPropagation: true,
