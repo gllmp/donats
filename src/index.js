@@ -43,7 +43,7 @@ const startApp = async () => {
     }
 }
 
-function renderApp(_data = []) {
+function renderApp(_videoData = [], _categoryData = []) {
     const loadingContainer = document.getElementById("loading-container");
     loadingContainer.classList.add("fade-out");
     loadingContainer.addEventListener("animationend", () => {
