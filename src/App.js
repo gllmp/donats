@@ -435,16 +435,16 @@ class App extends React.Component {
     }
   }
 
-  handlePlayerSwap() {
+  handlePlayerSwap = async () => {
     const videoIframe = this.videoPlayerElement.children[0].children[0];
 
     if (this.state.swapDirection === "open") {
       this.sliderRef.current.onCloseSlider();
       this.videoPlayerRef.current.onShowPlayer();
 
-      videoIframe.removeEventListener("animationend", this.swapToSlider());
+      await videoIframe.removeEventListener("animationend", this.swapToSlider());
 
-      new Promise((resolve, reject) => {
+      await new Promise((resolve, reject) => {
         resolve();
       }).then(() => {
         this.swiperElement.classList.add("fade-out");
@@ -565,44 +565,45 @@ class App extends React.Component {
     return (
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         {!isLoading && (
-        <Switch>
-          <Route exact path="/">
-            <BannerTop swapElement={this.state.swapElement} handleSwap={this.handleSwap} />
-            <div className="App">
-              <div className="app-container">
-                <div className="row">
-                  <div className="col-lg">
-                    <div className="align-items-center justify-content-center">
-                      <ContactForm ref={this.contactRef} />
-                      <Slider handleSwap={this.handleSwap} ref={this.sliderRef} />
-                      <VideoPlayer data={data} playlist={playlist} ref={this.videoPlayerRef} slider={this.sliderRef} />
-                      <RandomButton onClick={(e) => this.sliderRef.current.selectSlide(e.target)} />
-                      {/* <button onClick={() => this.videoPlayerRef.current.onUpdateVideo()}>RANDOM</button> */}
-                      <Footer />
+          <Switch>
+            <Route exact path="/">
+              <BannerTop swapElement={this.state.swapElement} handleSwap={this.handleSwap} />
+              <div className="App">
+                <div className="app-container">
+                  <div className="row">
+                    <div className="col-lg">
+                      <div className="align-items-center justify-content-center">
+                        <ContactForm ref={this.contactRef} />
+                        <Slider categories={categories} handleSwap={this.handleSwap} ref={this.sliderRef} />
+                        <VideoPlayer videos={videos} categories={categories} ref={this.videoPlayerRef} slider={this.sliderRef} />
+                        <RandomButton onClick={(e) => this.sliderRef.current.selectSlide(e.target)} />
+                        {/* <button onClick={() => this.videoPlayerRef.current.onUpdateVideo()}>RANDOM</button> */}
+                        <Footer />
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>    
-            </div>
-          </Route>
-          <PrivateRoute path="/admin" roles={[Role.Admin]} component={Admin} />
-          <Route path="/login">
-            <div id="admin-container">
-              {currentUser &&
-                <nav className="navbar navbar-expand navbar-dark bg-dark">
-                    <div className="navbar-nav">
-                        <Link to="/login" className="nav-item nav-link">Login</Link>
-                        {isAdmin && <Link to="/admin" className="nav-item nav-link">Admin</Link>}
-                    </div>
-                </nav>
-              }
-              {/* <PrivateRoute exact path="/" component={HomePage} /> */}
-              <PrivateRoute path="/admin" roles={[Role.Admin]} component={Admin} />
-              <Route path="/login" component={LoginPage} />
-              <Footer />
-            </div>
-          </Route>
-        </Switch>
+                </div>    
+              </div>
+            </Route>
+            <PrivateRoute path="/admin" roles={[Role.Admin]} component={Admin} />
+            <Route path="/login">
+              <div id="admin-container">
+                {currentUser &&
+                  <nav className="navbar navbar-expand navbar-dark bg-dark">
+                      <div className="navbar-nav">
+                          <Link to="/login" className="nav-item nav-link">Login</Link>
+                          {isAdmin && <Link to="/admin" className="nav-item nav-link">Admin</Link>}
+                      </div>
+                  </nav>
+                }
+                {/* <PrivateRoute exact path="/" component={HomePage} /> */}
+                <PrivateRoute path="/admin" roles={[Role.Admin]} component={Admin} />
+                <Route path="/login" component={LoginPage} />
+                <Footer />
+              </div>
+            </Route>
+          </Switch>
+        )}
       </BrowserRouter>
     );
   }
