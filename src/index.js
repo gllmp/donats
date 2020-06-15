@@ -18,7 +18,25 @@ let routes = {
 }
 
 const startApp = async () => {
-    if (window.location.pathname === "/" || window.location.pathname.includes(routes.adminVideo)) {
+    if (window.location.pathname === "/") {
+        await api.getAllVideos().then(videos => {
+            videoData = videos.data.data;
+        }).then(async () => {
+            await api.getAllCategories().then(categories => {
+                categoryData = categories.data.data;
+            }).then( () => {
+                renderApp(videoData, categoryData);
+            }).catch((error) => {
+                console.error(error);
+            }).finally(() => {
+        
+            });
+        }).catch((error) => {
+            console.error(error);
+        }).finally(() => {
+
+        });
+    } else if (window.location.pathname.includes(routes.adminVideo)) {
         await api.getAllVideos().then(videos => {
             videoData = videos.data.data;
         }).then( () => {
@@ -29,15 +47,17 @@ const startApp = async () => {
 
         });
     } else if (window.location.pathname.includes(routes.adminCategory)) {
-        await api.getAllCategories().then(categories => {
-            categoryData = categories.data.data;
-        }).then( () => {
-            renderApp(categoryData);
-        }).catch((error) => {
-            console.error(error);
-        }).finally(() => {
+        // await api.getAllCategories().then(categories => {
+        //     categoryData = categories.data.data;
+        // }).then( () => {
+        //     renderApp(categoryData);
+        // }).catch((error) => {
+        //     console.error(error);
+        // }).finally(() => {
     
-        });
+        // });
+
+        renderApp(categoryData);
     } else {
         renderApp();
     }
@@ -52,9 +72,9 @@ function renderApp(_videoData = [], _categoryData = []) {
         document.getElementById('root').classList.add("fade-in");
         
         ReactDOM.render(
-            <App videoData={JSON.stringify(_data)} categoryData={_data} appRoute={window.location.pathname} />,
+            <App videoData={JSON.stringify(_videoData)} categoryData={_categoryData} appRoute={window.location.pathname} />,
             document.getElementById('root')
-        );                    
+        );
     });
 }
 
