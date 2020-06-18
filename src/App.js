@@ -46,7 +46,6 @@ class App extends React.Component {
     this.parseVideosByCategory = this.parseVideosByCategory.bind(this);
     this.parseCategoryData = this.parseCategoryData.bind(this);
     this.setCategoriesArray = this.setCategoriesArray.bind(this);
-    this.parseCategoriesByCategory = this.parseCategoriesByCategory.bind(this);
     this.getDOMElements = this.getDOMElements.bind(this);
     this.handleSwap = this.handleSwap.bind(this);
     this.handleContactSwap = this.handleContactSwap.bind(this);
@@ -57,20 +56,6 @@ class App extends React.Component {
   }
 
   componentDidMount = async () => {
-
-    // const loadingContainer = document.getElementById("loading-container");
-    // loadingContainer.classList.add("fade-out");
-    // loadingContainer.addEventListener("animationend", () => {
-    //     loadingContainer.classList.add("hide");
-   
-    //     document.getElementById('root').classList.add("fade-in");
-        
-    //     ReactDOM.render(
-    //         <App videoData={JSON.stringify(_videoData)} categoryData={_categoryData} appRoute={window.location.pathname} />,
-    //         document.getElementById('root')
-    //     );                    
-    // });
-
     this.setState({
       isLoading: true
     });
@@ -97,13 +82,6 @@ class App extends React.Component {
         this.parseCategoryData(this.props.categoryData);
 
         console.log("CATEGORY DATA: ", this.categoryData);
-
-        // let videoAndCategoryData = {
-        //   videoData: videoData,
-        //   categoryData: this.categoryData
-        // }
-
-        // return(videoAndCategoryData)
       }).then(async () => {
 
         await this.setState({
@@ -180,10 +158,6 @@ class App extends React.Component {
         this.setCategoriesArray(this.categoryData, element);
 
         resolve(this.categoryData);
-      // }).then((categoryData) => {
-      //   this.parseCategoriesByCategory(categoryData, element);
-        
-      //   return this.categoryData;
       }).catch((error) => {
         console.error(error);
       }).finally(() => {
@@ -196,168 +170,12 @@ class App extends React.Component {
     let categoryName = categoryItem.name.replace(/\s+/g, '-').toLowerCase();    
 
     categoryData[categoryName] = [];
-    //categoryData[categoryName].push(categoryItem.category);
 
     categoryItem.category.forEach(async element => {
       categoryData[categoryName].push(element.replace(/\s+/g, '-').toLowerCase());
     })
   }
   
-  parseCategoriesByCategory(categoryData, categoryItem) {
-    let categoryName = categoryItem.name.replace(/\s+/g, '-').toLowerCase();
-
-    // Object.keys(categoryData).forEach(category => {
-    //   // if (item.category.replace(/\s+/g, '-').toLowerCase() === category) {
-    //   //   _data[category].push(item);
-    //   // }
-    // })
-
-    let categoriesArray = categoryData[categoryName][0];
-
-    // categoriesArray.forEach(category => {
-    //   //console.log(category)
-    // })
-
-    
-    for (let i = 0; i < categoriesArray.length; i++) {
-      //categoryData[categoryName][0][i] = String(categoryData[categoryName][0][i]).replace(/\s+/g, '-').toLowerCase()
-    }
-
-  }
-
-  // parseCategoryData(categoryData) {
-  //   categoryData.forEach(async element => {
-  //     await new Promise((resolve, reject) => {
-  //       this.setCategoriesArray(this.videoData, element);
-
-  //       resolve(this.videoData);
-  //     }).then((videoData) => {
-  //       this.parseCategoriesByCategory(videoData, element);
-        
-  //       return this.videoData;
-  //     }).catch((error) => {
-  //       console.error(error);
-  //     }).finally(() => {
-  //       console.log("VIDEO DATA: ", this.videoData);
-  //     });
-  //   });
-
-    // categoryData.forEach(element => {
-    //   new Promise((resolve, reject) => {
-    //     resolve();
-    //   }).then(() => {
-    //     //getCategories(data, element);
-    //   }).then(() => {
-    //     //parseItemsByCategory(data, element);        
-    //   }).catch((error) => {
-    //     console.error(error);
-    //   }).finally(() => {
-  
-    //   });
-    // })
-
-    // await new Promise(async (resolve, reject) => {
-    //   let categoryArray = [];
-
-    //   categoryData.forEach(element => {
-    //     categoryArray.push(element.name)
-    //   });
-  
-    //   await this.setState({ 
-    //     categories: categoryArray
-    //   });
-      
-    //   resolve(this.state);
-    // }).then((state) => {
-
-    //   console.log("CATEGORY DATA: ", this.state.categories);
-    // }).catch((error) => {
-    //   console.error(error);
-    // }).finally(() => {
-      
-    // });  
-
-
-
-
-    // await this.setState({
-    //   categories: categoryData
-    // })
-
-    // console.log("CATEGORY DATA: ", this.state.categories);
-
-
-
-
-    // await new Promise(async (resolve, reject) => {
-    //   let playlistArray = [];
-
-    //   await categoryData.forEach(categoryElement => {
-
-    //     playlistArray[categoryElement.name.replace(/\s+/g, '-').toLowerCase()] = [];
-    //   });
-
-    //   await Object.keys(playlistArray).forEach(playlistElement => {
-    //     categoryData.forEach(categoryElement => {
-    //       console.log(categoryElement)
-    //     })
-    //   })
-
-    //   await this.setState({ 
-    //     playlists: playlistArray
-    //   });
-      
-    //   resolve(this.state);
-    // }).then((state) => {
-
-    //   console.log("PLAYLIST DATA: ", this.state.playlists);
-    // }).catch((error) => {
-    //   console.error(error);
-    // }).finally(() => {
-      
-    // });
-
-
-
-    // let categories = categoryData;
-
-    // await new Promise(async (resolve, reject) => {
-    //     let categoriesArray = [];
-
-    //     categories.forEach(categoryElement => {
-
-    //         categoriesArray[categoryElement.name.replace(/\s+/g, '-').toLowerCase()] = categoryElement.category;
-    //     });
-
-    //     resolve(categoriesArray);
-    
-    // }).then((categoriesArray) => {
-
-    //     console.log(Object.keys(categoriesArray));
-
-        
-
-    //     // await Object.keys(categoriesArray).forEach(playlistElement => {
-    //     //     categories.forEach(categoryElement => {
-    //     //         //console.log(categoryElement)
-
-    //     //     })
-    //     // })
-
-    //     // await this.setState({ 
-    //     //     playlists: playlistArray
-    //     // });
-        
-    //     //resolve(this.state);
-    // }).then(() => {
-
-    // }).catch((error) => {
-    //     console.error(error);
-    // }).finally(() => {
-    //   console.log("CATEGORY DATA: ", categoryData);
-    // });
-//  }
-
   handleSwap(element, direction) {
     new Promise((resolve, reject) => {
       resolve();

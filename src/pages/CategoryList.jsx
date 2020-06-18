@@ -47,7 +47,6 @@ class CategoryList extends Component {
             coversGroups: [],
             isLoading: false,
         }
-
                       
         this.params = {
             slidesPerView: 3,

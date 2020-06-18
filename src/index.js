@@ -47,16 +47,6 @@ const startApp = async () => {
 
         });
     } else if (window.location.pathname.includes(routes.adminCategory)) {
-        // await api.getAllCategories().then(categories => {
-        //     categoryData = categories.data.data;
-        // }).then( () => {
-        //     renderApp(categoryData);
-        // }).catch((error) => {
-        //     console.error(error);
-        // }).finally(() => {
-    
-        // });
-
         renderApp(categoryData);
     } else {
         renderApp();
