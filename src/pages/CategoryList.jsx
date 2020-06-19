@@ -103,6 +103,7 @@ class CategoryList extends Component {
     componentDidMount = async () => {
         this.setState({ isLoading: true });
 
+        // /!\ PASS CATEGORIES AS PROPS
         await api.getAllCategories()
         .then(async (categories) => {
     
@@ -117,7 +118,7 @@ class CategoryList extends Component {
 
             const categoriesCovers = categories.map((category) =>
                 <div key={category.name.toString()}>
-                    <img className="swiper-slide-image" data-playlist={category.name} src={category.cover} alt="category cover" />
+                    <img className="swiper-slide-image" data-category={category.name} src={category.cover} alt="category cover" />
                 </div>
             );
     
