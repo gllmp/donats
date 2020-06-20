@@ -63,7 +63,7 @@ class VideoUpdate extends Component {
         this.setState({
             title: video.data.data.title,
             url: video.data.data.url,
-            category: video.data.data.category,
+            category: video.data.data.category
         })
         
         await api.getAllCategories().then(categories => {
