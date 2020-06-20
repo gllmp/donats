@@ -20,7 +20,7 @@ class CategoryInsert extends Component {
             url: '',
             savedCategories: [],
             isVisible: true,
-            isLoading: false,
+            isLoading: true,
             isUploading: false
         }
 
@@ -34,8 +34,6 @@ class CategoryInsert extends Component {
     componentDidMount = async () => {
         this.dragAndDropRef = React.createRef();
         this.categoryToggleRef = React.createRef();
-
-        this.setState({ isLoading: true });
         
         await api.getAllCategories().then(categories => {
             this.setState({

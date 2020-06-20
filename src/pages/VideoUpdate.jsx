@@ -48,7 +48,7 @@ class VideoUpdate extends Component {
             category: '',
             savedCategories: [],
             categoriesSelectItems: [],
-            isLoading: false
+            isLoading: true
         }
     }
 
@@ -64,7 +64,6 @@ class VideoUpdate extends Component {
             title: video.data.data.title,
             url: video.data.data.url,
             category: video.data.data.category,
-            isLoading: true
         })
         
         await api.getAllCategories().then(categories => {

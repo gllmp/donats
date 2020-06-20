@@ -45,7 +45,7 @@ class CategoryList extends Component {
             categories: [],
             covers: [],
             coversGroups: [],
-            isLoading: false,
+            isLoading: true,
         }
                       
         this.params = {
@@ -101,8 +101,6 @@ class CategoryList extends Component {
     }
 
     componentDidMount = async () => {
-        this.setState({ isLoading: true });
-
         // /!\ PASS CATEGORIES AS PROPS
         await api.getAllCategories()
         .then(async (categories) => {

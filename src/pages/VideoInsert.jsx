@@ -50,12 +50,11 @@ class VideoInsert extends Component {
             category: '',
             savedCategories: [],
             categoriesSelectItems: [],
-            isLoading: false
+            isLoading: true
         }
     }
 
     componentDidMount = async () => {
-        this.setState({ isLoading: true });
         
         await api.getAllCategories().then(categories => {
             this.setState({
@@ -193,7 +192,7 @@ class VideoInsert extends Component {
                 console.error(error);
             }).finally(() => {
         
-            });    
+            });
         }        
     }
 

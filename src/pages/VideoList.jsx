@@ -49,12 +49,11 @@ class VideoList extends Component {
         this.state = {
             videos: [],
             columns: [],
-            isLoading: false,
+            isLoading: true,
         }
     }
 
     componentDidMount = async () => {
-        this.setState({ isLoading: true });
         
         await api.getAllVideos().then(videos => {
             this.setState({

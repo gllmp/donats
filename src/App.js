@@ -35,7 +35,7 @@ class App extends React.Component {
       swapDirection: null,
       currentUser: null,
       isAdmin: false,
-      isLoading: false
+      isLoading: true
     };
 
     this.videoData = [];
@@ -56,10 +56,6 @@ class App extends React.Component {
   }
 
   componentDidMount = async () => {
-    this.setState({
-      isLoading: true
-    });
-
     this.sliderRef = React.createRef();
     this.videoPlayerRef = React.createRef();
     this.contactRef = React.createRef();
