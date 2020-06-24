@@ -1,14 +1,6 @@
 import React from 'react';
 import Swiper from 'react-id-swiper';
 import 'swiper/css/swiper.css';
-import deuspiCover from '../assets/img/deuspi-cover.png';
-import categoryCover from '../assets/img/category-cover.png';
-import culturaCover from '../assets/img/cultura-cover.png';
-import curiosityCover from '../assets/img/curiosity-cover.png';
-import filmParfaitCover from '../assets/img/film-parfait-cover.png';
-import laGrailleCover from '../assets/img/la-graille-cover.png';
-import radiovisionCover from '../assets/img/radiovision-cover.png';
-
 
 class Slider extends React.Component {
     constructor(props) {
