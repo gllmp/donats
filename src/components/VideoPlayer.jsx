@@ -1,8 +1,6 @@
 import React from 'react';
 import YouTube from 'react-youtube';
 
-let category;
-
 class VideoPlayer extends React.Component {
     constructor(props) {
         super(props);
@@ -16,6 +14,8 @@ class VideoPlayer extends React.Component {
             playlists: null,
             currentPlaylist: null
         };
+
+        this.category = "";
 
         this.onReady = this.onReady.bind(this);
         this.onEnd = this.onEnd.bind(this);
