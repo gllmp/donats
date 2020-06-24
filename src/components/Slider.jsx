@@ -110,16 +110,21 @@ class Slider extends React.Component {
       await new Promise(async (resolve, reject) => {
 
         resolve(this.state.categories);
-      }).then(async (categories) => {        
-        const categoriesCovers = categories.map((category) =>
-          <div key={category.name.toString()}>
-              <img className="swiper-slide-image" data-category={category.name.toLowerCase()} data-url={category.url} src={category.cover} alt="category cover" />
-          </div>
-        );
+      }).then(async (categories) => {
+        let categoriesCovers = [];
 
-        // const categoriesWithUrl = categories.filter((category) => 
-        //   category.url.length > 0
-        // );
+        Object.keys(this.props.videos).forEach(video => {
+          categories.forEach(category => {
+            if (video === category.name.toLowerCase()) {
+              categoriesCovers.push(
+                <div key={category.name.toString()}>
+                  <img className="swiper-slide-image" data-category={category.name.toLowerCase()} data-url={category.url} src={category.cover} alt="category cover" />
+                </div>
+              );
+            }
+          });
+        });
+
 
         await this.setState({ 
             covers: categoriesCovers
