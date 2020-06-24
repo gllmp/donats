@@ -194,9 +194,8 @@ class App extends React.Component {
   }
 
   getDOMElements() {
-    this.swiperElement = document.getElementsByClassName("swiper-container")[0];
+    this.swiperElement = document.getElementById("slider-container");
     this.playerElement = document.getElementById("player-container");
-
     this.videoPlayerElement = document.getElementById("video-player");
     this.randomButtonElement = document.getElementById("video-button");
 
@@ -388,7 +387,7 @@ class App extends React.Component {
                     <div className="col-lg">
                       <div className="align-items-center justify-content-center">
                         <ContactForm ref={this.contactRef} />
-                        <Slider categories={categories} handleSwap={this.handleSwap} ref={this.sliderRef} />
+                        <Slider categories={this.props.categoryData} handleSwap={this.handleSwap} ref={this.sliderRef} />
                         <VideoPlayer videos={videos} categories={categories} ref={this.videoPlayerRef} slider={this.sliderRef} />
                         <RandomButton onClick={(e) => this.sliderRef.current.selectSlide(e.target)} />
                         {/* <button onClick={() => this.videoPlayerRef.current.onUpdateVideo()}>RANDOM</button> */}

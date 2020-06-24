@@ -3,16 +3,24 @@ import Swiper from 'react-id-swiper';
 import 'swiper/css/swiper.css';
 import deuspiCover from '../assets/img/deuspi-cover.png';
 import categoryCover from '../assets/img/category-cover.png';
-    
+import culturaCover from '../assets/img/cultura-cover.png';
+import curiosityCover from '../assets/img/curiosity-cover.png';
+import filmParfaitCover from '../assets/img/film-parfait-cover.png';
+import laGrailleCover from '../assets/img/la-graille-cover.png';
+import radiovisionCover from '../assets/img/radiovision-cover.png';
+
+
 class Slider extends React.Component {
     constructor(props) {
       super(props);
 
       this.state = {
         swiper: null,
-        playlist: null,
+        categories: null,
+        category: null,
+        covers: [],
         showSlider: true,
-        currentSlide: null
+        currentSlide: null,
       };
               
       this.params = {
@@ -89,11 +97,44 @@ class Slider extends React.Component {
       //this.getSlideClickEvent = this.getSlideClickEvent.bind(this);
     }
     
-    componentDidMount() {
-      this.setSlidesTransform();
+    componentDidMount = async () => {
+      await this.setState({ 
+        categories: this.props.categories 
+      });
 
+      this.setSlidesTransform();
+      
       // fix click on duplicate slides
       //this.getSlideClickEvent();
+
+      await new Promise(async (resolve, reject) => {
+
+        resolve(this.state.categories);
+      }).then(async (categories) => {        
+        const categoriesCovers = categories.map((category) =>
+          <div key={category.name.toString()}>
+              <img className="swiper-slide-image" data-category={category.name.toLowerCase()} data-url={category.url} src={category.cover} alt="category cover" />
+          </div>
+        );
+
+        // const categoriesWithUrl = categories.filter((category) => 
+        //   category.url.length > 0
+        // );
+
+        await this.setState({ 
+            covers: categoriesCovers
+        });
+
+        console.log("COVERS LOADED: ", this.state.covers);
+      }).catch((error) => {
+        console.error(error);
+      }).finally(() => {
+        this.state.swiper.update();
+      });
+  }
+
+    componentWillUnmount() {
+
     }
 
     onShowSlider() {
@@ -160,16 +201,16 @@ class Slider extends React.Component {
     slideAndSwap() {
       let url = this.state.currentSlide.getAttribute("data-url");
 
-      if (url !== null) {
+      if (url.length > 0) {
         // go to special site
         window.location.href = url;
       } else {
         new Promise((resolve, reject) => {
           resolve();
         }).then(() => {
-          // get playlist
+          // get category
           this.setState({
-            playlist: this.state.currentSlide.getAttribute("data-playlist")
+            category: this.state.currentSlide.getAttribute("data-category")
           })
         }).then(() => {
           this.state.swiper.slideTo(this.state.swiper.clickedIndex);
@@ -235,7 +276,7 @@ class Slider extends React.Component {
     //       if (event.target.tagName === 'IMG') {
     //         let slideElement = event.target;
             
-    //         let playlist = slideElement.getAttribute("data-playlist");
+    //         let playlist = slideElement.getAttribute("data-category");
     //         console.log(playlist);
     
     //         let url = slideElement.getAttribute("data-url");
@@ -264,22 +305,34 @@ class Slider extends React.Component {
     // }
 
     render() {
+      const {covers} = this.state;
 
-        return (
-          <div id="slider-container">
-            <Swiper getSwiper={this.updateSwiper} {...this.params}>
-                <div><img className="swiper-slide-image" data-playlist="music" src={categoryCover} alt="category cover" /></div>
-                <div><img className="swiper-slide-image" data-playlist="rap" src={categoryCover} alt="category cover" /></div>
-                <div><img className="swiper-slide-image" data-playlist="skate" src={categoryCover} alt="category cover" /></div>
-                <div><img className="swiper-slide-image" data-playlist="deuspi" data-url="http://deuspi.biz/" src={deuspiCover} alt="deuspi cover" /></div>
-                <div><img className="swiper-slide-image" data-playlist="music_rap" src={categoryCover} alt="category cover" /></div>
-                <div><img className="swiper-slide-image" data-playlist="music_skate" src={categoryCover} alt="category cover" /></div>
-                <div><img className="swiper-slide-image" data-playlist="rap_skate" src={categoryCover} alt="category cover" /></div>
-            </Swiper>
-            {/* <button onClick={this.goPrev}>Prev</button>
-            <button onClick={this.goNext}>Next</button> */}
+      return (
+        // <div id="slider-container">
+        //   <Swiper getSwiper={this.updateSwiper} {...this.params}>
+        //       <div><img className="swiper-slide-image" data-category="music" data-url="" src={culturaCover} alt="category cover" /></div>
+        //       <div><img className="swiper-slide-image" data-category="rap" data-url="" src={curiosityCover} alt="category cover" /></div>
+        //       <div><img className="swiper-slide-image" data-category="deuspi" data-url="http://deuspi.biz/" src={deuspiCover} alt="deuspi cover" /></div>
+        //       <div><img className="swiper-slide-image" data-category="music_rap" data-url="" src={filmParfaitCover} alt="category cover" /></div>
+        //       <div><img className="swiper-slide-image" data-category="music_skate" data-url="" src={laGrailleCover} alt="category cover" /></div>
+        //       <div><img className="swiper-slide-image" data-category="rap_skate" data-url="" src={radiovisionCover} alt="category cover" /></div>
+        //   </Swiper>
+        //   {/* <button onClick={this.goPrev}>Prev</button>
+        //   <button onClick={this.goNext}>Next</button> */}
+        // </div>
+
+        <div id="slider-container">
+          <div className="row">
+            <div className="col-lg">
+              <div className="align-items-center justify-content-center">                                    
+                <Swiper getSwiper={this.updateSwiper} {...this.params}>
+                  {covers}
+                </Swiper>
+              </div>
+            </div>
           </div>
-        )
+        </div>
+      )
     }
   };
 
