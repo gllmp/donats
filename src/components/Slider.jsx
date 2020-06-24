@@ -107,7 +107,7 @@ class Slider extends React.Component {
 
         Object.keys(this.props.videos).forEach(video => {
           categories.forEach(category => {
-            if (video === category.name.toLowerCase()) {
+            if ((video === category.name.toLowerCase()) && (category.isVisible)) {
               categoriesCovers.push(
                 <div key={category.name.toString()}>
                   <img className="swiper-slide-image" data-category={category.name.toLowerCase()} data-url={category.url} src={category.cover} alt="category cover" />
