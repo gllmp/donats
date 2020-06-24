@@ -11,8 +11,8 @@ class VideoPlayer extends React.Component {
             videoId: "",
             player: null,
             showPlayer: false,
-            playlists: null,
-            currentPlaylist: null
+            categories: null,
+            currentCategory: null
         };
 
         this.category = "";
@@ -25,8 +25,8 @@ class VideoPlayer extends React.Component {
         this.onPauseVideo = this.onPauseVideo.bind(this);
         this.onUpdateVideo = this.onUpdateVideo.bind(this);
         this.onRandomVideo = this.onRandomVideo.bind(this);
-        this.getPlaylist = this.getPlaylist.bind(this);
-        this.setPlaylist = this.setPlaylist.bind(this);
+        this.getCategories = this.getCategories.bind(this);
+        this.selectCategories = this.selectCategories.bind(this);
         this.setCategory = this.setCategory.bind(this);
         this.setRandomId = this.setRandomId.bind(this);
         this.shuffleId = this.shuffleId.bind(this);
@@ -67,17 +67,17 @@ class VideoPlayer extends React.Component {
         this.state.player.pauseVideo();
     }
 
-    onUpdateVideo() {
-        new Promise((resolve, reject) => {
+    onUpdateVideo = async () => {
+        await new Promise((resolve, reject) => {
             resolve();
-        }).then(() => {
-            this.getPlaylist(this.props.playlist);
-        }).then(() => {
-            this.setPlaylist(this.props.slider);
-        }).then(() => {
-            this.setCategory(this.props.data);
-        }).then(() => {
-            this.onRandomVideo();
+        }).then(async () => {
+            await this.getCategories(this.props.categories);
+        }).then(async () => {
+            await this.selectCategories(this.props.slider);
+        }).then(async () => {
+            await this.setCategory(this.props.videos);
+        }).then(async () => {
+            await this.onRandomVideo();
         }).catch((error) => {
             console.error(error);
         }).finally(() => {
@@ -85,8 +85,43 @@ class VideoPlayer extends React.Component {
         });
     }
 
+    getCategories(categories) {
+        this.setState({
+            categories: categories
+        })
+    }
+    
+    selectCategories(sliderRef) {
+        let sliderCategory = sliderRef.current.state.category;
+        console.log(sliderCategory)
+
+        Object.keys(this.state.categories).forEach(element => {
+            if (element === sliderCategory) {
+                let selectedCategory = this.state.categories[element];
+    
+                this.setState({
+                    currentCategory: selectedCategory
+                })
+    
+                console.log("CURRENT CATEGORY: ", this.state.currentCategory);
+            }
+        });
+    }
+    
+    setCategory(data) {
+        let selectedData = [];
+        
+        this.state.currentCategory.forEach(element => {
+            selectedData.push(element);
+        })
+    
+        let index = Math.floor(Math.random() * Object.keys(selectedData).length);
+        
+        this.category = selectedData[index];
+    }
+
     onRandomVideo() {
-        let randomData = this.setRandomId(this.props.data);
+        let randomData = this.setRandomId(this.props.videos);
 
         new Promise((resolve, reject) => {
             resolve();
@@ -104,44 +139,10 @@ class VideoPlayer extends React.Component {
             //use `.finally()` to do something either way
         });
     }
-
-    getPlaylist(playlists) {
-        this.setState({
-            playlists: playlists
-        })
-    }
-    
-    setPlaylist(sliderRef) {
-        let sliderPlaylist = sliderRef.current.state.playlist;
-
-        Object.keys(this.state.playlists).forEach(element => {
-            if (element === sliderPlaylist) {
-                let selectedPlaylist = this.state.playlists[element];
-    
-                this.setState({
-                    currentPlaylist: selectedPlaylist
-                })
-    
-                console.log("PLAYLIST: ", this.state.currentPlaylist);
-            }
-        });    
-    }
-    
-    setCategory(data) {
-        let selectedData = [];
-    
-        this.state.currentPlaylist.forEach(element => {
-            selectedData.push(element);
-        })
-    
-        let index = Math.floor(Math.random() * Object.keys(selectedData).length);
-        
-        category = selectedData[index];
-    }
     
     setRandomId(data) {
         // set data category
-        let dataCategory = data[category];
+        let dataCategory = data[this.category];
     
         // set video index
         let videoIndex;
@@ -166,7 +167,7 @@ class VideoPlayer extends React.Component {
         //console.log("videoId: ", videoId);
     
         let videoData = {
-            category: category,
+            category: this.category,
             title: videoTitle,
             id: videoId
         };
