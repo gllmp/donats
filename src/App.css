@@ -275,6 +275,20 @@
   } */
 }
 
+/* Extra small devices */
+@media only screen and (min-width: 600px) and (max-height: 768px) {
+  .app-container {
+    width: 80% !important;
+    max-width: 768px;
+    position: relative;
+    top: -20vh;
+  }
+
+  #video-button-img {
+    max-width: 124px;
+  }
+}
+
 @media only screen and (max-width: 600px) {
   #banner-top {
     margin-top: 2vh;
