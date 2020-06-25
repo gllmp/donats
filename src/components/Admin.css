@@ -301,6 +301,26 @@ button:focus {
     text-align: center;
 }
 
+/* VIDEO DRAG AND DROP */
+#video-dropzone-container {
+    max-width: 100%;
+    margin-bottom: 1em;
+    padding: 0;
+    text-align: center;
+}
+
+#video-dropzone:focus {
+    outline: none;
+}
+
+#video-dropzone-container .dropzone {
+    width: 70%;
+}
+
+#video-dropzone p {
+    font-size: 1em;
+}
+
 /* UPDATE */
 .updateLink {
     color: #ef9b0f;
@@ -616,6 +636,10 @@ button:focus {
 
     #admin-title-sub {
         font-size: 1em;
+    }
+
+    #video-dropzone-container {
+        font-size: 0.7em;
     }
 
     .category-insert-section {
