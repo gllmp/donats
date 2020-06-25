@@ -5,7 +5,7 @@ import request from 'superagent';
 import api from '../api';
 import { history } from '../utils';
 import Checkbox from '@material-ui/core/Checkbox';
-import DragAndDrop from '../components/DragAndDrop'
+import DragAndDropCover from '../components/DragAndDropCover'
 import CategoryToggle from '../components/CategoryToggle'
 import loadingCircle from '../assets/img/loading-circle.gif'
 
@@ -231,7 +231,7 @@ class CategoryInsert extends Component {
 
                                     <section id="category-insert-cover" className="category-insert-section">
                                         <CloudinaryContext cloudName={process.env.REACT_APP_CLOUDINARY_CLOUDNAME}>
-                                            <DragAndDrop ref={this.dragAndDropRef} />
+                                            <DragAndDropCover ref={this.dragAndDropRef} />
                                         </CloudinaryContext>
                                     </section>
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 import Compressor from 'compressorjs';
 
-class DragAndDrop extends Component {
+class DragAndDropCover extends Component {
   constructor(props) {
     super(props);
 
@@ -171,4 +171,4 @@ class DragAndDrop extends Component {
   }
 }
 
-export default DragAndDrop;
+export default DragAndDropCover;
