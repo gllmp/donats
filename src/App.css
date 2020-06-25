@@ -270,9 +270,9 @@
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-height: 768px) {
-  #video-button-container {
+  /* #video-button-container {
     bottom: 25vh !important;
-  }
+  } */
 }
 
 @media only screen and (max-width: 600px) {
@@ -325,9 +325,9 @@
     top: 0;
   }
 
-  #video-button-container {
+  /* #video-button-container {
     bottom: 30vh;
-  }
+  } */
   
   #video-button-img {
     max-width: 124px;
