@@ -75,18 +75,18 @@ class VideoList extends Component {
             {
                 Header: 'TITLE',
                 accessor: 'title',
-                filterable: false,
+                filterable: true,
                 width: 400,
             },
             {
                 Header: 'URL',
                 accessor: 'url',
-                filterable: false,
+                filterable: true,
             },
             {
                 Header: 'CATEGORY',
                 accessor: 'category',
-                filterable: false
+                filterable: true
             },
             {
                 Header: '',
