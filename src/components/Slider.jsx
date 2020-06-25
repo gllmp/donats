@@ -230,7 +230,7 @@ class Slider extends React.Component {
         }).then(() => {
           // get category
           this.setState({
-            category: this.state.currentSlide.getAttribute("data-category")
+            category: this.state.currentSlide.getAttribute("data-category").replace(/\s+/g, '-').toLowerCase()
           })
         }).then(() => {
           this.state.swiper.slideTo(this.state.swiper.clickedIndex);
