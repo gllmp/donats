@@ -118,9 +118,28 @@ class Slider extends React.Component {
           });
         });
 
+        // covers with URL
+        categories.forEach(category => {
+          if (category.url.length > 0) {
+            categoriesCovers.push(
+              <div key={category.name.toString()}>
+                <img className="swiper-slide-image" data-category={category.name.toLowerCase()} data-url={category.url} src={category.cover} alt="category cover" />
+              </div>
+            );
+          }
+        });
+
+        // swap array to center Deuspi cover
+        for (let i = 0; i < categoriesCovers.length; i++) {
+          if (categoriesCovers[i].key === "DEUSPI") {
+            let deuspiCover = categoriesCovers[i];
+            categoriesCovers[i] = categoriesCovers[2];
+            categoriesCovers[2] = deuspiCover;
+          }
+        }
 
         await this.setState({ 
-            covers: categoriesCovers
+          covers: categoriesCovers
         });
 
         console.log("COVERS LOADED: ", this.state.covers);
