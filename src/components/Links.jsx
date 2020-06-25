@@ -12,7 +12,7 @@ class Links extends Component {
         return (
             <React.Fragment>
                 <Nav className="mr-auto">
-                    <Nav.Link className="nav-link" href={process.env.PUBLIC_URL + "/admin/videos/list"}>LIST</Nav.Link>
+                    <Nav.Link className="nav-link" href={process.env.PUBLIC_URL + "/admin/videos/list"}>VIDEOS</Nav.Link>
                     <Nav.Link className="nav-link" href={process.env.PUBLIC_URL + "/admin/categories/list"}>CATEGORIES</Nav.Link>
                     <Nav.Link className="nav-link nav-link-button" href={process.env.PUBLIC_URL + "/admin/videos/create"}>ADD VIDEO</Nav.Link>
                     <Nav.Link className="nav-link nav-link-button" href={process.env.PUBLIC_URL + "/admin/categories/create"}>ADD CATEGORY</Nav.Link>
