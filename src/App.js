@@ -391,6 +391,7 @@ class App extends React.Component {
                         <VideoPlayer videos={videos} categories={categories} ref={this.videoPlayerRef} slider={this.sliderRef} />
                         <RandomButton onClick={(e) => this.sliderRef.current.selectSlide(e.target)} />
                         {/* <button onClick={() => this.videoPlayerRef.current.onUpdateVideo()}>RANDOM</button> */}
+                        <div className="landscape-subtitle">Le hasard fait bien les choses</div>
                         <Footer />
                       </div>
                     </div>
