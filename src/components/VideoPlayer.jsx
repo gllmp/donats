@@ -12,10 +12,12 @@ class VideoPlayer extends React.Component {
             player: null,
             showPlayer: false,
             categories: null,
-            currentCategory: null
+            currentCategory: null,
+            clickCount: 0
         };
 
         this.category = "";
+        this.promoClickLimit = 5;
 
         this.onReady = this.onReady.bind(this);
         this.onEnd = this.onEnd.bind(this);
@@ -68,6 +70,8 @@ class VideoPlayer extends React.Component {
     }
 
     onUpdateVideo = async () => {
+        this.state.clickCount++;
+
         await new Promise((resolve, reject) => {
             resolve();
         }).then(async () => {
@@ -117,7 +121,15 @@ class VideoPlayer extends React.Component {
     
         let index = Math.floor(Math.random() * Object.keys(selectedData).length);
         
-        this.category = selectedData[index];
+        if (this.state.clickCount > this.promoClickLimit) {
+            this.setState({
+                clickCount: 0
+            });
+
+            this.category = "autopromo";
+        } else {
+            this.category = selectedData[index];
+        }
     }
 
     onRandomVideo() {
