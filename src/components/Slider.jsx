@@ -60,8 +60,11 @@ class Slider extends React.Component {
             spaceBetween: 20
           },
           320: {
-            slidesPerView: 2,
-            spaceBetween: 10
+            slidesPerView: 1.5,
+            spaceBetween: 5,
+            coverflowEffect: {
+              depth: 300,
+            }
           }
         },
         on: {
