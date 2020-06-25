@@ -89,7 +89,8 @@ class CategoryInsert extends Component {
                 //console.log("CLOUDINARY RESPONSE: ", response);
                 if (error != null) {
                     // upload failed
-                    console.log("File upload to Cloudinary has failed ", error);
+                    //console.log("File upload to Cloudinary has failed ", error);
+                    alert("L'upload du ficher vers Cloudinary a échoué");
                 } else if (response.status === 200) {
                     // upload success
                     resolve(response);
