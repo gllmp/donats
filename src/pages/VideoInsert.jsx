@@ -51,7 +51,8 @@ class VideoInsert extends Component {
             category: '',
             savedCategories: [],
             categoriesSelectItems: [],
-            isLoading: true
+            isLoading: true,
+            hasTitle: false
         }
     }
 
@@ -129,7 +130,17 @@ class VideoInsert extends Component {
                             //console.log(_this.state)
                             getYoutubeTitle(_this.state.url, API_KEY, function (err, title) {
                                 console.log("TITLE: ", title);
-                                if (err) console.log("ERROR: ", err);
+                                if (err) {
+                                    console.log("ERROR: ", err);
+
+                                    _this.setState({
+                                        hasTitle: false
+                                    });
+                                } else {
+                                    _this.setState({
+                                        hasTitle: true
+                                    });
+                                }
                 
                                 _this.setState({ title });
                                 payload.title = title;
@@ -137,16 +148,18 @@ class VideoInsert extends Component {
                                 resolve();
                             })    
                         }).then(() => {
-                            api.insertVideo(payload)
-                            .then(res => {
-                                this.setState({
-                                    title: '',
-                                    url: '',
-                                    category: '',
-                                })
-                            }).finally(() => {
-                                //window.location.href = `/admin`;
-                            });
+                            if (_this.state.hasTitle) {
+                                api.insertVideo(payload)
+                                .then(res => {
+                                    this.setState({
+                                        title: '',
+                                        url: '',
+                                        category: '',
+                                    })
+                                }).finally(() => {
+                                    //window.location.href = `/admin`;
+                                });
+                            }
                 
                         }).catch((error) => {
                             console.error(error);
