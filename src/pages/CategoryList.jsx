@@ -113,12 +113,22 @@ class CategoryList extends Component {
     
             return this.state.categories;
         }).then(async (categories) => {
-
             const categoriesCovers = categories.map((category) =>
                 <div key={category.name.toString()}>
                     <img className="swiper-slide-image" data-category={category.name} src={category.cover} alt="category cover" />
                 </div>
             );
+
+            // temporarily hide not visible categories
+            categories.forEach(category => {
+                if (!category.isVisible) {
+                    for (let i = 0; i < categoriesCovers.length; i++) {
+                        if (categoriesCovers[i].key === category.name) {
+                            categoriesCovers.splice(i, 1);
+                        }
+                    }
+                }
+            });
     
             await this.setState({ 
                 covers: categoriesCovers
