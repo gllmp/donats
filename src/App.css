@@ -181,8 +181,8 @@
 .swiper-slide-image {
   width: 100%;
   height: auto;
-  max-width: 400px;
-  max-height: 540px;
+  /* max-width: 400px;
+  max-height: 540px; */
 }
 
 .swiper-button-next {
