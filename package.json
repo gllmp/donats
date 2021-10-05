@@ -2,7 +2,7 @@
   "name": "donats",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://donats.net/",
+  "homepage": "https://donats.net/",
   "dependencies": {
     "@material-ui/core": "^4.10.0",
     "@testing-library/jest-dom": "^4.2.4",
