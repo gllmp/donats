@@ -86,7 +86,7 @@ class App extends React.Component {
           isLoading: false
         });
         
-        console.log("LOADING FINISHED", this.state);
+        console.log("LOADING FINISHED");
       }).catch((error) => {
         console.error(error);
       }).finally(() => {    
