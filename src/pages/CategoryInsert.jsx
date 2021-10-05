@@ -104,7 +104,7 @@ class CategoryInsert extends Component {
             })
 
             //console.log("UPLOADED FILE: ", this.state);
-            console.log("File upload to Cloudinary successful");
+            console.log("Fichié uploadé avec succès sur Cloudinary !");
 
             return this.state.cover;
         }).catch((error) => {
