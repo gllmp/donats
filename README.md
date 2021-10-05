@@ -3,7 +3,7 @@ DONATS
 
 YOUTUBE RANDOM PLAYER
 
-See [donats-server](https://github.com/specialgee/donats-server) for the server-side API implementation.
+See [donats-server](https://github.com/gllmp/donats-server) for the server-side API implementation.
 
 ## Available Scripts
 
