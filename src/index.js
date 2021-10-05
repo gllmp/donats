@@ -37,6 +37,8 @@ const startApp = async () => {
         }).finally(() => {
 
         });
+    } else if ( (window.location.pathname.includes(routes.admin)) || (window.location.pathname.includes(routes.login)) ) {
+        renderApp();
     } else if (window.location.pathname.includes(routes.adminVideo)) {
         await api.getAllVideos().then(videos => {
             videoData = videos.data.data;
