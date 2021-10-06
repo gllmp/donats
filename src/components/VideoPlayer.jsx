@@ -215,7 +215,9 @@ class VideoPlayer extends React.Component {
                 autoplay: 1,
                 controls: 0,
                 iv_load_policy: 3,
-                modestbranding: 1
+                modestbranding: 1,
+                // enablejsapi: 1,
+                // origin: "https://donats.net/"
             },
             frameBorder: "0"
         }
