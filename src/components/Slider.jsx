@@ -221,31 +221,26 @@ class Slider extends React.Component {
     slideAndSwap() {
       let url = this.state.currentSlide.getAttribute("data-url");
 
-      if (url.length > 0) {
-        // go to special site
-        window.location.href = url;
-      } else {
-        new Promise((resolve, reject) => {
-          resolve();
-        }).then(() => {
-          // get category
-          this.setState({
-            category: this.state.currentSlide.getAttribute("data-category").replace(/\s+/g, '-').toLowerCase()
-          })
-        }).then(() => {
-          this.state.swiper.slideTo(this.state.swiper.clickedIndex);
-        }).then(() => {
-          // swap slider with video player
-          setTimeout(() => {
-            this.props.handleSwap("slider", "open");
-          }, this.params.speed)
-        }).catch((error) => {
-            console.error(error);
-        }).finally(() => {
-      
-        });            
-      }
-    }
+      new Promise((resolve, reject) => {
+        resolve();
+      }).then(() => {
+        // get category
+        this.setState({
+          category: this.state.currentSlide.getAttribute("data-category").replace(/\s+/g, '-').toLowerCase()
+        })
+      }).then(() => {
+        this.state.swiper.slideTo(this.state.swiper.clickedIndex);
+      }).then(() => {
+        // swap slider with video player
+        setTimeout(() => {
+          this.props.handleSwap("slider", "open");
+        }, this.params.speed)
+      }).catch((error) => {
+          console.error(error);
+      }).finally(() => {
+    
+      });            
+  }
 
     setSlidesTransform() {
       let slides = document.getElementsByClassName("swiper-slide");
