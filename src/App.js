@@ -67,14 +67,12 @@ class App extends React.Component {
 
     if (this.props.appRoute === "/" ) {
       await new Promise(async (resolve, reject) => {
-
         this.parseVideoData(this.props.videoData);
 
         console.log("VIDEO DATA: ", this.videoData);
         
         resolve(this.videoData);
       }).then(async (videoData) => {
-        
         this.parseCategoryData(this.props.categoryData);
 
         console.log("CATEGORY DATA: ", this.categoryData);
@@ -94,7 +92,7 @@ class App extends React.Component {
       });
     } else if (this.props.appRoute.includes("/admin/videos")) {
       this.parseVideoData(this.props.videoData);
-
+      
       this.setState({
         videos: this.videoData,
         isLoading: false
