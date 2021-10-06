@@ -13,14 +13,18 @@ class VideoPlayer extends React.Component {
             showPlayer: false,
             categories: null,
             currentCategory: null,
-            clickCount: 0
+            clickCount: 0,
+            isVideoAvailable: null
         };
 
         this.category = "";
         this.promoClickLimit = 5;
 
-        this.onReady = this.onReady.bind(this);
-        this.onEnd = this.onEnd.bind(this);
+        this.onPlayerReady = this.onPlayerReady.bind(this);
+        this.onPlayerPlay = this.onPlayerPlay.bind(this);
+        this.onPlayerEnd = this.onPlayerEnd.bind(this);
+        this.onPlayerStateChange = this.onPlayerStateChange.bind(this);
+        this.onPlayerError = this.onPlayerError.bind(this);
         this.onShowPlayer = this.onShowPlayer.bind(this);
         this.onClosePlayer = this.onClosePlayer.bind(this);
         this.onPlayVideo = this.onPlayVideo.bind(this);
@@ -38,16 +42,57 @@ class VideoPlayer extends React.Component {
         
     }
   
-    onReady(event) {
+    onPlayerReady(event) {
         console.log(`YouTube Player object for videoId: "${this.state.videoId}" has been saved to state.`); // eslint-disable-line
+        
         this.setState({
             player: event.target,
         });
     }
 
-    onEnd(event) {
+    onPlayerPlay(event) {
+        if (this.state.isVideoAvailable === false) {
+            let playerElement = document.getElementById("video-container");
+            playerElement.style.display = "block";
+    
+            this.setState({
+                isVideoAvailable: true
+            })
+        }
+    }
+
+    onPlayerEnd(event) {
         this.onUpdateVideo();
     }
+
+    onPlayerStateChange(event) {
+        // console.log("Youtube Player State Changed: ", event)
+    }
+
+    onPlayerError(event) {
+        console.log("Youtube Player Error: ", event);
+
+        let errorCode = event.data;
+        
+        if (errorCode === 100 || errorCode === 150) {
+            console.log("Video Not Found");
+
+            let playerElement = document.getElementById("video-container");
+            playerElement.style.display = "none";
+
+            this.setState({
+                isVideoAvailable: false
+            })
+        
+            this.onUpdateVideo();
+        } else {
+            this.setState({
+                isVideoAvailable: true
+            })
+        }
+  
+    }
+
 
     onShowPlayer() {
         this.setState({
@@ -226,7 +271,7 @@ class VideoPlayer extends React.Component {
                 <div id="player-container">
                     <div id="video-container" className="embed-responsive embed-responsive-16by9">
                         <div id="video-player" className="">
-                            <YouTube videoId={this.state.videoId} className="random-video" ref={this.youtubePlayerRef} opts={opts} onReady={this.onReady} onEnd={this.onEnd} />
+                            <YouTube videoId={this.state.videoId} className="random-video" ref={this.youtubePlayerRef} opts={opts} onReady={this.onPlayerReady} onPlay={this.onPlayerPlay} onEnd={this.onPlayerEnd} onStateChange={this.onPlayerStateChange} onError={this.onPlayerError} />
                         </div>
                     </div>
                 </div>
