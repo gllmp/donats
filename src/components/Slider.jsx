@@ -132,14 +132,14 @@ class Slider extends React.Component {
           }
         });
 
-        // swap array to center Deuspi cover
-        for (let i = 0; i < categoriesCovers.length; i++) {
-          if (categoriesCovers[i].key === "DEUSPI") {
-            let deuspiCover = categoriesCovers[i];
-            categoriesCovers[i] = categoriesCovers[2];
-            categoriesCovers[2] = deuspiCover;
-          }
-        }
+        // // swap array to center Radiovision cover
+        // for (let i = 0; i < categoriesCovers.length; i++) {
+        //   if (categoriesCovers[i].key === "RADIOVISION") {
+        //     let radiovisionCover = categoriesCovers[i];
+        //     categoriesCovers[i] = categoriesCovers[2];
+        //     categoriesCovers[2] = radiovisionCover;
+        //   }
+        // }
 
         await this.setState({ 
           covers: categoriesCovers
