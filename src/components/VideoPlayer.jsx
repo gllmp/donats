@@ -35,7 +35,7 @@ class VideoPlayer extends React.Component {
     }
 
     componentDidMount() {
-
+        
     }
   
     onReady(event) {
@@ -116,7 +116,9 @@ class VideoPlayer extends React.Component {
         let selectedData = [];
         
         this.state.currentCategory.forEach(element => {
-            selectedData.push(element);
+            if (data[element] !== undefined) {
+                selectedData.push(element);
+            }
         })
     
         let index = Math.floor(Math.random() * Object.keys(selectedData).length);
@@ -155,7 +157,7 @@ class VideoPlayer extends React.Component {
     setRandomId(data) {
         // set data category
         let dataCategory = data[this.category];
-    
+        
         // set video index
         let videoIndex;
         const videoLength = dataCategory.length;
