@@ -24,7 +24,7 @@ const startApp = async () => {
         }).then(async () => {
             await api.getAllCategories().then(categories => {
                 categoryData = categories.data.data;
-                console.log(categoryData);
+                //console.log(categoryData);
             }).then( () => {
                 renderApp(videoData, categoryData);
             }).catch((error) => {
