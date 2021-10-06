@@ -253,7 +253,7 @@ class App extends React.Component {
       this.sliderRef.current.onCloseSlider();
       this.videoPlayerRef.current.onShowPlayer();
 
-      await videoIframe.removeEventListener("animationend", this.swapToSlider());
+      // await videoIframe.removeEventListener("animationend", this.swapToSlider());
 
       await new Promise((resolve, reject) => {
         resolve();
