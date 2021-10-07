@@ -713,6 +713,10 @@ button:focus {
         border-radius: 0px;
         text-align: left;
     }
+
+    .nav-link-button:hover {
+        color: #fff !important;
+    }
 }
 
 /* Small/Medium/Large devices (1300px and down) */
