@@ -42,7 +42,7 @@ class VideoUpdate extends Component {
         super(props);
 
         this.state = {
-            _id: this.props.match.params.id,
+            id: this.props.match.params.id,
             title: '',
             url: '',
             category: '',
@@ -57,8 +57,8 @@ class VideoUpdate extends Component {
     }
 
     componentDidMount = async () => {
-        const { _id } = this.state;
-        const video = await api.getVideoById(_id)
+        const { id } = this.state;
+        const video = await api.getVideoById(id)
 
         this.setState({
             title: video.data.data.title,
@@ -110,11 +110,11 @@ class VideoUpdate extends Component {
     }
 
     handleUpdateVideo = async () => {
-        const { _id, title, url, category } = this.state;
+        const { id, title, url, category } = this.state;
         const payload = { title, url, category }
 
         await new Promise((resolve, reject) => {
-            api.updateVideoById(_id, payload)
+            api.updateVideoById(id, payload)
             .then(res => {
                 window.alert(`Vidéo mise à jour avec succès`);
                 resolve();
