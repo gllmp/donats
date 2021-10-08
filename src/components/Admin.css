@@ -6,11 +6,12 @@ body {
 
 #root {
     height: 100%;
+    overflow: scroll;
 }
 
 #admin-container {
     width: 100%;
-    height: 92%;
+    height: 90%;
     /* position: absolute; */
     position: relative;
     top: 0;
@@ -18,7 +19,6 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: inherit;
-    overflow: scroll;
 }
 
 #admin-title-container {
@@ -360,8 +360,8 @@ button:focus {
     top: 50%;
     transform: translate(0, -50%);
     width: 100%;
-    height: 100%;
-    margin-top: 2em;
+    height: auto;
+    /* margin-top: 2em; */
     /* margin-top: 12vh; */
 }
 
@@ -599,7 +599,7 @@ button:focus {
     font-family: 'Antique-Compact', 'Helvetica Neue', sans-serif;
     position: relative;
     margin-top: auto;
-    margin-bottom: 2em;
+    margin-bottom: 1em;
 }
 
 /* SCROLLBAR */
@@ -622,12 +622,12 @@ button:focus {
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
-#admin-container::-webkit-scrollbar {
+#root::-webkit-scrollbar {
     display: none;
 }
   
   /* Hide scrollbar for IE, Edge and Firefox */
-#admin-container {
+#root {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
 }
@@ -718,6 +718,12 @@ button:focus {
 
     .form-insert h1 {
         font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-height: 880px) {
+    .categories-list {
+        height: 100% !important;
     }
 }
 
