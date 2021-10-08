@@ -117,7 +117,9 @@ class CategoryList extends Component {
         }).then(async (categories) => {
             const categoriesCovers = categories.map((category) =>
                 <div key={category.name.toString()}>
-                    <img className="swiper-slide-image" data-category={category.name} src={category.cover} alt="category cover" />
+                    <Link className="updateLink" to={`/admin/categories/update/${category._id}`}>
+                        <img className="swiper-slide-image" data-category={category.name} data-id={category._id} src={category.cover} alt="category cover" />
+                    </Link>
                 </div>
             );
 
