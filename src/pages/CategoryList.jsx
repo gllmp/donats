@@ -122,15 +122,15 @@ class CategoryList extends Component {
             );
 
             // temporarily hide not visible categories
-            categories.forEach(category => {
-                if (!category.isVisible) {
-                    for (let i = 0; i < categoriesCovers.length; i++) {
-                        if (categoriesCovers[i].key === category.name) {
-                            categoriesCovers.splice(i, 1);
-                        }
-                    }
-                }
-            });
+            // categories.forEach(category => {
+            //     if (!category.isVisible) {
+            //         for (let i = 0; i < categoriesCovers.length; i++) {
+            //             if (categoriesCovers[i].key === category.name) {
+            //                 categoriesCovers.splice(i, 1);
+            //             }
+            //         }
+            //     }
+            // });
     
             await this.setState({ 
                 covers: categoriesCovers
