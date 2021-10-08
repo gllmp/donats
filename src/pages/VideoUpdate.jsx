@@ -53,10 +53,6 @@ class VideoUpdate extends Component {
     }
 
     componentDidMount = async () => {
-
-    }
-
-    componentDidMount = async () => {
         const { id } = this.state;
         const video = await api.getVideoById(id)
 

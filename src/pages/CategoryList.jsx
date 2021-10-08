@@ -4,13 +4,13 @@ import Swiper from 'react-id-swiper';
 import 'swiper/css/swiper.css';
 import api from '../api';
 
-class UpdateVideo extends Component {
+class UpdateCategory extends Component {
     render() {
         return <Link className="updateLink" to={`/admin/categories/update/${this.props.id}`}>Update</Link>
     }
 }
 
-class DeleteVideo extends Component {
+class DeleteCategory extends Component {
     deleteEntry = async () => {
         if (
             window.confirm(
@@ -101,6 +101,8 @@ class CategoryList extends Component {
     }
 
     componentDidMount = async () => {
+        document.getElementById("admin-container").classList.add("categories-list");
+        
         // /!\ PASS CATEGORIES AS PROPS
         await api.getAllCategories()
         .then(async (categories) => {

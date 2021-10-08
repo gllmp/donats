@@ -236,17 +236,17 @@ class CategoryInsert extends Component {
                                         </CloudinaryContext>
                                     </section>
 
+                                    <section id="category-insert-categories" className="category-insert-section">
+                                        <p id="category-toggle-title">{this.state.savedCategories.length} CATÉGORIES DISPONIBLES</p>
+                                        <CategoryToggle categories={this.state.savedCategories} ref={this.categoryToggleRef} />
+                                    </section>
+
                                     <section id="category-insert-url-visible" className="category-insert-section">
                                         {/* <input id="category-url-input" className="form-control" type="text" value={url} placeholder="URL" onChange={this.handleChangeInputUrl} /> */}
                                         <div id="category-visible-container">
                                             <Checkbox className="category-visible-checkbox" checked={this.state.isVisible} disableRipple={true} onChange={this.handleChangeInputIsVisible} />
                                             <label id="category-visible-label">VISIBLE</label>
                                         </div>
-                                    </section>
-
-                                    <section id="category-insert-categories" className="category-insert-section">
-                                        <p id="category-toggle-title">{this.state.savedCategories.length} CATÉGORIES DISPONIBLES</p>
-                                        <CategoryToggle categories={this.state.savedCategories} ref={this.categoryToggleRef} />
                                     </section>
 
                                     <section id="category-insert-button-container" className="category-insert-section">

@@ -393,7 +393,7 @@ button:focus {
 
 #category-insert-container {
     margin: 0 auto;
-    margin-top: 2vh;
+    margin-top: 2em;
     width: 100%;
     max-width: 40vw;
 }
@@ -405,7 +405,7 @@ button:focus {
 }
 
 .category-insert-section {
-    margin-top: 6vh;
+    margin-top: 4em;
 }
 
 /* CATEGORY NAME */
@@ -524,12 +524,18 @@ button:focus {
 
 /* CATEGORY TOGGLE */
 #category-insert-categories {
-    margin-top: 4vh;
-    height: 10vh;
+    margin-top: 4em;
+    height: auto;
 }
 
 #category-insert-categories .swiper-container {
     padding: 1em;
+}
+
+#category-insert-categories .swiper-wrapper {
+    /* overflow-x: scroll; */
+    /* display: inline; */
+    margin-bottom: 2em;
 }
 
 #category-toggle-title {
@@ -538,8 +544,16 @@ button:focus {
     margin-bottom: 1vh;
 }
 
+#category-insert-categories .swiper-slide {
+    display: contents;
+}
+
 #category-insert-categories .swiper-slide .MuiFormControlLabel-root {
     margin-left: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 #category-insert-categories .swiper-button-prev  {
@@ -674,7 +688,7 @@ button:focus {
     }
 
     .category-insert-section {
-        margin-top: 4vh;
+        margin-top: 4em;
     }
     
     #category-insert-title {

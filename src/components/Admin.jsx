@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { AdminNavBar } from '../components';
-import { AdminPage, VideoList, VideoInsert, VideoUpdate, CategoryList, CategoryInsert } from '../pages';
+import { AdminPage, VideoList, VideoInsert, VideoUpdate, CategoryList, CategoryInsert, CategoryUpdate } from '../pages';
 import Footer from './Footer';
 
 class Admin extends React.Component {
@@ -35,6 +35,7 @@ class Admin extends React.Component {
                         <Route path="/admin/videos/update/:id" component={VideoUpdate} />
                         <Route path="/admin/categories/list"  component={CategoryList} />
                         <Route path="/admin/categories/create"  component={CategoryInsert} />
+                        <Route path="/admin/categories/update/:id"  component={CategoryUpdate} />
                         <Route path="/"  component={AdminPage} />
                     </Switch>
 
