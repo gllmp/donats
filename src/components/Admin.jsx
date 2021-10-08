@@ -37,8 +37,9 @@ class Admin extends React.Component {
                         <Route path="/admin/categories/create"  component={CategoryInsert} />
                         <Route path="/"  component={AdminPage} />
                     </Switch>
+
+                    <Footer />
                 </div>
-                <Footer />
             </BrowserRouter>
         )    
     }
