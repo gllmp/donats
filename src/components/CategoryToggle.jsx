@@ -94,8 +94,8 @@ class CategoryToggle extends React.Component {
     };
             
     this.params = {
-      slidesPerView: 3,
-      spaceBetween: 30,
+      // slidesPerView: 3,
+      spaceBetween: 0,
       speed: 300,
       initialSlide: 1,
       centeredSlides: true,
@@ -113,24 +113,23 @@ class CategoryToggle extends React.Component {
         type: 'bullets',
         dynamicBullets: true
       },
-      // breakpoints: {
-      //   1024: {
-      //     slidesPerView: 4,
-      //     spaceBetween: 40
-      //   },
-      //   768: {
-      //     slidesPerView: 4,
-      //     spaceBetween: 30
-      //   },
-      //   640: {
-      //     slidesPerView: 4,
-      //     spaceBetween: 20
-      //   },
-      //   320: {
-      //     slidesPerView: 4,
-      //     spaceBetween: 10
-      //   }
-      // },
+      breakpoints: {
+        1024: {
+          slidesPerView: 3,
+        },
+        // 768: {
+        //   slidesPerView: 4,
+        //   spaceBetween: 30
+        // },
+        // 640: {
+        //   slidesPerView: 4,
+        //   spaceBetween: 20
+        // },
+        320: {
+          slidesPerView: 1,
+          // spaceBetween: 10
+        }
+      },
       // on: {
       //   init: () => {
       //     //console.log("INIT SWIPER");
