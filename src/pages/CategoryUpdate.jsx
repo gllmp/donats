@@ -132,7 +132,7 @@ class CategoryUpdate extends Component {
 
         if (!name) {
             alert("Ajoutez un nom avant de continuer");
-        } else if (this.state.isVisible && !this.dragAndDropRef.current.state.hasLoaded) {
+        } else if (!this.dragAndDropRef.current.state.hasLoaded) {
             alert("Ajoutez une image avant de continuer");
         } else {
             this.setState({
@@ -166,14 +166,9 @@ class CategoryUpdate extends Component {
             });
 
             const promiseCover = new Promise(async (resolve, reject) => {
-                // Upload cover only if category is visible
-                if (this.state.isVisible) {                
-                    await this.uploadFileToCloudinary(this.dragAndDropRef.current.state.file);
+                await this.uploadFileToCloudinary(this.dragAndDropRef.current.state.file);
 
-                    resolve(this.state.cover);
-                } else {
-                    resolve(this.state.cover);
-                }
+                resolve(this.state.cover);
             })
 
             const promiseUrl = new Promise((resolve, reject) => {
@@ -203,7 +198,7 @@ class CategoryUpdate extends Component {
                         name: '',
                         category: '',
                         cover: '',
-                        //isVisible: true,
+                        isVisible: true,
                         url: '',
                         isUploading: false
                     });
