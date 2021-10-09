@@ -30,6 +30,7 @@ class CategoryUpdate extends Component {
         this.handleChangeInputIsVisible = this.handleChangeInputIsVisible.bind(this);
         this.uploadFileToCloudinary = this.uploadFileToCloudinary.bind(this);
         this.uploadCategory = this.uploadCategory.bind(this);
+        this.deleteCategory = this.deleteCategory.bind(this);
     }
 
     componentDidMount = async () => {
@@ -48,7 +49,7 @@ class CategoryUpdate extends Component {
         this.dragAndDropRef = React.createRef();
         this.categoryToggleRef = React.createRef();
         
-        await api.getAllCategories().then(categories => {
+        await api.getAllCategories().then(categories => {            
             this.setState({
                 savedCategories: categories.data.data,
                 isLoading: false,
@@ -222,8 +223,13 @@ class CategoryUpdate extends Component {
 
     }
 
+    
+    deleteCategory() { 
+        
+    }
+
     render() {
-        const { name, url } = this.state;
+        const { name, category, cover, url, isVisible } = this.state;
 
         return (
             <div id="category-insert-wrapper">
@@ -259,7 +265,8 @@ class CategoryUpdate extends Component {
 
                                     <section id="category-insert-button-container" className="category-insert-section">
                                         <button id="category-button-save" className="btn btn-primary" onClick={this.uploadCategory}>SAVE</button>
-                                        <Link to="/admin/categories/list" id="category-button-cancel" className="btn btn-danger">CANCEL</Link>
+                                        <Link to="/admin/categories/list" id="category-button-cancel" className="btn btn-warning mr-3">CANCEL</Link>
+                                        <button id="category-button-delete" className="btn btn-danger" onClick={this.deleteCategory}>DELETE</button>
                                         {this.state.isUploading &&
                                             <img className="loading-circle" alt="gif" src={loadingCircle} />
                                         }

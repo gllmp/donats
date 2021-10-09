@@ -259,7 +259,7 @@ class VideoInsert extends Component {
 
                         <div className="mt-4">
                             <Button onClick={this.handleIncludeVideo}>ADD VIDEO</Button>
-                            <Link to="/admin/videos/list" className="btn btn-danger"> CANCEL </Link>
+                            <Link to="/admin/videos/list" className="btn btn-warning"> CANCEL </Link>
                         </div>
                     </Wrapper>
                 )}

@@ -610,6 +610,21 @@ button:focus {
     opacity: 0.75;
 }
 
+#category-button-delete {
+    margin-right: 1em;
+    max-width: 125px;
+    opacity: 1;
+}
+
+#category-button-delete:hover {
+    background-color: #f00;
+    opacity: 0.75;
+}
+
+#category-button-cancel {
+    max-width: 90px;
+}
+
 /* FOOTER */
 #admin-container #footer {
     font-family: 'Antique-Compact', 'Helvetica Neue', sans-serif;
@@ -711,6 +726,12 @@ button:focus {
 
     #category-insert-categories .swiper-container {
         padding: 0;
+    }
+
+    #category-insert-button-container .btn {
+        display: block;
+        margin: 1em;
+        margin-left: 0;
     }
 }
 

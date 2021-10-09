@@ -246,7 +246,7 @@ class CategoryInsert extends Component {
 
                                     <section id="category-insert-button-container" className="category-insert-section">
                                         <button id="category-button-save" className="btn btn-primary" onClick={this.uploadCategory}>SAVE</button>
-                                        <Link to="/admin/categories/list" id="category-button-cancel" className="btn btn-danger">CANCEL</Link>
+                                        <Link to="/admin/categories/list" id="category-button-cancel" className="btn btn-warning">CANCEL</Link>
                                         {this.state.isUploading &&
                                             <img className="loading-circle" alt="gif" src={loadingCircle} />
                                         }
