@@ -246,7 +246,7 @@ class CategoryUpdate extends Component {
 
                                     <section id="category-insert-cover" className="category-insert-section">
                                         <CloudinaryContext cloudName={process.env.REACT_APP_CLOUDINARY_CLOUDNAME}>
-                                            <DragAndDropCover ref={this.dragAndDropRef} />
+                                            <DragAndDropCover ref={this.dragAndDropRef} coverPreview={cover} />
                                         </CloudinaryContext>
                                     </section>
 

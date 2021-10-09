@@ -25,6 +25,12 @@ class DragAndDropCover extends Component {
 
   componentDidMount() {
     this.dropzoneElement = document.getElementsByClassName("dropzone")[0];
+  
+    if (this.props.coverPreview) {
+      this.setState({
+        preview: this.props.coverPreview
+      })  
+    }
   }
 
   componentWillUnmount() {
