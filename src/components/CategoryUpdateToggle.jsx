@@ -91,8 +91,6 @@ class CategoryUpdateToggle extends React.Component {
   constructor(props) {
     super(props);
 
-    console.log(props)
-
     this.state = {
       categories: props.categories,
       selectedCategory: props.selectedCategory,

@@ -18,14 +18,16 @@ class CategoryUpdate extends Component {
             name: '',
             category: [],
             cover: '',
-            url: '',
-            savedCategories: [],
             toggleList: {},
+            savedCategories: [],
+            initialCategoryParameters: {},
+            url: '',
             isVisible: true,
             isLoading: true,
             isUploading: false
         }
 
+        this.getInitialCategoryParameters = this.getInitialCategoryParameters.bind(this);
         this.initiateToggleList = this.initiateToggleList.bind(this);
         this.handleChangeInputName = this.handleChangeInputName.bind(this);
         this.handleChangeInputUrl = this.handleChangeInputUrl.bind(this);
@@ -57,6 +59,8 @@ class CategoryUpdate extends Component {
             });
         })
 
+        this.getInitialCategoryParameters();
+
         console.log("CATEGORY UPDATE STATE: ", this.state);
 
         await this.initiateToggleList().then(list => {
@@ -71,7 +75,20 @@ class CategoryUpdate extends Component {
     componentWillUnmount() {
 
     }
-    
+
+    getInitialCategoryParameters() {
+        this.setState({
+            initialCategoryParameters: {
+                _id: this.state.id,
+                name: this.state.name,
+                category: this.state.category,
+                isVisible: this.state.isVisible,
+                cover: this.state.cover,
+                url: this.state.url,
+            }
+        })
+    }
+
     initiateToggleList = async () => {
         let togglesCheckedArray = {};
     
@@ -199,7 +216,7 @@ class CategoryUpdate extends Component {
                 categoryArray.push(this.state.name);
 
                 savedCategories.forEach(element => {
-                    if (this.categoryToggleRef.current.state.togglesChecked[element.name] === true) {
+                    if (this.categoryToggleRef.current.state.toggleList[element.name] === true) {
                         categoryArray.push(element.name)
                     }
                 });
@@ -216,7 +233,7 @@ class CategoryUpdate extends Component {
             });
 
             const promiseCover = new Promise(async (resolve, reject) => {
-                await this.uploadFileToCloudinary(this.dragAndDropRef.current.state.file);
+                // await this.uploadFileToCloudinary(this.dragAndDropRef.current.state.file);
 
                 resolve(this.state.cover);
             })
@@ -242,26 +259,26 @@ class CategoryUpdate extends Component {
 
                 return payload;
             }).then(async (result) => {
-                await api.insertCategory(result)
-                .then(res => {
-                    this.setState({
-                        name: '',
-                        category: '',
-                        cover: '',
-                        isVisible: true,
-                        url: '',
-                        isUploading: false
-                    });
+                // await api.insertCategory(result)
+                // .then(res => {
+                //     this.setState({
+                //         name: '',
+                //         category: '',
+                //         cover: '',
+                //         isVisible: true,
+                //         url: '',
+                //         isUploading: false
+                //     });
 
-                    window.alert(`Catégorie créée avec succès`);
-                }).catch((error) => {
-                    this.setState({
-                        isUploading: false
-                    });
+                //     window.alert(`Catégorie créée avec succès`);
+                // }).catch((error) => {
+                //     this.setState({
+                //         isUploading: false
+                //     });
 
-                    console.error(error);
-                    window.alert(`La création de la catégorie a échouée`);
-                });
+                //     console.error(error);
+                //     window.alert(`La création de la catégorie a échouée`);
+                // });
             }).catch((error) => {
                 console.error(error);
             }).finally(() => {
