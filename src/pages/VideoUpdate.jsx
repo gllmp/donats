@@ -120,7 +120,7 @@ class VideoUpdate extends Component {
         }).finally(() => {
             history.push(process.env.PUBLIC_URL + "/admin/videos/list");
             window.location.reload(true);
-        })    
+        })
     }
 
     render() {

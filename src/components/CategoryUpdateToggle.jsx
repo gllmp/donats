@@ -5,7 +5,6 @@ import { withStyles } from '@material-ui/core/styles';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
-// import { resolve } from 'path/posix';
 
 const IOSSwitch = withStyles((theme) => ({
   root: {
@@ -43,10 +42,7 @@ const IOSSwitch = withStyles((theme) => ({
   },
   checked: {},
   focusVisible: {},
-}))(({ classes, ...props }) => {
-  
-  // console.log(props);
-  
+}))(({ classes, ...props }) => {  
   return (
     <Switch
       focusVisibleClassName={classes.focusVisible}
@@ -81,7 +77,6 @@ function TogglesList(props) {
             onChange={categoryToggleRef.handleToggle}
             color="primary"
             disabled={false}
-            // test={props.toggleState[category.name]}
           />
         }
         label={category.name}
@@ -101,17 +96,6 @@ class CategoryUpdateToggle extends React.Component {
     this.state = {
       categories: props.categories,
       selectedCategory: props.selectedCategory,
-      // toggleList: {AUTOPROMO: false,
-      //   CULTURA: true,
-      //   CURIOSITY: false,
-      //   DEUSPI: false,
-      //   DOCUMENTAIRE: false,
-      //   MUSIC: false,
-      //   PROMO: false,
-      //   RADIOVISION: false,
-      //   RAP: false,
-      //   SKATE: false
-      // },
       toggleList: props.toggleList,
       swiper: null
     };
@@ -180,7 +164,7 @@ class CategoryUpdateToggle extends React.Component {
     let toggleStateDuplicate = this.state.toggleList;
 
     // event.target.value = event.target.checked;
-    let value = Boolean(event.target.checked);
+    // let value = Boolean(event.target.checked);
 
     // console.log("NAME: ", event.target.name);
     // console.log("VALUE: ", event.target.value);
@@ -199,11 +183,7 @@ class CategoryUpdateToggle extends React.Component {
         toggleList: toggleStateDuplicate
       });
 
-      // this.setState({
-      //   toggleList: value
-      // });
-
-      //console.log("CATEGORY TOGGLE: ", this.state.toggleList);
+      console.log("CATEGORY TOGGLE: ", this.state.toggleList);
     }).catch((error) => {
         console.error(error);
     }).finally(() => {
@@ -216,8 +196,6 @@ class CategoryUpdateToggle extends React.Component {
   }
 
   render() {
-    // const { toggleList } = this.state;
-
     return (
       <Swiper getSwiper={this.updateSwiper} {...this.params} >
         <TogglesList categoryToggleRef={this} />

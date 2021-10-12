@@ -6,7 +6,7 @@ import api from '../api';
 import { history } from '../utils';
 import Checkbox from '@material-ui/core/Checkbox';
 import DragAndDropCover from '../components/DragAndDropCover'
-import CategoryToggle from '../components/CategoryToggle'
+import CategoryUpdateToggle from '../components/CategoryUpdateToggle'
 import loadingCircle from '../assets/img/loading-circle.gif'
 
 class CategoryUpdate extends Component {
@@ -20,11 +20,13 @@ class CategoryUpdate extends Component {
             cover: '',
             url: '',
             savedCategories: [],
+            toggleList: {},
             isVisible: true,
             isLoading: true,
             isUploading: false
         }
 
+        this.initiateToggleList = this.initiateToggleList.bind(this);
         this.handleChangeInputName = this.handleChangeInputName.bind(this);
         this.handleChangeInputUrl = this.handleChangeInputUrl.bind(this);
         this.handleChangeInputIsVisible = this.handleChangeInputIsVisible.bind(this);
@@ -45,7 +47,6 @@ class CategoryUpdate extends Component {
             isVisible: category.data.data.isVisible
         })
 
-
         this.dragAndDropRef = React.createRef();
         this.categoryToggleRef = React.createRef();
         
@@ -57,12 +58,60 @@ class CategoryUpdate extends Component {
         })
 
         console.log("CATEGORY UPDATE STATE: ", this.state);
+
+        await this.initiateToggleList().then(list => {
+            this.setState({
+                toggleList: list
+            });
+        })
+        
+        console.log("CATEGORY TOGGLE LIST: ", this.state.toggleList);
     }
 
     componentWillUnmount() {
 
     }
     
+    initiateToggleList = async () => {
+        let togglesCheckedArray = {};
+    
+        new Promise((resolve, reject) => {
+          resolve(togglesCheckedArray);
+        }).then(() => {
+          if (this.state.category !== undefined) {
+            // for category update, activate all selected categories
+            this.state.savedCategories.forEach(category => {
+              togglesCheckedArray[category.name] = false;
+      
+              this.state.category.forEach(selectedCategory => {
+                if (category.name === selectedCategory) {
+                  togglesCheckedArray[category.name] = true;
+                }
+              })
+            });
+
+            return togglesCheckedArray;
+          } else {
+            // set category toggles unchecked by default
+            this.state.savedCategories.forEach(category => {
+              togglesCheckedArray[category.name] = false;
+            });
+
+            return togglesCheckedArray;
+          }
+        }).then((togglesCheckedArray) => {
+          // this.setState({
+          //   togglesChecked: togglesCheckedArray
+          // });
+    
+            return togglesCheckedArray;
+        }).catch((error) => {
+            console.error(error);
+        })
+
+        return togglesCheckedArray;
+    }
+
     handleChangeInputName(event) {
         const name = event.target.value.toUpperCase();
 
@@ -250,11 +299,12 @@ class CategoryUpdate extends Component {
                                         </CloudinaryContext>
                                     </section>
 
-                                    <section id="category-insert-categories" className="category-insert-section">
-                                        <p id="category-toggle-title">{this.state.savedCategories.length} CATÉGORIES DISPONIBLES</p>
-                                        <CategoryToggle categories={this.state.savedCategories} ref={this.categoryToggleRef} />
-                                    </section>
-
+                                    { Object.keys(this.state.toggleList).length > 0 && (
+                                        <section id="category-insert-categories" className="category-insert-section">
+                                            <p id="category-toggle-title">{this.state.savedCategories.length} CATÉGORIES DISPONIBLES</p>
+                                            <CategoryUpdateToggle categories={this.state.savedCategories} selectedCategory={category} toggleList={this.state.toggleList} ref={this.categoryToggleRef} />
+                                        </section>
+                                    )}
                                     <section id="category-insert-url-visible" className="category-insert-section">
                                         {/* <input id="category-url-input" className="form-control" type="text" value={url} placeholder="URL" onChange={this.handleChangeInputUrl} /> */}
                                         <div id="category-visible-container">
