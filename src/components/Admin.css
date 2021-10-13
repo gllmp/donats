@@ -371,6 +371,10 @@ button:focus {
     height: 100%;
 }
 
+#category-list-container .swiper-slide-image {
+    width: 80%;
+}
+
 #category-list-container .align-items-center {
     height: 100%;
 }
@@ -702,6 +706,10 @@ button:focus {
 
     #video-dropzone-container {
         font-size: 0.7em;
+    }
+
+    #category-list-container .swiper-slide-image {
+        width: 100%;
     }
 
     .category-insert-section {
