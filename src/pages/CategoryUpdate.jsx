@@ -30,6 +30,7 @@ class CategoryUpdate extends Component {
         this.getInitialCategoryParameters = this.getInitialCategoryParameters.bind(this);
         this.initiateToggleList = this.initiateToggleList.bind(this);
         this.handleChangeInputName = this.handleChangeInputName.bind(this);
+        this.handleChangeCategorySwitch = this.handleChangeCategorySwitch.bind(this);
         this.handleChangeInputUrl = this.handleChangeInputUrl.bind(this);
         this.handleChangeInputIsVisible = this.handleChangeInputIsVisible.bind(this);
         this.uploadFileToCloudinary = this.uploadFileToCloudinary.bind(this);
@@ -59,10 +60,6 @@ class CategoryUpdate extends Component {
             });
         })
 
-        this.getInitialCategoryParameters();
-
-        console.log("CATEGORY UPDATE STATE: ", this.state);
-
         await this.initiateToggleList().then(list => {
             this.setState({
                 toggleList: list
@@ -70,6 +67,10 @@ class CategoryUpdate extends Component {
         })
         
         console.log("CATEGORY TOGGLE LIST: ", this.state.toggleList);
+
+        this.getInitialCategoryParameters();
+
+        console.log("CATEGORY UPDATE STATE: ", this.state);
     }
 
     componentWillUnmount() {
@@ -77,11 +78,14 @@ class CategoryUpdate extends Component {
     }
 
     getInitialCategoryParameters() {
+        const cloneToggleList = { ...this.state.toggleList };
+
         this.setState({
             initialCategoryParameters: {
                 _id: this.state.id,
                 name: this.state.name,
                 category: this.state.category,
+                toggleList: cloneToggleList,
                 isVisible: this.state.isVisible,
                 cover: this.state.cover,
                 url: this.state.url,
@@ -139,6 +143,12 @@ class CategoryUpdate extends Component {
         });
 
         this.setState({ name });
+    }
+
+    handleChangeCategorySwitch(list) {
+        const toggleList = list;
+
+        this.setState({ toggleList })        
     } 
 
     handleChangeInputUrl(event) {
@@ -319,7 +329,7 @@ class CategoryUpdate extends Component {
                                     { Object.keys(this.state.toggleList).length > 0 && (
                                         <section id="category-insert-categories" className="category-insert-section">
                                             <p id="category-toggle-title">{this.state.savedCategories.length} CATÉGORIES DISPONIBLES</p>
-                                            <CategoryUpdateToggle categories={this.state.savedCategories} selectedCategory={category} toggleList={this.state.toggleList} ref={this.categoryToggleRef} />
+                                            <CategoryUpdateToggle onChange={this.handleChangeCategorySwitch} categories={this.state.savedCategories} selectedCategory={category} toggleList={this.state.toggleList} ref={this.categoryToggleRef} />
                                         </section>
                                     )}
                                     <section id="category-insert-url-visible" className="category-insert-section">

@@ -181,6 +181,8 @@ class CategoryUpdateToggle extends React.Component {
         toggleList: toggleStateDuplicate
       });
 
+      this.props.onChange(this.state.toggleList);
+
       console.log("CATEGORY TOGGLE: ", this.state.toggleList);
     }).catch((error) => {
         console.error(error);
