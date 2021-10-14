@@ -37,7 +37,7 @@ const startApp = async () => {
         }).finally(() => {
 
         });
-    } else if ( (window.location.pathname.includes(routes.admin)) || (window.location.pathname.includes(routes.login)) ) {
+    } else if ( (window.location.pathname === routes.admin) || (window.location.pathname === routes.login) ) {
         renderApp();
     } else if (window.location.pathname.includes(routes.adminVideo)) {
         await api.getAllVideos().then(videos => {
@@ -50,7 +50,16 @@ const startApp = async () => {
 
         });
     } else if (window.location.pathname.includes(routes.adminCategory)) {
-        renderApp(categoryData);
+        await api.getAllCategories().then(categories => {
+            categoryData = categories.data.data;
+            console.log(categoryData);
+        }).then( () => {
+            renderApp(categoryData);
+        }).catch((error) => {
+            console.error(error);
+        }).finally(() => {
+
+        });
     } else {
         window.location.pathname = "/";
         renderApp();
