@@ -341,7 +341,7 @@ class CategoryUpdate extends Component {
                                     </section>
 
                                     <section id="category-insert-button-container" className="category-insert-section">
-                                        <button id="category-button-save" className="btn btn-primary" onClick={this.uploadCategory}>SAVE</button>
+                                        <button id="category-button-save" className="btn btn-primary" onClick={this.uploadCategory}>UPDATE</button>
                                         <Link to="/admin/categories/list" id="category-button-cancel" className="btn btn-warning mr-3">CANCEL</Link>
                                         <button id="category-button-delete" className="btn btn-danger" onClick={this.deleteCategory}>DELETE</button>
                                         {this.state.isUploading &&
