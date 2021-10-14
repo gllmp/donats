@@ -33,6 +33,8 @@ class CategoryUpdate extends Component {
         this.handleChangeCategorySwitch = this.handleChangeCategorySwitch.bind(this);
         this.handleChangeInputUrl = this.handleChangeInputUrl.bind(this);
         this.handleChangeInputIsVisible = this.handleChangeInputIsVisible.bind(this);
+        this.listHasChanged = this.listHasChanged.bind(this);
+        this.checkUpdatedParameters = this.checkUpdatedParameters.bind(this);
         this.uploadFileToCloudinary = this.uploadFileToCloudinary.bind(this);
         this.uploadCategory = this.uploadCategory.bind(this);
         this.deleteCategory = this.deleteCategory.bind(this);
@@ -163,6 +165,78 @@ class CategoryUpdate extends Component {
         this.setState({ isVisible });
     }
 
+    listHasChanged(initialList, updatedList) {
+        initialList = Object.entries(initialList);
+        updatedList = Object.entries(updatedList);
+
+        if (initialList.length !== updatedList.length) return true;
+        
+        for (let i = 0; i < initialList.length; i++){
+            if (initialList[i][1] !== updatedList[i][1]){
+                return true;
+            }
+        }
+
+        return false; 
+    }
+
+    checkUpdatedParameters() {
+        const { _id, name, category, toggleList, cover, isVisible, url, savedCategories } = this.state;
+
+        // check if each category parameters have been changed
+        let updatedCategoryParameters = {
+            isNameUpdated: false,
+            isCoverUpdated: false,
+            isCategoryUpdated: false,
+            isUrlUpdated: false,
+            isVisibleUpdated: false
+        }
+
+        // NAME
+        if (name !== this.state.initialCategoryParameters.name) {
+            if (!name) {
+                alert("Ajoutez un nom avant de continuer");
+            } else {
+                updatedCategoryParameters.isNameUpdated = true;
+            }
+        }
+
+        // COVER
+        if (this.dragAndDropRef.current.state.size) {
+            if (!this.dragAndDropRef.current.state.hasLoaded) {
+                alert("Ajoutez une image avant de continuer");
+            } else {
+                updatedCategoryParameters.isCoverUpdated = true;
+            }
+        }
+
+        // CATEGORY
+        if (this.listHasChanged(toggleList, this.state.initialCategoryParameters.toggleList)) {
+            if (Object.values(toggleList).every((toggleValue) => {
+                    return toggleValue === false;
+                })) 
+            {
+                alert("Ajoutez une catégorie avant de continuer");
+            } else {
+                updatedCategoryParameters.isCategoryUpdated = true;
+            }
+        }
+        
+        // VISIBLE
+        if (isVisible !== this.state.initialCategoryParameters.isVisible) {
+            updatedCategoryParameters.isVisibleUpdated = true;
+        }
+
+        // URL
+        if (url !== this.state.initialCategoryParameters.url) {
+            updatedCategoryParameters.isUrlUpdated = true;
+        }
+
+        console.log("CATEGORY UPDATED PARAMETERS: ", updatedCategoryParameters);
+
+        return updatedCategoryParameters;
+    }
+
     uploadFileToCloudinary = async (file) => {
         // upload compressed file to Cloudinary with unsigned preset
         const url = `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUDNAME}/upload`;
@@ -205,97 +279,99 @@ class CategoryUpdate extends Component {
     }
 
     uploadCategory() {        
-        const { _id, name, category, cover, isVisible, url, savedCategories } = this.state;
+        const { _id, name, category, toggleList, cover, isVisible, url, savedCategories } = this.state;
+        
+        let updatedCategoryParameters = this.checkUpdatedParameters();
 
-        if (!name) {
-            alert("Ajoutez un nom avant de continuer");
-        } else if (!this.dragAndDropRef.current.state.hasLoaded) {
-            alert("Ajoutez une image avant de continuer");
-        } else {
-            this.setState({
-                isUploading: true
-            });
+        // if (!name) {
+        //     alert("Ajoutez un nom avant de continuer");
+        // } else if (!this.dragAndDropRef.current.state.hasLoaded) {
+        //     alert("Ajoutez une image avant de continuer");
+        // } else {
+        //     this.setState({
+        //         isUploading: true
+        //     });
             
-            const promiseName = new Promise((resolve, reject) => {
+        //     const promiseName = new Promise((resolve, reject) => {
 
-                resolve(this.state.name);
-            });
+        //         resolve(this.state.name);
+        //     });
 
-            const promiseCategory = new Promise(async (resolve, reject) => {
-                let categoryArray = [];
-                categoryArray.push(this.state.name);
+        //     const promiseCategory = new Promise(async (resolve, reject) => {
+        //         let categoryArray = [];
+        //         categoryArray.push(this.state.name);
 
-                savedCategories.forEach(element => {
-                    if (this.categoryToggleRef.current.state.toggleList[element.name] === true) {
-                        categoryArray.push(element.name)
-                    }
-                });
+        //         savedCategories.forEach(element => {
+        //             if (this.categoryToggleRef.current.state.toggleList[element.name] === true) {
+        //                 categoryArray.push(element.name)
+        //             }
+        //         });
             
-                await this.setState({ 
-                    category: categoryArray
-                });
+        //         await this.setState({ 
+        //             category: categoryArray
+        //         });
 
-                resolve(this.state.category);
-            });
+        //         resolve(this.state.category);
+        //     });
 
-            const promiseIsVisible = new Promise((resolve, reject) => {
-                resolve(this.state.isVisible);
-            });
+        //     const promiseIsVisible = new Promise((resolve, reject) => {
+        //         resolve(this.state.isVisible);
+        //     });
 
-            const promiseCover = new Promise(async (resolve, reject) => {
-                // await this.uploadFileToCloudinary(this.dragAndDropRef.current.state.file);
+        //     const promiseCover = new Promise(async (resolve, reject) => {
+        //         // await this.uploadFileToCloudinary(this.dragAndDropRef.current.state.file);
 
-                resolve(this.state.cover);
-            })
+        //         resolve(this.state.cover);
+        //     })
 
-            const promiseUrl = new Promise((resolve, reject) => {
-                resolve(this.state.url);
-            });
+        //     const promiseUrl = new Promise((resolve, reject) => {
+        //         resolve(this.state.url);
+        //     });
 
-            let payload = { name, category, cover, isVisible, url };
+        //     let payload = { name, category, cover, isVisible, url };
 
-            Promise.all([promiseName, promiseCategory, promiseIsVisible, promiseCover, promiseUrl])
-            .then((values) => {
-                //console.log(values);
+        //     Promise.all([promiseName, promiseCategory, promiseIsVisible, promiseCover, promiseUrl])
+        //     .then((values) => {
+        //         //console.log(values);
 
-                payload.name = values[0];
-                payload.category = values[1];
-                payload.isVisible = values[2];
-                payload.cover = values[3];
-                payload.url = values[4];
+        //         payload.name = values[0];
+        //         payload.category = values[1];
+        //         payload.isVisible = values[2];
+        //         payload.cover = values[3];
+        //         payload.url = values[4];
 
-                console.log("PAYLOAD: ", payload);
-                console.log("CATEGORY STATE: ", this.state);
+        //         console.log("PAYLOAD: ", payload);
+        //         console.log("CATEGORY STATE: ", this.state);
 
-                return payload;
-            }).then(async (result) => {
-                // await api.insertCategory(result)
-                // .then(res => {
-                //     this.setState({
-                //         name: '',
-                //         category: '',
-                //         cover: '',
-                //         isVisible: true,
-                //         url: '',
-                //         isUploading: false
-                //     });
+        //         return payload;
+        //     }).then(async (result) => {
+        //         // await api.insertCategory(result)
+        //         // .then(res => {
+        //         //     this.setState({
+        //         //         name: '',
+        //         //         category: '',
+        //         //         cover: '',
+        //         //         isVisible: true,
+        //         //         url: '',
+        //         //         isUploading: false
+        //         //     });
 
-                //     window.alert(`Catégorie créée avec succès`);
-                // }).catch((error) => {
-                //     this.setState({
-                //         isUploading: false
-                //     });
+        //         //     window.alert(`Catégorie créée avec succès`);
+        //         // }).catch((error) => {
+        //         //     this.setState({
+        //         //         isUploading: false
+        //         //     });
 
-                //     console.error(error);
-                //     window.alert(`La création de la catégorie a échouée`);
-                // });
-            }).catch((error) => {
-                console.error(error);
-            }).finally(() => {
-                history.push(process.env.PUBLIC_URL + "/admin/categories/list");
-                window.location.reload(true);
-            });
-        }
+        //         //     console.error(error);
+        //         //     window.alert(`La création de la catégorie a échouée`);
+        //         // });
+        //     }).catch((error) => {
+        //         console.error(error);
+        //     }).finally(() => {
+        //         history.push(process.env.PUBLIC_URL + "/admin/categories/list");
+        //         window.location.reload(true);
+        //     });
+        // }
 
     }
 
