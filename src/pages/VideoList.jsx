@@ -28,7 +28,9 @@ class DeleteVideo extends Component {
             await new Promise(async (resolve, reject) => {
                 await api.deleteVideoById(this.props.id).then( () => {
                     resolve();
-                });    
+                });
+            }).then(async () => {
+                await alert("Vidéo supprimée avec succès !");
             }).catch((error) => {
                 console.error(error);
             }).finally(() => {
