@@ -137,6 +137,13 @@ class CategoryUpdate extends Component {
 
     handleChangeInputName(event) {
         const name = event.target.value.toUpperCase();
+       
+        let toggleLabels = document.getElementsByClassName("MuiFormControlLabel-label");
+        for (let i = 0; i<toggleLabels.length; i++) {
+            if (toggleLabels[i].textContent === this.state.name) {
+                toggleLabels[i].textContent = name;            
+            }
+        }
 
         this.state.savedCategories.forEach(element => {
             if (name === element.name) {
@@ -168,6 +175,8 @@ class CategoryUpdate extends Component {
     listHasChanged(initialList, updatedList) {
         initialList = Object.entries(initialList);
         updatedList = Object.entries(updatedList);
+
+        if (this.state.name !== this.state.initialCategoryParameters.name) return true;
 
         if (initialList.length !== updatedList.length) return true;
         
@@ -283,96 +292,122 @@ class CategoryUpdate extends Component {
         
         let updatedCategoryParameters = this.checkUpdatedParameters();
 
-        // if (!name) {
-        //     alert("Ajoutez un nom avant de continuer");
-        // } else if (!this.dragAndDropRef.current.state.hasLoaded) {
-        //     alert("Ajoutez une image avant de continuer");
-        // } else {
-        //     this.setState({
-        //         isUploading: true
-        //     });
+        this.setState({
+            isUploading: true
+        });
+        
+        const promiseName = new Promise((resolve, reject) => {
+            if (updatedCategoryParameters.isNameUpdated) {
+                resolve(this.state.name);
+            } else {
+                resolve(this.state.initialCategoryParameters.name);
+            }
+        });
+
+        const promiseCover = new Promise(async (resolve, reject) => {
+            if (updatedCategoryParameters.isCoverUpdated) {
+                await this.uploadFileToCloudinary(this.dragAndDropRef.current.state.file);
+                resolve(this.state.cover);
+            } else {
+                resolve(this.state.initialCategoryParameters.cover);
+            }
+        })
+
+        const promiseCategory = new Promise(async (resolve, reject) => {
+            let categoryArray = [];
+            // categoryArray.push(this.state.name);
             
-        //     const promiseName = new Promise((resolve, reject) => {
+            await savedCategories.forEach(element => {
+                if (this.categoryToggleRef.current.state.toggleList[element.name] === true) {
+                    if (element.name === this.state.initialCategoryParameters.name) {
+                        categoryArray.push(this.state.name);
+                    } else {
+                        categoryArray.push(element.name);
+                    }
+                }
+            });
+        
+            await this.setState({ 
+                category: categoryArray
+            });
 
-        //         resolve(this.state.name);
-        //     });
+            if (updatedCategoryParameters.isCategoryUpdated) {
+                resolve(this.state.category);
+            } else {
+                resolve(this.state.initialCategoryParameters.category);
+            }
+        });
 
-        //     const promiseCategory = new Promise(async (resolve, reject) => {
-        //         let categoryArray = [];
-        //         categoryArray.push(this.state.name);
+        const promiseIsVisible = new Promise((resolve, reject) => {
+            if (updatedCategoryParameters.isVisibleUpdated) {
+                resolve(this.state.isVisible);
+            } else {
+                resolve(this.state.initialCategoryParameters.isVisible);
+            }
+        });
 
-        //         savedCategories.forEach(element => {
-        //             if (this.categoryToggleRef.current.state.toggleList[element.name] === true) {
-        //                 categoryArray.push(element.name)
-        //             }
-        //         });
-            
-        //         await this.setState({ 
-        //             category: categoryArray
-        //         });
+        const promiseUrl = new Promise((resolve, reject) => {
+            if (updatedCategoryParameters.isUrlUpdated) {
+                resolve(this.state.url);
+            } else {
+                resolve(this.state.initialCategoryParameters.url);
+            }
+        });
 
-        //         resolve(this.state.category);
-        //     });
+        let payload = { name, category, cover, isVisible, url };
 
-        //     const promiseIsVisible = new Promise((resolve, reject) => {
-        //         resolve(this.state.isVisible);
-        //     });
+        Promise.all([promiseName, promiseCategory, promiseIsVisible, promiseCover, promiseUrl])
+        .then((values) => {
+            // console.log(values);
 
-        //     const promiseCover = new Promise(async (resolve, reject) => {
-        //         // await this.uploadFileToCloudinary(this.dragAndDropRef.current.state.file);
+            payload.name = values[0];
+            payload.category = values[1];
+            payload.isVisible = values[2];
+            payload.cover = values[3];
+            payload.url = values[4];
 
-        //         resolve(this.state.cover);
-        //     })
+            console.log("PAYLOAD: ", payload);
+            console.log("CATEGORY STATE: ", this.state);
 
-        //     const promiseUrl = new Promise((resolve, reject) => {
-        //         resolve(this.state.url);
-        //     });
+            return payload;
+        }).then(async (result) => {
+            if (Object.values(updatedCategoryParameters).every((param) => {
+                return param === false;
+                })
+            ) {
+                this.setState({
+                    isUploading: false
+                });
+        
+                alert("Aucun paramètre n'a été modifié, mise à jour non effectuée.")
+            } else {
+                await api.updateCategoryById(this.state.id, result)
+                .then(res => {
+                    this.setState({
+                        // name: '',
+                        // category: '',
+                        // cover: '',
+                        // isVisible: true,
+                        // url: '',
+                        isUploading: false
+                    });
 
-        //     let payload = { name, category, cover, isVisible, url };
+                    window.alert(`Catégorie modifiée avec succès`);
+                }).catch((error) => {
+                    this.setState({
+                        isUploading: false
+                    });
 
-        //     Promise.all([promiseName, promiseCategory, promiseIsVisible, promiseCover, promiseUrl])
-        //     .then((values) => {
-        //         //console.log(values);
-
-        //         payload.name = values[0];
-        //         payload.category = values[1];
-        //         payload.isVisible = values[2];
-        //         payload.cover = values[3];
-        //         payload.url = values[4];
-
-        //         console.log("PAYLOAD: ", payload);
-        //         console.log("CATEGORY STATE: ", this.state);
-
-        //         return payload;
-        //     }).then(async (result) => {
-        //         // await api.insertCategory(result)
-        //         // .then(res => {
-        //         //     this.setState({
-        //         //         name: '',
-        //         //         category: '',
-        //         //         cover: '',
-        //         //         isVisible: true,
-        //         //         url: '',
-        //         //         isUploading: false
-        //         //     });
-
-        //         //     window.alert(`Catégorie créée avec succès`);
-        //         // }).catch((error) => {
-        //         //     this.setState({
-        //         //         isUploading: false
-        //         //     });
-
-        //         //     console.error(error);
-        //         //     window.alert(`La création de la catégorie a échouée`);
-        //         // });
-        //     }).catch((error) => {
-        //         console.error(error);
-        //     }).finally(() => {
-        //         history.push(process.env.PUBLIC_URL + "/admin/categories/list");
-        //         window.location.reload(true);
-        //     });
-        // }
-
+                    console.error(error);
+                    window.alert(`La modification de la catégorie a échouée`);
+                });
+            }
+        }).catch((error) => {
+            console.error(error);
+        }).finally(() => {
+            history.push(process.env.PUBLIC_URL + "/admin/categories/list");
+            window.location.reload(true);
+        });
     }
 
     
