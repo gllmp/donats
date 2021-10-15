@@ -24,7 +24,7 @@ const startApp = async () => {
         }).then(async () => {
             await api.getAllCategories().then(categories => {
                 categoryData = categories.data.data;
-                //console.log(categoryData);
+                // console.log(categoryData);
             }).then( () => {
                 renderApp(videoData, categoryData);
             }).catch((error) => {
@@ -52,7 +52,7 @@ const startApp = async () => {
     } else if (window.location.pathname.includes(routes.adminCategory)) {
         await api.getAllCategories().then(categories => {
             categoryData = categories.data.data;
-            console.log(categoryData);
+            // console.log(categoryData);
         }).then( () => {
             renderApp(categoryData);
         }).catch((error) => {
