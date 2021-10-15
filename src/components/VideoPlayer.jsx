@@ -53,7 +53,7 @@ class VideoPlayer extends React.Component {
     onPlayerPlay(event) {
         if (this.state.isVideoAvailable === false) {
             let playerElement = document.getElementById("video-container");
-            playerElement.style.display = "block";
+            playerElement.style.visibility = "visible";
     
             this.setState({
                 isVideoAvailable: true
@@ -78,7 +78,7 @@ class VideoPlayer extends React.Component {
             console.log("Video Not Found");
 
             let playerElement = document.getElementById("video-container");
-            playerElement.style.display = "none";
+            playerElement.style.visibility = "hidden";
 
             this.setState({
                 isVideoAvailable: false

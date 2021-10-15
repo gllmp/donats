@@ -175,13 +175,13 @@
 }
 
 /* SWIPER */
-.app-container #slider {
+.app-container #slider-player-wrapper {
   margin-top: auto;
 }
 
 .app-container #slider-container { 
   width: 100%;
-  margin-bottom: 2vh;
+  /* margin-bottom: 2vh; */
   opacity: 1;
 }
 
@@ -221,6 +221,7 @@
 /* PLAYER */
 #player-container {
   display: none;
+  margin-bottom: 1em;
 }
 
 #quarantine-logo {

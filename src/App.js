@@ -381,7 +381,7 @@ class App extends React.Component {
               <BannerTop swapElement={this.state.swapElement} handleSwap={this.handleSwap} />
               <div className="App">
                 <div className="app-container">
-                  <div id="slider" className="row">
+                  <div id="slider-player-wrapper" className="row">
                     <div className="col-lg">
                       <div className="align-items-center justify-content-center">
                         <ContactForm ref={this.contactRef} />
@@ -393,7 +393,7 @@ class App extends React.Component {
                     </div>
                   </div>
                   <RandomButton onClick={(e) => this.sliderRef.current.selectSlide(e.target)} />
-                        <Footer />
+                  <Footer />
 
                 </div>    
               </div>
