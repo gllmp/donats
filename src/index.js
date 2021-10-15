@@ -6,6 +6,11 @@ import api from './api';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+// hide logs in production
+if (process.env.NODE_ENV === 'production') {
+    console.log = function () {};
+}
+
 let videoData = [];
 let categoryData = [];
 
