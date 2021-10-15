@@ -371,6 +371,17 @@ button:focus {
     height: 100%;
 }
 
+#category-list-container #category-slider-container {
+    margin-top: 2em;
+}
+
+#category-list-container .category-list-section {
+    margin: 0 auto;
+    margin-top: 1em;
+    max-width: 800px;
+    max-height: 1080px;
+}
+
 #category-list-container .swiper-slide-image {
     width: 80%;
 }
@@ -385,12 +396,6 @@ button:focus {
     margin-bottom: 0;
 }
 
-.category-list-section {
-    margin: 0 auto;
-    margin-top: 3vh;
-    max-width: 800px;
-    max-height: 1080px;
-}
 
 /* CATEGORY INSERT */
 #category-insert-wrapper {

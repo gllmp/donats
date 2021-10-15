@@ -1,26 +1,30 @@
 /* APP */
 .App {
+  height: 90vh;
   text-align: center;
   background-color: #000;
   color: #fff;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
 }
 
 .app-container {
   width: 80% !important;
-  max-width: 1400px;
-  position: relative;
-  top: -15vh;
+  max-width: 1080px;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: initial;
 }
 
 /* BANNER */
 #banner-top {
   padding: 0;
+  height: 10vh;
 }
 
 #banner-title {
@@ -30,6 +34,7 @@
   margin-top: 2vh;
   font-size: 3.5em;
   opacity: 1;
+  z-index: 2;
 }
 
 #banner-title:focus {
@@ -37,9 +42,11 @@
 }
 
 #banner-info {
+  position: relative;
   margin-right: 5vw;
   margin-top: 2vh;
   opacity: 1;
+  z-index: 2;
 }
 
 #banner-info:hover {
@@ -168,10 +175,18 @@
 }
 
 /* SWIPER */
+.app-container #slider {
+  margin-top: auto;
+}
+
 .app-container #slider-container { 
   width: 100%;
   margin-bottom: 2vh;
   opacity: 1;
+}
+
+.swiper-slide {
+  max-width: 540px;
 }
 
 .swiper-slide:hover {
@@ -236,10 +251,8 @@
 
 #video-button-container {
   margin: 0 auto;
-  position: fixed;
-  left: 50%;
-  transform: translate(-50%, 50%);
-  bottom: 15vh;
+  margin-top: 1em;
+  position: relative;
 }
 
 #video-button {
@@ -286,7 +299,7 @@
     width: 80% !important;
     max-width: 768px;
     position: relative;
-    top: -20vh;
+    /* top: -20vh; */
   }
 
   #video-button-img {
@@ -310,7 +323,7 @@
 
 @media only screen and (max-width: 600px) {
   #banner-top {
-    margin-top: 2vh;
+    /* margin-top: 2vh; */
   }
 
   #banner-title {

@@ -381,19 +381,20 @@ class App extends React.Component {
               <BannerTop swapElement={this.state.swapElement} handleSwap={this.handleSwap} />
               <div className="App">
                 <div className="app-container">
-                  <div className="row">
+                  <div id="slider" className="row">
                     <div className="col-lg">
                       <div className="align-items-center justify-content-center">
                         <ContactForm ref={this.contactRef} />
                         <Slider videos={videos} categories={this.props.categoryData} handleSwap={this.handleSwap} ref={this.sliderRef} />
                         <VideoPlayer videos={videos} categories={categories} ref={this.videoPlayerRef} slider={this.sliderRef} />
-                        <RandomButton onClick={(e) => this.sliderRef.current.selectSlide(e.target)} />
                         {/* <button onClick={() => this.videoPlayerRef.current.onUpdateVideo()}>RANDOM</button> */}
                         <div className="landscape-subtitle">Le hasard fait bien les choses</div>
-                        <Footer />
                       </div>
                     </div>
                   </div>
+                  <RandomButton onClick={(e) => this.sliderRef.current.selectSlide(e.target)} />
+                        <Footer />
+
                 </div>    
               </div>
             </Route>
