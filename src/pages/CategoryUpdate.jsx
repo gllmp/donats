@@ -410,9 +410,26 @@ class CategoryUpdate extends Component {
         });
     }
 
-    
-    deleteCategory() { 
-        
+    deleteCategory = async () => {
+        if (
+            window.confirm(
+                //`Voulez-vous supprimer ${this.state.id} définitivement ?`,
+                "Voulez-vous supprimer cette catégorie définitivement ?",
+            )
+        ) {
+            await new Promise(async (resolve, reject) => {
+                await api.deleteCategoryById(this.state.id).then( () => {
+                    resolve();
+                });
+            }).then(async () => {
+                await alert("Catégorie supprimée avec succès !");
+            }).catch((error) => {
+                console.error(error);
+            }).finally(() => {
+                history.push(process.env.PUBLIC_URL + "/admin/categories/list");
+                window.location.reload(true);
+            });
+        }
     }
 
     render() {
