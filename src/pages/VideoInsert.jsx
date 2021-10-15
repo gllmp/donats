@@ -166,7 +166,10 @@ class VideoInsert extends Component {
                         }).finally(() => {
                             currentCategoryIndex++;
                             if (currentCategoryIndex === data.category[currentCategory].length) {
-                                window.alert(`Vidéo ajoutée avec succès`);
+                                document.getElementById("video-url-input").disabled = false;
+                                document.getElementById("video-category-select").disabled = false;        
+            
+                                window.alert(`Fichier uploadé avec succès`);
                             }
                         });
                     });
@@ -189,7 +192,7 @@ class VideoInsert extends Component {
             alert("Ajoutez une URL avant de continer");
         } else if (!category && data.length === 0) {
             alert("Ajoutez une catégorie avant de continuer");
-        } else if (data.length > 0) {
+        } else if (data.length > 0) {            
             // Upload data from file
             this.handleIncludeDataFromFile();
         } else {
@@ -238,6 +241,7 @@ class VideoInsert extends Component {
 
                         <Label>URL: </Label>
                         <InputText
+                            id="video-url-input"
                             type="text"
                             value={url}
                             onChange={this.handleChangeInputUrl}
@@ -246,6 +250,7 @@ class VideoInsert extends Component {
                         <Label className="mt-4">CATEGORY: </Label>
 
                         <Select
+                            id="video-category-select"
                             type="text"
                             value={category}
                             onChange={this.handleChangeInputCategory}

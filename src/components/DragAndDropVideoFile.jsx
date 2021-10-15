@@ -58,6 +58,9 @@ class DragAndDropVideoFile extends Component {
       }).catch((error) => {
         console.error(error);
       }).finally(() => {
+        document.getElementById("video-url-input").disabled = true;
+        document.getElementById("video-category-select").disabled = true;
+
         console.log("SELECTED FILE: ", this.state);
       });    
     })
