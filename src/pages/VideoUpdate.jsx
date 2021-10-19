@@ -124,7 +124,12 @@ class VideoUpdate extends Component {
     }
 
     render() {
-        const { title, url, category } = this.state;
+        let { title, url, category } = this.state;
+
+        if (!title) {
+            //title = "";
+        }
+
         return (
             <div id="video-upload-container">
                 {!this.state.isLoading && (
