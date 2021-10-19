@@ -127,7 +127,7 @@ class VideoUpdate extends Component {
         let { title, url, category } = this.state;
 
         if (!title) {
-            //title = "";
+            title = "";
         }
 
         return (
