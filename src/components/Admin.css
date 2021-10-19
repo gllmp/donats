@@ -122,7 +122,7 @@ body {
 }
 
 .nav-link {
-    color: #fff;
+    color: #fff !important;
     padding: 5px;
     padding-bottom: 0;
     margin-right: 1em;
