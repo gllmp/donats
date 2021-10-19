@@ -193,6 +193,17 @@ body {
     outline: 0;
 }
 
+.select-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.link-checkbox {
+
+}
+
 /* Input autofill background */
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 

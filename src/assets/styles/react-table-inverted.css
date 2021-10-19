@@ -255,6 +255,11 @@
     text-align: center;
 }
 
+/* Checkbox */
+.ReactTable .gridCellCheckbox {
+    text-align: center;
+}
+
 .ReactTable .rt-expander {
     display: inline-block;
     position: relative;

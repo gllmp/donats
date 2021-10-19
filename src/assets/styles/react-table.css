@@ -241,6 +241,16 @@
 	opacity: 0 !important
 }
 
+.ReactTable .gridCellLink {
+    /* CUSTOM CSS */
+    text-align: center;
+}
+
+/* Checkbox */
+.ReactTable .gridCellCheckbox {
+    text-align: center;
+}
+
 .ReactTable .rt-expander {
 	display: inline-block;
 	position: relative;
