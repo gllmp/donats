@@ -97,9 +97,9 @@ class VideoInsert extends Component {
         let url = event.target.value;
         
         if (url.includes("https://www.youtube.com/watch?v=")) {
-            url = url.split("https://www.youtube.com/watch?v=")[1];
+            url = url.split("https://www.youtube.com/watch?v=")[1].split("&")[0];
         } else if (url.includes("https://youtu.be/")) {
-            url = url.split("https://youtu.be/")[1];
+            url = url.split("https://youtu.be/")[1].split("&")[0];
         }
 
         this.setState({ url });
