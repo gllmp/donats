@@ -100,7 +100,7 @@ class CategoryInsert extends Component {
             });        
         }).then((result) => {
             this.setState({
-                cover: result.body.url
+                cover: result.body.secure_url
             })
 
             //console.log("UPLOADED FILE: ", this.state);
