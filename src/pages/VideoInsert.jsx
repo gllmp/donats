@@ -94,7 +94,14 @@ class VideoInsert extends Component {
     }
 
     handleChangeInputUrl = async event => {
-        const url = event.target.value;
+        let url = event.target.value;
+        
+        if (url.includes("https://www.youtube.com/watch?v=")) {
+            url = url.split("https://www.youtube.com/watch?v=")[1];
+        } else if (url.includes("https://youtu.be/")) {
+            url = url.split("https://youtu.be/")[1];
+        }
+        console.log(url)
         this.setState({ url });
     }
     
