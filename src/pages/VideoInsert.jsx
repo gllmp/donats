@@ -101,7 +101,7 @@ class VideoInsert extends Component {
         } else if (url.includes("https://youtu.be/")) {
             url = url.split("https://youtu.be/")[1];
         }
-        console.log(url)
+
         this.setState({ url });
     }
     
