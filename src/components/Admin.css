@@ -738,6 +738,13 @@ button:focus {
         max-width: 300px;
     }
 
+    #admin-list-container .loading-circle {
+        position: absolute;
+        top: -8%;
+        left: 85%;
+        z-index: 0;
+    }
+
     #admin-title-container {
         max-width: none;
         width: 100%;
