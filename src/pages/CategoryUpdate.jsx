@@ -418,8 +418,15 @@ class CategoryUpdate extends Component {
             )
         ) {
             await new Promise(async (resolve, reject) => {
-                await api.deleteCategoryById(this.state.id).then( () => {
+                await api.deleteCategoryById(this.state.id)
+                .then(() => {
                     resolve();
+                }).then(() => {
+
+                }).catch((error) => {
+                    console.error(error);
+                }).finally(() => {
+
                 });
             }).then(async () => {
                 await alert("Catégorie supprimée avec succès !");
