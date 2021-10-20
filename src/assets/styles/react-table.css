@@ -248,7 +248,7 @@
 
 /* Checkbox */
 .ReactTable .gridCellCheckbox {
-    text-align: center;
+    /* text-align: center; */
 }
 
 .ReactTable .rt-expander {

@@ -195,13 +195,37 @@ body {
 
 .select-header {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: flex-start;
     align-items: center;
 }
 
-.link-checkbox {
+.select-checkbox {
+    margin-left: 1em;
+}
 
+.select-checkbox:hover {
+    cursor: pointer;
+}
+
+.link-checkbox {
+    margin-left: 1em;
+}
+
+.link-checkbox:hover {
+    cursor: pointer;
+}
+
+.bin-icon {
+    width: 20px;
+    height: 20px;
+    stroke: #fff;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.bin-icon:hover {
+    cursor: pointer;
 }
 
 /* Input autofill background */
