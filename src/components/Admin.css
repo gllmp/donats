@@ -169,6 +169,13 @@ body {
     transform: translate(0, -50%);
 }
 
+#admin-list-container .loading-circle {
+    position: absolute;
+    top: 0%;
+    left: 100%;
+    z-index: 1;
+}
+
 /* FORM */
 .jumbotron {
     background-color: #000;
