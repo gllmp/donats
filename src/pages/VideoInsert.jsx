@@ -163,6 +163,8 @@ class VideoInsert extends Component {
                                         url: '',
                                         category: '',
                                     })
+                                }).catch((error) => {
+                                    console.error(error);
                                 }).finally(() => {
                                     //window.location.href = `/admin`;
                                 });
