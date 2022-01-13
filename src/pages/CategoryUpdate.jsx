@@ -23,6 +23,7 @@ class CategoryUpdate extends Component {
             initialCategoryParameters: {},
             url: '',
             isVisible: true,
+            isCentered: false,
             isLoading: true,
             isUploading: false
         }
@@ -33,6 +34,7 @@ class CategoryUpdate extends Component {
         this.handleChangeCategorySwitch = this.handleChangeCategorySwitch.bind(this);
         this.handleChangeInputUrl = this.handleChangeInputUrl.bind(this);
         this.handleChangeInputIsVisible = this.handleChangeInputIsVisible.bind(this);
+        this.handleChangeInputIsCentered = this.handleChangeInputIsCentered.bind(this);
         this.listHasChanged = this.listHasChanged.bind(this);
         this.checkUpdatedParameters = this.checkUpdatedParameters.bind(this);
         this.uploadFileToCloudinary = this.uploadFileToCloudinary.bind(this);
@@ -49,7 +51,8 @@ class CategoryUpdate extends Component {
             category: category.data.data.category,
             cover: category.data.data.cover,
             url: category.data.data.url,
-            isVisible: category.data.data.isVisible
+            isVisible: category.data.data.isVisible,
+            isCentered: category.data.data.isCentered
         })
 
         this.dragAndDropRef = React.createRef();
@@ -89,6 +92,7 @@ class CategoryUpdate extends Component {
                 category: this.state.category,
                 toggleList: cloneToggleList,
                 isVisible: this.state.isVisible,
+                isCentered: this.state.isCentered,
                 cover: this.state.cover,
                 url: this.state.url,
             }
@@ -172,6 +176,12 @@ class CategoryUpdate extends Component {
         this.setState({ isVisible });
     }
 
+    handleChangeInputIsCentered() {
+        const isCentered = !this.state.isCentered;
+
+        this.setState({ isCentered });
+    }
+
     listHasChanged(initialList, updatedList) {
         initialList = Object.entries(initialList);
         updatedList = Object.entries(updatedList);
@@ -190,7 +200,7 @@ class CategoryUpdate extends Component {
     }
 
     checkUpdatedParameters() {
-        const { _id, name, category, toggleList, cover, isVisible, url, savedCategories } = this.state;
+        const { _id, name, category, toggleList, cover, isVisible, isCentered, url, savedCategories } = this.state;
 
         // check if each category parameters have been changed
         let updatedCategoryParameters = {
@@ -198,7 +208,8 @@ class CategoryUpdate extends Component {
             isCoverUpdated: false,
             isCategoryUpdated: false,
             isUrlUpdated: false,
-            isVisibleUpdated: false
+            isVisibleUpdated: false,
+            isCenteredUpdated: false
         }
 
         // NAME
@@ -234,6 +245,11 @@ class CategoryUpdate extends Component {
         // VISIBLE
         if (isVisible !== this.state.initialCategoryParameters.isVisible) {
             updatedCategoryParameters.isVisibleUpdated = true;
+        }
+
+        // CENTERED
+        if (isCentered !== this.state.initialCategoryParameters.isCentered) {
+            updatedCategoryParameters.isCenteredUpdated = true;
         }
 
         // URL
@@ -288,7 +304,7 @@ class CategoryUpdate extends Component {
     }
 
     uploadCategory() {        
-        const { _id, name, category, toggleList, cover, isVisible, url, savedCategories } = this.state;
+        const { _id, name, category, toggleList, cover, isVisible, isCentered, url, savedCategories } = this.state;
         
         let updatedCategoryParameters = this.checkUpdatedParameters();
 
@@ -346,6 +362,14 @@ class CategoryUpdate extends Component {
             }
         });
 
+        const promiseIsCentered = new Promise((resolve, reject) => {
+            if (updatedCategoryParameters.isCenteredUpdated) {
+                resolve(this.state.isCentered);
+            } else {
+                resolve(this.state.initialCategoryParameters.isCentered);
+            }
+        });
+
         const promiseUrl = new Promise((resolve, reject) => {
             if (updatedCategoryParameters.isUrlUpdated) {
                 resolve(this.state.url);
@@ -354,17 +378,18 @@ class CategoryUpdate extends Component {
             }
         });
 
-        let payload = { name, category, cover, isVisible, url };
+        let payload = { name, category, cover, isVisible, isCentered, url };
 
-        Promise.all([promiseName, promiseCategory, promiseIsVisible, promiseCover, promiseUrl])
+        Promise.all([promiseName, promiseCategory, promiseIsVisible, promiseIsCentered, promiseCover, promiseUrl])
         .then((values) => {
             // console.log(values);
 
             payload.name = values[0];
             payload.category = values[1];
             payload.isVisible = values[2];
-            payload.cover = values[3];
-            payload.url = values[4];
+            payload.isCentered = values[3];
+            payload.cover = values[4];
+            payload.url = values[5];
 
             console.log("PAYLOAD: ", payload);
             console.log("CATEGORY STATE: ", this.state);
@@ -381,6 +406,14 @@ class CategoryUpdate extends Component {
         
                 alert("Aucun paramètre n'a été modifié, mise à jour non effectuée.")
             } else {
+                // /!\ DATABASE OVERWRITE IF NOT CAREFUL, PROCEED WITH CAUTION /!\
+                // if (payload.isCentered === true) {
+                //     this.state.savedCategories.forEach(async category => {
+                //         let tempResult = result;
+                //         tempResult.isCentered = false;
+                //     });
+                // }
+
                 await api.updateCategoryById(this.state.id, result)
                 .then(res => {
                     this.setState({
@@ -388,6 +421,7 @@ class CategoryUpdate extends Component {
                         // category: '',
                         // cover: '',
                         // isVisible: true,
+                        // isCentered: false,
                         // url: '',
                         isUploading: false
                     });
@@ -440,7 +474,7 @@ class CategoryUpdate extends Component {
     }
 
     render() {
-        const { name, category, cover, url, isVisible } = this.state;
+        const { name, category, cover, url, isVisible, isCentered } = this.state;
 
         return (
             <div id="category-insert-wrapper">
@@ -473,6 +507,10 @@ class CategoryUpdate extends Component {
                                             <Checkbox className="category-visible-checkbox" checked={this.state.isVisible} disableRipple={true} onChange={this.handleChangeInputIsVisible} />
                                             <label id="category-visible-label">VISIBLE</label>
                                         </div>
+                                        {/* <div id="category-centered-container">
+                                            <Checkbox className="category-centered-checkbox" checked={this.state.isCentered} disableRipple={true} onChange={this.handleChangeInputIsCentered} />
+                                            <label id="category-centered-label">CENTERED</label>
+                                        </div> */}
                                     </section>
 
                                     <section id="category-insert-button-container" className="category-insert-section">
