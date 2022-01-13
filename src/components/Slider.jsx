@@ -121,16 +121,16 @@ class Slider extends React.Component {
           });
         });
 
-        // covers with URL
-        categories.forEach(category => {
-          if (category.url.length > 0) {
-            categoriesCovers.push(
-              <div key={category.name.toString()}>
-                <img className="swiper-slide-image" data-category={category.name.toLowerCase()} data-url={category.url} src={category.cover} alt="category cover" />
-              </div>
-            );
-          }
-        });
+        // covers with URL (deuspi)
+        // categories.forEach(category => {
+        //   if (category.url.length > 0) {
+        //     categoriesCovers.push(
+        //       <div key={category.name.toString()}>
+        //         <img className="swiper-slide-image" data-category={category.name.toLowerCase()} data-url={category.url} src={category.cover} alt="category cover" />
+        //       </div>
+        //     );
+        //   }
+        // });
 
         // // swap array to center Radiovision cover
         // for (let i = 0; i < categoriesCovers.length; i++) {
