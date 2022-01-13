@@ -541,6 +541,12 @@ button:focus {
 }
 
 /* CATEGORY URL */
+#category-insert-url-visible {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 #category-insert-url-visible label {
     font-size: 1.5em;
 }
@@ -573,6 +579,28 @@ button:focus {
 
 #category-visible-label {
     margin-bottom: 0;
+}
+
+/* CATEGORY VISIBLE */
+#category-centered-container {
+    width: auto;
+    display: inline-block;
+}
+
+.category-centered-checkbox {
+    color: #fff !important;
+    padding: 0 !important;
+    margin-right: 0.5em !important;
+}
+
+.category-centered-checkbox svg {
+    width: 1.5em !important;
+    height: 1.5em !important;
+}
+
+#category-centered-label {
+    margin-bottom: 0;
+    font-size: 1.5em;
 }
 
 /* CATEGORY TOGGLE */
