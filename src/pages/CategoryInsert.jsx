@@ -20,6 +20,7 @@ class CategoryInsert extends Component {
             url: '',
             savedCategories: [],
             isVisible: true,
+            isCentered: false,
             isLoading: true,
             isUploading: false
         }
@@ -27,6 +28,7 @@ class CategoryInsert extends Component {
         this.handleChangeInputName = this.handleChangeInputName.bind(this);
         this.handleChangeInputUrl = this.handleChangeInputUrl.bind(this);
         this.handleChangeInputIsVisible = this.handleChangeInputIsVisible.bind(this);
+        this.handleChangeInputIsCentered = this.handleChangeInputIsCentered.bind(this);
         this.uploadFileToCloudinary = this.uploadFileToCloudinary.bind(this);
         this.uploadCategory = this.uploadCategory.bind(this);
     }
@@ -73,6 +75,12 @@ class CategoryInsert extends Component {
         this.setState({ isVisible });
     }   
 
+    handleChangeInputIsCentered() {
+        const isCentered = !this.state.isCentered;
+
+        this.setState({ isCentered });
+    }
+
     uploadFileToCloudinary = async (file) => {
         // upload compressed file to Cloudinary with unsigned preset
         const url = `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUDNAME}/upload`;
@@ -115,7 +123,7 @@ class CategoryInsert extends Component {
     }
 
     uploadCategory() {        
-        const { name, category, cover, isVisible, url, savedCategories } = this.state;
+        const { name, category, cover, isVisible, isCentered, url, savedCategories } = this.state;
 
         if (!name) {
             alert("Ajoutez un nom avant de continuer");
@@ -152,6 +160,10 @@ class CategoryInsert extends Component {
                 resolve(this.state.isVisible);
             });
 
+            const promiseIsCentered = new Promise((resolve, reject) => {
+                resolve(this.state.isCentered);
+            });
+
             const promiseCover = new Promise(async (resolve, reject) => {
                     await this.uploadFileToCloudinary(this.dragAndDropRef.current.state.file);
 
@@ -162,17 +174,18 @@ class CategoryInsert extends Component {
                 resolve(this.state.url);
             });
 
-            let payload = { name, category, cover, isVisible, url };
+            let payload = { name, category, cover, isVisible, isCentered, url };
 
-            Promise.all([promiseName, promiseCategory, promiseIsVisible, promiseCover, promiseUrl])
+            Promise.all([promiseName, promiseCategory, promiseIsVisible, promiseIsCentered, promiseCover, promiseUrl])
             .then((values) => {
                 //console.log(values);
 
                 payload.name = values[0];
                 payload.category = values[1];
                 payload.isVisible = values[2];
-                payload.cover = values[3];
-                payload.url = values[4];
+                payload.isCentered = values[3];
+                payload.cover = values[4];
+                payload.url = values[5];
 
                 console.log("PAYLOAD: ", payload);
                 console.log("CATEGORY STATE: ", this.state);
@@ -186,6 +199,7 @@ class CategoryInsert extends Component {
                         category: '',
                         cover: '',
                         isVisible: true,
+                        isCentered: false,
                         url: '',
                         isUploading: false
                     });
@@ -242,6 +256,10 @@ class CategoryInsert extends Component {
                                             <Checkbox className="category-visible-checkbox" checked={this.state.isVisible} disableRipple={true} onChange={this.handleChangeInputIsVisible} />
                                             <label id="category-visible-label">VISIBLE</label>
                                         </div>
+                                        {/* <div id="category-centered-container">
+                                            <Checkbox className="category-centered-checkbox" checked={this.state.isCentered} disableRipple={true} onChange={this.handleChangeInputIsCentered} />
+                                            <label id="category-centered-label">CENTERED</label>
+                                        </div> */}
                                     </section>
 
                                     <section id="category-insert-button-container" className="category-insert-section">
