@@ -28,7 +28,10 @@ const startApp = async () => {
             videoData = videos.data.data;
         }).then(async () => {
             await api.getAllCategories().then(categories => {
-                categoryData = categories.data.data;
+                let reorderedCategories = [];
+                reorderedCategories = reorderCategories(categories.data.data);
+    
+                categoryData = reorderedCategories;    
                 // console.log(categoryData);
             }).then( () => {
                 renderApp(videoData, categoryData);
@@ -56,7 +59,10 @@ const startApp = async () => {
         });
     } else if (window.location.pathname.includes(routes.adminCategory)) {
         await api.getAllCategories().then(categories => {
-            categoryData = categories.data.data;
+            let reorderedCategories = [];
+            reorderedCategories = reorderCategories(categories.data.data);
+
+            categoryData = reorderedCategories;
             // console.log(categoryData);
         }).then( () => {
             renderApp(categoryData);
@@ -69,6 +75,21 @@ const startApp = async () => {
         window.location.pathname = "/";
         renderApp();
     }
+}
+
+function reorderCategories(categoriesData) {
+    let categoriesOrders = [];
+    categoriesData.forEach(category => {
+        categoriesOrders.push(category.order);
+    });
+    
+    let reorderedCategories = [];
+    categoriesData.forEach(category => {
+        reorderedCategories[category.order - 1] = category;
+    });
+    //console.log("REORDERED CATEGORIES: ", reorderedCategories);
+
+    return reorderedCategories;
 }
 
 function renderApp(_videoData = [], _categoryData = []) {

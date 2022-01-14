@@ -31,6 +31,7 @@ class CategoryInsert extends Component {
         this.handleChangeInputOrder = this.handleChangeInputOrder.bind(this);
         this.handleChangeInputIsVisible = this.handleChangeInputIsVisible.bind(this);
         this.handleChangeInputIsCentered = this.handleChangeInputIsCentered.bind(this);
+        this.reorderCategories = this.reorderCategories.bind(this);
         this.uploadFileToCloudinary = this.uploadFileToCloudinary.bind(this);
         this.uploadCategory = this.uploadCategory.bind(this);
     }
@@ -40,8 +41,11 @@ class CategoryInsert extends Component {
         this.categoryToggleRef = React.createRef();
         
         await api.getAllCategories().then(categories => {
+            let reorderedCategories = [];
+            reorderedCategories = this.reorderCategories(categories.data.data);
+            
             this.setState({
-                savedCategories: categories.data.data,
+                savedCategories: reorderedCategories,
                 isLoading: false,
             });
         })
@@ -87,6 +91,21 @@ class CategoryInsert extends Component {
         const isCentered = !this.state.isCentered;
 
         this.setState({ isCentered });
+    }
+
+    reorderCategories(categoriesData) {
+        let categoriesOrders = [];
+        categoriesData.forEach(category => {
+            categoriesOrders.push(category.order);
+        });
+        
+        let reorderedCategories = [];
+        categoriesData.forEach(category => {
+            reorderedCategories[category.order - 1] = category;
+        });
+        //console.log("REORDERED CATEGORIES: ", reorderedCategories);
+
+        return reorderedCategories;
     }
 
     uploadFileToCloudinary = async (file) => {

@@ -22,18 +22,21 @@ class CategoryUpdate extends Component {
             savedCategories: [],
             initialCategoryParameters: {},
             url: '',
+            order: '',
             isVisible: true,
             isCentered: false,
             isLoading: true,
             isUploading: false
         }
 
+        this.reorderCategories = this.reorderCategories.bind(this);
         this.getInitialCategoryParameters = this.getInitialCategoryParameters.bind(this);
         this.initiateToggleList = this.initiateToggleList.bind(this);
         this.handleChangeInputName = this.handleChangeInputName.bind(this);
         this.handleChangeCategorySwitch = this.handleChangeCategorySwitch.bind(this);
         this.handleChangeInputUrl = this.handleChangeInputUrl.bind(this);
         this.handleChangeInputIsVisible = this.handleChangeInputIsVisible.bind(this);
+        this.handleChangeInputOrder = this.handleChangeInputOrder.bind(this);
         this.handleChangeInputIsCentered = this.handleChangeInputIsCentered.bind(this);
         this.listHasChanged = this.listHasChanged.bind(this);
         this.checkUpdatedParameters = this.checkUpdatedParameters.bind(this);
@@ -51,6 +54,7 @@ class CategoryUpdate extends Component {
             category: category.data.data.category,
             cover: category.data.data.cover,
             url: category.data.data.url,
+            order: category.data.data.order,
             isVisible: category.data.data.isVisible,
             isCentered: category.data.data.isCentered
         })
@@ -58,9 +62,12 @@ class CategoryUpdate extends Component {
         this.dragAndDropRef = React.createRef();
         this.categoryToggleRef = React.createRef();
         
-        await api.getAllCategories().then(categories => {            
+        await api.getAllCategories().then(categories => {     
+            let reorderedCategories = [];
+            reorderedCategories = this.reorderCategories(categories.data.data);
+                   
             this.setState({
-                savedCategories: categories.data.data,
+                savedCategories: reorderedCategories,
                 isLoading: false,
             });
         })
@@ -82,6 +89,21 @@ class CategoryUpdate extends Component {
 
     }
 
+    reorderCategories(categoriesData) {
+        let categoriesOrders = [];
+        categoriesData.forEach(category => {
+            categoriesOrders.push(category.order);
+        });
+        
+        let reorderedCategories = [];
+        categoriesData.forEach(category => {
+            reorderedCategories[category.order - 1] = category;
+        });
+        //console.log("REORDERED CATEGORIES: ", reorderedCategories);
+
+        return reorderedCategories;
+    }
+
     getInitialCategoryParameters() {
         const cloneToggleList = { ...this.state.toggleList };
 
@@ -95,6 +117,7 @@ class CategoryUpdate extends Component {
                 isCentered: this.state.isCentered,
                 cover: this.state.cover,
                 url: this.state.url,
+                order: this.state.order,
             }
         })
     }
@@ -169,6 +192,12 @@ class CategoryUpdate extends Component {
         
         this.setState({ url });
     }
+
+    handleChangeInputOrder(event) {
+        const order = event.target.value;
+        
+        this.setState({ order });
+    }
     
     handleChangeInputIsVisible() {
         const isVisible = !this.state.isVisible;
@@ -200,7 +229,7 @@ class CategoryUpdate extends Component {
     }
 
     checkUpdatedParameters() {
-        const { _id, name, category, toggleList, cover, isVisible, isCentered, url, savedCategories } = this.state;
+        const { _id, name, category, toggleList, cover, isVisible, isCentered, url, order, savedCategories } = this.state;
 
         // check if each category parameters have been changed
         let updatedCategoryParameters = {
@@ -208,6 +237,7 @@ class CategoryUpdate extends Component {
             isCoverUpdated: false,
             isCategoryUpdated: false,
             isUrlUpdated: false,
+            isOrderUpdated: false,
             isVisibleUpdated: false,
             isCenteredUpdated: false
         }
@@ -257,6 +287,11 @@ class CategoryUpdate extends Component {
             updatedCategoryParameters.isUrlUpdated = true;
         }
 
+        // ORDER
+        if (order !== this.state.initialCategoryParameters.order) {
+            updatedCategoryParameters.isOrderUpdated = true;
+        }
+
         console.log("CATEGORY UPDATED PARAMETERS: ", updatedCategoryParameters);
 
         return updatedCategoryParameters;
@@ -304,7 +339,7 @@ class CategoryUpdate extends Component {
     }
 
     uploadCategory() {        
-        const { _id, name, category, toggleList, cover, isVisible, isCentered, url, savedCategories } = this.state;
+        const { _id, name, category, toggleList, cover, isVisible, isCentered, url, order, savedCategories } = this.state;
         
         let updatedCategoryParameters = this.checkUpdatedParameters();
 
@@ -378,9 +413,48 @@ class CategoryUpdate extends Component {
             }
         });
 
-        let payload = { name, category, cover, isVisible, isCentered, url };
+        const promiseOrder = new Promise(async (resolve, reject) => {
+            if (updatedCategoryParameters.isOrderUpdated) {
+                // Swap categories order
+                let prevOrder;
+                prevOrder = this.state.initialCategoryParameters.order;
+                
+                let newOrder = this.state.order;
 
-        Promise.all([promiseName, promiseCategory, promiseIsVisible, promiseIsCentered, promiseCover, promiseUrl])
+                let categoryToChange;
+                for (let i=0; i<this.state.savedCategories.length; i++) {
+                    // /!\ Parse order to int /!\
+                    if (this.state.savedCategories[i].order === parseInt(newOrder)) {
+                        categoryToChange = this.state.savedCategories[i];
+                    }
+                }        
+
+                let cateogryToChangePayload = { name, category, cover, isVisible, isCentered, url, order };
+                cateogryToChangePayload.name = categoryToChange.name;
+                cateogryToChangePayload.category = categoryToChange.category;
+                cateogryToChangePayload.isVisible = categoryToChange.isVisible;
+                cateogryToChangePayload.isCentered = categoryToChange.isCentered;
+                cateogryToChangePayload.cover = categoryToChange.cover;
+                cateogryToChangePayload.url = categoryToChange.url;
+                cateogryToChangePayload.order = prevOrder;
+
+                let cateogryToChangeId = categoryToChange._id;
+
+                await api.updateCategoryById(cateogryToChangeId, cateogryToChangePayload)
+                .then(res => {
+                    resolve(this.state.order);
+                }).catch((error) => {
+                    console.error(error);
+                    window.alert(`La modification de la catégorie a échouée`);
+                });
+            } else {
+                resolve(this.state.initialCategoryParameters.order);
+            }
+        });
+
+        let payload = { name, category, cover, isVisible, isCentered, url, order };
+
+        Promise.all([promiseName, promiseCategory, promiseIsVisible, promiseIsCentered, promiseCover, promiseUrl, promiseOrder])
         .then((values) => {
             // console.log(values);
 
@@ -390,6 +464,7 @@ class CategoryUpdate extends Component {
             payload.isCentered = values[3];
             payload.cover = values[4];
             payload.url = values[5];
+            payload.order = values[6];
 
             console.log("PAYLOAD: ", payload);
             console.log("CATEGORY STATE: ", this.state);
@@ -423,6 +498,7 @@ class CategoryUpdate extends Component {
                         // isVisible: true,
                         // isCentered: false,
                         // url: '',
+                        // order: '',
                         isUploading: false
                     });
 
@@ -474,7 +550,7 @@ class CategoryUpdate extends Component {
     }
 
     render() {
-        const { name, category, cover, url, isVisible, isCentered } = this.state;
+        const { name, category, cover, url, order, isVisible, isCentered } = this.state;
 
         return (
             <div id="category-insert-wrapper">
@@ -503,6 +579,16 @@ class CategoryUpdate extends Component {
                                     )}
                                     <section id="category-insert-url-visible" className="category-insert-section">
                                         {/* <input id="category-url-input" className="form-control" type="text" value={url} placeholder="URL" onChange={this.handleChangeInputUrl} /> */}
+                                        
+                                        <form id="category-order-form">
+                                            <label>ORDER</label>
+                                            <select id="category-order-select" value={order} onChange={this.handleChangeInputOrder}>
+                                                {this.state.savedCategories.map((item, key) =>
+                                                    <option key={item.name} value={item.order}>{item.order}</option>
+                                                )}
+                                            </select>
+                                        </form>
+
                                         <div id="category-visible-container">
                                             <Checkbox className="category-visible-checkbox" checked={this.state.isVisible} disableRipple={true} onChange={this.handleChangeInputIsVisible} />
                                             <label id="category-visible-label">VISIBLE</label>

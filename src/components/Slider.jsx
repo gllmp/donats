@@ -109,17 +109,28 @@ class Slider extends React.Component {
         let categoriesCovers = [];
 
         // get covers for each category
-        Object.keys(this.props.videos).forEach(video => {
-          categories.forEach(category => {
-            if ((video === category.name.replace(/\s+/g, '-').toLowerCase()) && (category.isVisible)) {
-              categoriesCovers.push(
-                <div key={category.name.toString()}>
-                  <img className="swiper-slide-image" data-category={category.name.toLowerCase()} data-url={category.url} src={category.cover} alt="category cover" />
-                </div>
-              );
-            }
-          });
+        // Object.keys(this.props.videos).forEach(video => {
+        //   categories.forEach(category => {
+        //     if ((video === category.name.replace(/\s+/g, '-').toLowerCase()) && (category.isVisible)) {
+        //       categoriesCovers.push(
+        //         <div key={category.name.toString()}>
+        //           <img className="swiper-slide-image" data-category={category.name.toLowerCase()} data-url={category.url} src={category.cover} alt="category cover" />
+        //         </div>
+        //       );
+        //     }
+        //   });
+        // });
+
+        categories.forEach(category => {
+          if (category.isVisible) {
+            categoriesCovers.push(
+              <div key={category.name.toString()}>
+                <img className="swiper-slide-image" data-category={category.name.toLowerCase()} data-url={category.url} src={category.cover} alt="category cover" />
+              </div>
+            );
+          }
         });
+
 
         // covers with URL (deuspi)
         // categories.forEach(category => {
