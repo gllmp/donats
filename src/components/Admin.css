@@ -581,7 +581,12 @@ button:focus {
     margin-bottom: 0;
 }
 
-/* CATEGORY VISIBLE */
+/* CATEGORY ORDER */
+#category-order-form label {
+    margin-right: 1em;
+}
+
+/* CATEGORY CENTERED */
 #category-centered-container {
     width: auto;
     display: inline-block;
