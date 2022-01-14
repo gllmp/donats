@@ -123,11 +123,16 @@ class Slider extends React.Component {
 
         categories.forEach(category => {
           if (category.isVisible) {
-            categoriesCovers.push(
-              <div key={category.name.toString()}>
-                <img className="swiper-slide-image" data-category={category.name.toLowerCase()} data-url={category.url} src={category.cover} alt="category cover" />
-              </div>
-            );
+            let existingCategories = Object.keys(this.props.videos);
+            for (let i = 0; i < existingCategories.length; i++) {
+              if (existingCategories[i] === category.name.replace(/\s+/g, '-').toLowerCase()) {
+                categoriesCovers.push(
+                  <div key={category.name.toString()}>
+                    <img className="swiper-slide-image" data-category={category.name.toLowerCase()} data-url={category.url} src={category.cover} alt="category cover" />
+                  </div>
+                );    
+              } 
+            }
           }
         });
 
