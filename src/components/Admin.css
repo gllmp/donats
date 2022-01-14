@@ -560,6 +560,25 @@ button:focus {
     border-radius: 3px;
 }
 
+/* CATEGORY ORDER */
+#category-order-input {
+    width: 50%;
+    margin-right: 2em;
+    float: left;
+    font-size: 1em;
+    border: 1px dashed #fff;
+    border-radius: 3px;
+}
+
+#category-order-select {
+    margin-left: 1em;
+    font-size: 1.5em;
+}
+
+#category-order-select option {
+    background-color: #fff;
+}
+
 /* CATEGORY VISIBLE */
 #category-visible-container {
     width: auto;
