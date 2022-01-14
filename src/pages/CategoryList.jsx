@@ -97,6 +97,7 @@ class CategoryList extends Component {
         }
 
         this.updateSwiper = this.updateSwiper.bind(this);
+        this.reorderCategories = this.reorderCategories.bind(this);
         this.splitCovers = this.splitCovers.bind(this);
     }
 
@@ -106,9 +107,12 @@ class CategoryList extends Component {
         // /!\ PASS CATEGORIES AS PROPS
         await api.getAllCategories()
         .then(async (categories) => {
-    
+
+            let reorderedCategories = [];
+            reorderedCategories = this.reorderCategories(categories.data.data);
+            
             await this.setState({
-                categories: categories.data.data,
+                categories: reorderedCategories,
             });
 
             console.log("CATEGORIES LOADED: ", this.state.categories);
@@ -170,6 +174,21 @@ class CategoryList extends Component {
 
     updateSwiper(swiper) {
         this.setState({ swiper });
+    }
+
+    reorderCategories(categoriesData) {
+        let categoriesOrders = [];
+        categoriesData.forEach(category => {
+            categoriesOrders.push(category.order);
+        });
+        
+        let reorderedCategories = [];
+        categoriesData.forEach(category => {
+            reorderedCategories[category.order - 1] = category;
+        });
+        //console.log("REORDERED CATEGORIES: ", reorderedCategories);
+
+        return reorderedCategories;
     }
 
     splitCovers(coversArray) {

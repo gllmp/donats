@@ -29,6 +29,7 @@ class CategoryUpdate extends Component {
             isUploading: false
         }
 
+        this.reorderCategories = this.reorderCategories.bind(this);
         this.getInitialCategoryParameters = this.getInitialCategoryParameters.bind(this);
         this.initiateToggleList = this.initiateToggleList.bind(this);
         this.handleChangeInputName = this.handleChangeInputName.bind(this);
@@ -61,9 +62,12 @@ class CategoryUpdate extends Component {
         this.dragAndDropRef = React.createRef();
         this.categoryToggleRef = React.createRef();
         
-        await api.getAllCategories().then(categories => {            
+        await api.getAllCategories().then(categories => {     
+            let reorderedCategories = [];
+            reorderedCategories = this.reorderCategories(categories.data.data);
+                   
             this.setState({
-                savedCategories: categories.data.data,
+                savedCategories: reorderedCategories,
                 isLoading: false,
             });
         })
@@ -83,6 +87,21 @@ class CategoryUpdate extends Component {
 
     componentWillUnmount() {
 
+    }
+
+    reorderCategories(categoriesData) {
+        let categoriesOrders = [];
+        categoriesData.forEach(category => {
+            categoriesOrders.push(category.order);
+        });
+        
+        let reorderedCategories = [];
+        categoriesData.forEach(category => {
+            reorderedCategories[category.order - 1] = category;
+        });
+        //console.log("REORDERED CATEGORIES: ", reorderedCategories);
+
+        return reorderedCategories;
     }
 
     getInitialCategoryParameters() {
