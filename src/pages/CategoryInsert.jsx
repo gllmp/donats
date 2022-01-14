@@ -18,6 +18,7 @@ class CategoryInsert extends Component {
             category: [],
             cover: 'https://res.cloudinary.com/donats/image/upload/v1590425039/category-cover_ulikx1.png',
             url: '',
+            order: '',
             savedCategories: [],
             isVisible: true,
             isCentered: false,
@@ -27,6 +28,7 @@ class CategoryInsert extends Component {
 
         this.handleChangeInputName = this.handleChangeInputName.bind(this);
         this.handleChangeInputUrl = this.handleChangeInputUrl.bind(this);
+        this.handleChangeInputOrder = this.handleChangeInputOrder.bind(this);
         this.handleChangeInputIsVisible = this.handleChangeInputIsVisible.bind(this);
         this.handleChangeInputIsCentered = this.handleChangeInputIsCentered.bind(this);
         this.uploadFileToCloudinary = this.uploadFileToCloudinary.bind(this);
@@ -69,6 +71,12 @@ class CategoryInsert extends Component {
         this.setState({ url });
     }
     
+    handleChangeInputOrder(event) {
+        const order = event.target.value;
+        
+        this.setState({ order });
+    }
+
     handleChangeInputIsVisible() {
         const isVisible = !this.state.isVisible;
 
@@ -123,7 +131,7 @@ class CategoryInsert extends Component {
     }
 
     uploadCategory() {        
-        const { name, category, cover, isVisible, isCentered, url, savedCategories } = this.state;
+        const { name, category, cover, isVisible, isCentered, url, order, savedCategories } = this.state;
 
         if (!name) {
             alert("Ajoutez un nom avant de continuer");
@@ -174,9 +182,19 @@ class CategoryInsert extends Component {
                 resolve(this.state.url);
             });
 
-            let payload = { name, category, cover, isVisible, isCentered, url };
+            const promiseOrder = new Promise(async (resolve, reject) => {
+                let totalCategories = this.state.savedCategories.length;
 
-            Promise.all([promiseName, promiseCategory, promiseIsVisible, promiseIsCentered, promiseCover, promiseUrl])
+                await this.setState({ 
+                    order: totalCategories + 1
+                });
+
+                resolve(this.state.order);            
+            });
+
+            let payload = { name, category, cover, isVisible, isCentered, url, order };
+
+            Promise.all([promiseName, promiseCategory, promiseIsVisible, promiseIsCentered, promiseCover, promiseUrl, promiseOrder])
             .then((values) => {
                 //console.log(values);
 
@@ -186,6 +204,7 @@ class CategoryInsert extends Component {
                 payload.isCentered = values[3];
                 payload.cover = values[4];
                 payload.url = values[5];
+                payload.order = values[6];
 
                 console.log("PAYLOAD: ", payload);
                 console.log("CATEGORY STATE: ", this.state);
@@ -201,6 +220,7 @@ class CategoryInsert extends Component {
                         isVisible: true,
                         isCentered: false,
                         url: '',
+                        order: '',
                         isUploading: false
                     });
 
@@ -224,7 +244,7 @@ class CategoryInsert extends Component {
     }
 
     render() {
-        const { name, url } = this.state;
+        const { name, url, order } = this.state;
 
         return (
             <div id="category-insert-wrapper">
@@ -252,6 +272,17 @@ class CategoryInsert extends Component {
 
                                     <section id="category-insert-url-visible" className="category-insert-section">
                                         {/* <input id="category-url-input" className="form-control" type="text" value={url} placeholder="URL" onChange={this.handleChangeInputUrl} /> */}
+                                        {/* <input id="category-order-input" className="form-control" type="text" value={order} placeholder="ORDER" onChange={this.handleChangeInputOrder} /> */}
+
+                                        {/* <form>
+                                            <input list="data"  />
+                                            <datalist id="data">
+                                                {this.state.savedCategories.map((item, key) =>
+                                                    <option key={key} value={item.order} />
+                                                )}
+                                            </datalist>
+                                        </form> */}
+
                                         <div id="category-visible-container">
                                             <Checkbox className="category-visible-checkbox" checked={this.state.isVisible} disableRipple={true} onChange={this.handleChangeInputIsVisible} />
                                             <label id="category-visible-label">VISIBLE</label>
