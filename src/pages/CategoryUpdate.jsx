@@ -76,6 +76,16 @@ class CategoryUpdate extends Component {
             this.setState({
                 toggleList: list
             });
+
+            // DISABLE TOGGLE IF SAME NAME AS SELECTED CATEGORY (to prevent database errors)
+            let toggleElements = document.getElementsByClassName("category-switch-toggle");
+            for (let i = 0; i < toggleElements.length; i++) {
+                let inputElement = toggleElements[i].getElementsByClassName("MuiSwitch-input")[0];
+                
+                if (inputElement.name === this.state.name) {
+                    inputElement.setAttribute("disabled", "");
+                }
+            }
         })
         
         console.log("CATEGORY TOGGLE LIST: ", this.state.toggleList);
